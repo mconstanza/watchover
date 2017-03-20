@@ -1,5 +1,5 @@
 <template>
-  <h2>{{msg}}</h2>
+  <h2>{{currentBattletag.name}}</h2>
 </template>
 
 <script>
@@ -9,7 +9,8 @@ export default {
     return {
       msg: 'test'
     }
-  }
+  },
+  props: ['currentBattletag']
 }
 </script>
 

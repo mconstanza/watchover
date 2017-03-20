@@ -1,19 +1,17 @@
 <template>
-  <v-app id="app" top-toolbar>
-
+  <div id="app">
     <v-toolbar id="toolbar" class="indigo">
       <v-toolbar-title>WatchOver</v-toolbar-title>
       <v-spacer />
-      <user-search/>
+      <user-search @clicked ="onClickSearch"/>
     </v-toolbar>
 
     <main>
       <v-content>
-        <router-view></router-view>
+        <router-view :current-battletag="currentBattletag"></router-view>
       </v-content>
     </main>
-
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -22,6 +20,17 @@ export default {
   name: 'app',
   components: {
     userSearch
+  },
+  data () {
+    return {
+      currentBattletag: {}
+    }
+  },
+  methods: {
+    onClickSearch: function (battletag) {
+      console.log(battletag)
+      this.currentBattletag = battletag
+    }
   }
 }
 </script>
