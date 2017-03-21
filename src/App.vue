@@ -32,31 +32,6 @@ export default {
           competitive: []
         },
         heroStats: {
-          Lucio: {
-            name: 'Lúcio',
-            image: '/static/Lucio.png',
-            loading: true
-          },
-          Soldier76: {
-            name: 'Soldier: 76',
-            image: '/static/Soldier.png',
-            loading: true
-          },
-          Reaper: {
-            name: 'Reaper',
-            image: '/static/Reaper.png',
-            loading: true
-          },
-          Roadhog: {
-            name: 'Roadhog',
-            image: '/static/Roadhog.png',
-            loading: true
-          },
-          'D.Va': {
-            name: 'D.Va',
-            image: '/static/Dva.png',
-            loading: true
-          },
           Ana: {
             name: 'Ana',
             image: '/static/Ana.png',
@@ -67,9 +42,9 @@ export default {
             image: '/static/Bastion.png',
             loading: true
           },
-          Winston: {
-            name: 'Harambe',
-            image: '/static/Harambe.png',
+          'D.Va': {
+            name: 'D.Va',
+            image: '/static/Dva.png',
             loading: true
           },
           Genji: {
@@ -82,14 +57,14 @@ export default {
             image: '/static/Hanzo.png',
             loading: true
           },
-          Zarya: {
-            name: 'Zarya',
-            image: '/static/Zarya.png',
-            loading: true
-          },
           Junkrat: {
             name: 'Junkrat',
             image: '/static/Junkrat.png',
+            loading: true
+          },
+          Lucio: {
+            name: 'Lúcio',
+            image: '/static/Lucio.png',
             loading: true
           },
           McCree: {
@@ -112,14 +87,29 @@ export default {
             image: '/static/Pharah.png',
             loading: true
           },
+          Reaper: {
+            name: 'Reaper',
+            image: '/static/Reaper.png',
+            loading: true
+          },
+          Roadhog: {
+            name: 'Roadhog',
+            image: '/static/Roadhog.png',
+            loading: true
+          },
+          Reinhardt: {
+            name: 'Reinhardt',
+            image: '/static/Reinhardt.png',
+            loading: true
+          },
+          Soldier76: {
+            name: 'Soldier: 76',
+            image: '/static/Soldier.png',
+            loading: true
+          },
           Sombra: {
             name: 'Sombra',
             image: '/static/Sombra.png',
-            loading: true
-          },
-          Tracer: {
-            name: 'Tracer',
-            image: '/static/Tracer.png',
             loading: true
           },
           Symmetra: {
@@ -127,9 +117,9 @@ export default {
             image: '/static/Symmetra.png',
             loading: true
           },
-          Zenyatta: {
-            name: 'Zenyatta',
-            image: '/static/Zenyatta.png',
+          Tracer: {
+            name: 'Tracer',
+            image: '/static/Tracer.png',
             loading: true
           },
           Torbjoern: {
@@ -142,9 +132,19 @@ export default {
             image: '/static/Widowmaker.png',
             loading: true
           },
-          Reinhardt: {
-            name: 'Reinhardt',
-            image: '/static/Reinhardt.png',
+          Winston: {
+            name: 'Harambe',
+            image: '/static/Harambe.png',
+            loading: true
+          },
+          Zarya: {
+            name: 'Zarya',
+            image: '/static/Zarya.png',
+            loading: true
+          },
+          Zenyatta: {
+            name: 'Zenyatta',
+            image: '/static/Zenyatta.png',
             loading: true
           }
         }
@@ -193,29 +193,29 @@ export default {
       this.viewMode = view
     },
     loadHeroes: function () {
-      this.loadHeroData('Lucio')
-      this.loadHeroData('Soldier76')
-      this.loadHeroData('Tracer')
-      this.loadHeroData('Widowmaker')
-      this.loadHeroData('Hanzo')
-      this.loadHeroData('Genji')
+      this.loadHeroData('Ana')
       this.loadHeroData('Bastion')
-      this.loadHeroData('Roadhog')
-      this.loadHeroData('Junkrat')
-      this.loadHeroData('Symmetra')
-      this.loadHeroData('Sombra')
-      this.loadHeroData('Reinhardt')
-      this.loadHeroData('Zarya')
       this.loadHeroData('D.Va')
-      this.loadHeroData('Reaper')
+      this.loadHeroData('Genji')
+      this.loadHeroData('Hanzo')
+      this.loadHeroData('Junkrat')
+      this.loadHeroData('Lucio')
       this.loadHeroData('McCree')
       this.loadHeroData('Mei')
-      this.loadHeroData('Winston')
-      this.loadHeroData('Ana')
       this.loadHeroData('Mercy')
-      this.loadHeroData('Zenyatta')
-      this.loadHeroData('Torbjoern')
       this.loadHeroData('Pharah')
+      this.loadHeroData('Reaper')
+      this.loadHeroData('Reinhardt')
+      this.loadHeroData('Roadhog')
+      this.loadHeroData('Soldier76')
+      this.loadHeroData('Sombra')
+      this.loadHeroData('Symmetra')
+      this.loadHeroData('Torbjoern')
+      this.loadHeroData('Tracer')
+      this.loadHeroData('Widowmaker')
+      this.loadHeroData('Winston')
+      this.loadHeroData('Zarya')
+      this.loadHeroData('Zenyatta')
     }
   }
 }

@@ -5,7 +5,7 @@
     </div>
     <br/>
     <br/>
-    <button id="switchViewBtn" @click="switchView">{{viewMode}}</button>
+    <button id="switchViewBtn" v-if="currentBattletag.tag.length > 0" @click="switchView">{{viewMode}}</button>
     <br />
     <br />
     <div id="CardContainer">
