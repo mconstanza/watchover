@@ -1,7 +1,7 @@
 <template>
     <v-card >
       <!-- Title -->
-      <v-card-row class="indigo">
+      <v-card-row class="indigo cardTitleRow">
         <v-card-title>
           <span class="white--text">{{hero.name}}</span>
         </v-card-title>
@@ -67,6 +67,18 @@
               </v-card-text>
             </v-card-column>
 
+            <v-card-column>
+              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+                <p><strong>Average Eliminations</strong></p>
+                <p>{{hero.competitive['Eliminations-Average'] || '---' }} </p>
+              </v-card-text>
+
+              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+                <p><strong>Average Eliminations</strong></p>
+                <p>{{hero.quick['Eliminations-Average'] || '---'}} </p>
+              </v-card-text>
+            </v-card-column>
+
           </v-card-row>
 
         </v-card-column>
@@ -75,9 +87,17 @@
       <br/>
       <hr/>
       <v-card-row>
-        <v-card-text class="card_text">
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Average Eliminations</strong></p>
+            <p>{{hero.competitive['Eliminations-Average'] || '---' }} </p>
+          </v-card-text>
 
-        </v-card-text>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Average Eliminations</strong></p>
+            <p>{{hero.quick['Eliminations-Average'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
       </v-card-row>
     </v-card>
 </template>
@@ -116,6 +136,10 @@ p {
 
 .card {
   text-align: left;
+}
+
+.cardTitleRow {
+  height: 45px;
 }
 
 #avatar {

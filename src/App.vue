@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id='appContainer'>
     <v-toolbar id="toolbar" class="indigo">
       <v-toolbar-title>WatchOver</v-toolbar-title>
       <v-spacer />
@@ -8,7 +8,7 @@
 
     <main>
       <v-content>
-        <router-view :viewMode="viewMode" @switchView="switchView" :current-battletag="currentBattletag" ></router-view>
+        <router-view :viewMode="view.mode" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :current-battletag="currentBattletag" ></router-view>
       </v-content>
     </main>
   </div>
@@ -35,121 +35,152 @@ export default {
           Ana: {
             name: 'Ana',
             image: '/static/Ana.png',
+            role: 'support',
             loading: true
           },
           Bastion: {
             name: 'Bastion',
             image: '/static/Bastion.png',
+            role: 'defense',
             loading: true
           },
           'D.Va': {
             name: 'D.Va',
             image: '/static/Dva.png',
+            role: 'tank',
             loading: true
           },
           Genji: {
             name: 'Genji',
             image: '/static/Genji.png',
+            role: 'offense',
             loading: true
           },
           Hanzo: {
             name: 'Hanzo',
             image: '/static/Hanzo.png',
+            role: 'defense',
             loading: true
           },
           Junkrat: {
             name: 'Junkrat',
             image: '/static/Junkrat.png',
+            role: 'defense',
             loading: true
           },
           Lucio: {
             name: 'Lúcio',
             image: '/static/Lucio.png',
+            role: 'support',
             loading: true
           },
           McCree: {
             name: 'McCree',
             image: '/static/McCree.png',
+            role: 'offense',
             loading: true
           },
           Mei: {
             name: 'Mei',
             image: '/static/Mei.png',
+            role: 'defense',
             loading: true
           },
           Mercy: {
             name: 'Mercy',
             image: '/static/Mercy.png',
+            role: 'support',
             loading: true
           },
           Pharah: {
             name: 'Pharah',
             image: '/static/Pharah.png',
+            role: 'offense',
             loading: true
           },
           Reaper: {
             name: 'Reaper',
             image: '/static/Reaper.png',
+            role: 'offense',
             loading: true
           },
           Roadhog: {
             name: 'Roadhog',
             image: '/static/Roadhog.png',
+            role: 'tank',
             loading: true
           },
           Reinhardt: {
             name: 'Reinhardt',
             image: '/static/Reinhardt.png',
+            role: 'tank',
             loading: true
           },
           Soldier76: {
             name: 'Soldier: 76',
             image: '/static/Soldier.png',
+            role: 'offense',
             loading: true
           },
           Sombra: {
             name: 'Sombra',
             image: '/static/Sombra.png',
+            role: 'offense',
             loading: true
           },
           Symmetra: {
             name: 'Symmetra',
             image: '/static/Symmetra.png',
+            role: 'support',
             loading: true
           },
           Tracer: {
             name: 'Tracer',
             image: '/static/Tracer.png',
+            role: 'offense',
             loading: true
           },
           Torbjoern: {
             name: 'Torbjörn',
             image: '/static/Torb.png',
+            role: 'defense',
             loading: true
           },
           Widowmaker: {
             name: 'Widowmaker',
             image: '/static/Widowmaker.png',
+            role: 'defense',
             loading: true
           },
           Winston: {
             name: 'Harambe',
             image: '/static/Harambe.png',
+            role: 'tank',
             loading: true
           },
           Zarya: {
             name: 'Zarya',
             image: '/static/Zarya.png',
+            role: 'tank',
             loading: true
           },
           Zenyatta: {
             name: 'Zenyatta',
             image: '/static/Zenyatta.png',
+            role: 'support',
             loading: true
           }
         }
       },
-      viewMode: 'Competitive' // set to Competitive or Quickplay
+      view: {
+        mode: 'Competitive', // set to Competitive or Quickplay,
+        roles: {
+          tank: true,
+          support: true,
+          offense: true,
+          defense: true
+        }
+      }
     }
   },
   methods: {
@@ -190,7 +221,7 @@ export default {
       })
     },
     switchView: function (view) {
-      this.viewMode = view
+      this.view.mode = view
     },
     loadHeroes: function () {
       this.loadHeroData('Ana')
@@ -216,6 +247,29 @@ export default {
       this.loadHeroData('Winston')
       this.loadHeroData('Zarya')
       this.loadHeroData('Zenyatta')
+    },
+    switchRoleView: function (role) {
+      if (role === 'all') {
+        this.view.roles.tank = true
+        this.view.roles.support = true
+        this.view.roles.offense = true
+        this.view.roles.defense = true
+      } else if (role === 'damage') {
+        this.view.roles.offense = true
+        this.view.roles.defense = true
+        this.view.roles.support = false
+        this.view.roles.tank = false
+      } else if (role === 'tank') {
+        this.view.roles.offense = false
+        this.view.roles.defense = false
+        this.view.roles.support = false
+        this.view.roles.tank = true
+      } else if (role === 'support') {
+        this.view.roles.offense = false
+        this.view.roles.defense = false
+        this.view.roles.support = true
+        this.view.roles.tank = false
+      }
     }
   }
 }
@@ -227,7 +281,7 @@ export default {
     font-family: Overwatch;
     src: url(http://us.battle.net/forums/static/fonts/bignoodletoo/bignoodletoo.woff);
 }
-#app {
+#appContainer {
   font-family: 'Overwatch', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

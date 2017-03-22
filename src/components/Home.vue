@@ -1,15 +1,21 @@
 <template>
   <div id="HomeContainer">
     <div id="HeadingContainer">
-      <basics-card v-if="currentBattletag.tag.length > 0" :viewMode="viewMode" :currentBattletag="currentBattletag"></basics-card>
+      <basics-card v-if="currentBattletag.tag != ''" :viewMode="viewMode" :currentBattletag="currentBattletag"></basics-card>
     </div>
     <br/>
     <br/>
-    <button id="switchViewBtn" v-if="currentBattletag.tag.length > 0" @click="switchView">{{viewMode}}</button>
+    <div id="viewButtonsDiv" v-if="currentBattletag.tag.length > 0">
+      <button id="switchViewBtn" class="viewToggle" @click="switchView">{{viewMode}}</button>
+      <button class="viewToggle" @click="switchRoleView('all')">All</button>
+      <button class="viewToggle" @click="switchRoleView('damage')">Damage</button>
+      <button class="viewToggle" @click="switchRoleView('tank')">Tank</button>
+      <button class="viewToggle" @click="switchRoleView('support')">Support</button>
+    </div>
     <br />
     <br />
     <div id="CardContainer">
-      <hero-card v-for="hero in currentBattletag.heroStats" v-if="!hero.loading":hero="hero" :key="hero.name" :viewMode="viewMode" ></hero-card>
+      <hero-card v-for="hero in currentBattletag.heroStats" v-if="!hero.loading" v-show="view.roles[hero.role]" :hero="hero" :key="hero.name" :viewMode="viewMode" ></hero-card>
     </div>
   </div>
 </template>
@@ -28,7 +34,7 @@ export default {
     basicsCard,
     heroCard
   },
-  props: ['currentBattletag', 'viewMode'],
+  props: ['currentBattletag', 'viewMode', 'view'],
   methods: {
     switchView: function (event) {
       if (this.viewMode === 'Competitive') {
@@ -36,6 +42,9 @@ export default {
       } else if (this.viewMode === 'Quickplay') {
         this.$emit('switchView', 'Competitive')
       }
+    },
+    switchRoleView: function (role) {
+      this.$emit('switchRoleView', role)
     }
   }
 }
@@ -68,6 +77,7 @@ a {
 
 #HomeContainer {
   text-align: center;
+  font-family: 'Overwatch';
 }
 
 #HeadingContainer {
@@ -91,7 +101,7 @@ a {
   align-items: flex-start;
 }
 
-#switchViewBtn {
+.viewToggle {
   width: 80px;
   height: 35px;
   background-color: #bec1c4;
