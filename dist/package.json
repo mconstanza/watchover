@@ -1,0 +1,10 @@
+{
+  "name": "watch-over",
+  "version": "1.0.0",
+  "description": "Overwatch profile analyzer",
+  "author": "Mike Constanza <michael.constanza@gmail.com>",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm install express"
+  }
+}
