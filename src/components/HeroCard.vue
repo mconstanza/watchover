@@ -2,11 +2,17 @@
     <v-card >
       <!-- Title -->
       <v-card-row class="indigo cardTitleRow">
-        <v-card-title>
+        <v-card-title @click="toggleHeroStats">
           <span class="white--text">{{hero.name}}</span>
+          <v-spacer></v-spacer>
+          <span>
+            <v-icon v-if="fullStats">expand_more</v-icon>
+            <v-icon v-if="!fullStats">expand_less</v-icon>
+          </span>
         </v-card-title>
       </v-card-row>
       <!-- Title -->
+
       <!-- Content -->
       <v-card-row>
         <!-- Avatar -->
@@ -234,7 +240,7 @@
       <hr/>
 
       <!-- Role specific Stats -->
-      <v-card-row class="roleStatRow">
+      <v-card-row v-show="fullStats" class="roleStatRow">
 
         <!-- Support Stats -->
         <v-card-column>
@@ -386,7 +392,7 @@
       <hr/>
 
       <!-- Hero Specific Stats -->
-      <v-card-row class="heroStatRow">
+      <v-card-row v-show="fullStats" class="heroStatRow">
         <v-card-column>
           <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.name === 'Ana'">
             <p><strong>Enemies Slept</strong></p>
@@ -574,7 +580,21 @@
 <script>
 export default {
   name: 'hero-card',
-  props: ['hero', 'viewMode']
+  props: ['hero', 'viewMode'],
+  data () {
+    return {
+      fullStats: false
+    }
+  },
+  methods: {
+    toggleHeroStats: function () {
+      if (this.fullStats === true) {
+        this.fullStats = false
+      } else if (this.fullStats === false) {
+        this.fullStats = true
+      }
+    }
+  }
 }
 </script>
 
