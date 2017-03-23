@@ -62,6 +62,15 @@
 
             </v-card-column>
 
+            <v-card-column v-show="viewMode == 'Competitive'">
+
+              <v-card-text >
+                <p><strong>Losses</strong></p>
+                <p>{{currentBattletag.profile.games.competitive.lost}}</p>
+              </v-card-text>
+
+            </v-card-column>
+
           </v-card-row>
         </v-card-column>
 

@@ -1,246 +1,259 @@
 <template>
-    <v-card class="heroCard">
-      <!-- Title -->
-      <v-card-row class="indigo cardTitleRow">
-        <v-card-title @click="toggleHeroStats">
-          <span class="white--text">{{hero.name}}</span>
-          <v-spacer></v-spacer>
-          <span>
+<v-card class="heroCard">
+  <!-- Title -->
+  <v-card-row class="indigo cardTitleRow">
+    <v-card-title @click="toggleHeroStats">
+      <span class="white--text">{{hero.name}}</span>
+      <v-spacer></v-spacer>
+      <span>
             <v-icon v-if="fullStats">expand_more</v-icon>
             <v-icon v-if="!fullStats">expand_less</v-icon>
           </span>
-        </v-card-title>
-      </v-card-row>
-      <!-- Title -->
+    </v-card-title>
+  </v-card-row>
+  <!-- Title -->
 
-      <!-- Content -->
+  <!-- Content -->
+  <v-card-row>
+    <!-- Avatar -->
+    <v-card-column id="avatar">
+      <v-card-row :img="hero.image"></v-card-row>
+    </v-card-column>
+    <!-- Avatar -->
+
+    <v-card-column>
+
       <v-card-row>
-        <!-- Avatar -->
-        <v-card-column id="avatar">
-          <v-card-row :img="hero.image"></v-card-row>
-        </v-card-column>
-        <!-- Avatar -->
 
         <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Time Played</strong></p>
+            <p>{{hero.competitive.TimePlayed || '---'}} </p>
+          </v-card-text>
 
-          <v-card-row>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Time Played</strong></p>
+            <p>{{hero.quick.TimePlayed || '---'}}</p>
+          </v-card-text>
+        </v-card-column>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Time Played</strong></p>
-                <p>{{hero.competitive.TimePlayed || '---'}} </p>
-              </v-card-text>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Games Won</strong></p>
+            <p>{{hero.competitive.GamesWon || '---'}} </p>
+          </v-card-text>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Time Played</strong></p>
-                <p>{{hero.quick.TimePlayed || '---'}}</p>
-              </v-card-text>
-            </v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Games Won</strong></p>
+            <p>{{hero.quick.GamesWon || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Games Won</strong></p>
-                <p>{{hero.competitive.GamesWon || '---'}} </p>
-              </v-card-text>
+        <v-card-column v-show="viewMode ==='Competitive'">
+          <v-card-text class="card_text">
+            <p><strong>Games Lost</strong></p>
+            <p>{{hero.competitive.GamesLost || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Games Won</strong></p>
-                <p>{{hero.quick.GamesWon || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+        <v-card-column v-show="viewMode ==='Competitive'">
+          <v-card-text class="card_text">
+            <p><strong>Win %</strong></p>
+            <p>{{hero.competitive.WinPercentage || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-            <v-card-column v-show="viewMode ==='Competitive'">
-              <v-card-text class="card_text" >
-                <p><strong>Games Lost</strong></p>
-                <p>{{hero.competitive.GamesLost || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Time on Fire</strong></p>
+            <p>{{hero.competitive.TimeSpentonFire || '---'}} </p>
+          </v-card-text>
 
-            <v-card-column v-show="viewMode ==='Competitive'">
-              <v-card-text class="card_text" >
-                <p><strong>Win %</strong></p>
-                <p>{{hero.competitive.WinPercentage || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Time on Fire</strong></p>
+            <p>{{hero.quick.TimeSpentonFire || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Time on Fire</strong></p>
-                <p>{{hero.competitive.TimeSpentonFire || '---'}} </p>
-              </v-card-text>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Avg Fire</strong></p>
+            <p>{{hero.competitive['TimeSpentonFire-Average'] || '---'}} </p>
+          </v-card-text>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Time on Fire</strong></p>
-                <p>{{hero.quick.TimeSpentonFire || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Avg Fire</strong></p>
+            <p>{{hero.quick['TimeSpentonFire-Average'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Avg Fire</strong></p>
-                <p>{{hero.competitive['TimeSpentonFire-Average'] || '---'}} </p>
-              </v-card-text>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Most Fire</strong></p>
+            <p>{{hero.competitive['TimeSpentonFire-MostinGame'] || '---'}} </p>
+          </v-card-text>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Avg Fire</strong></p>
-                <p>{{hero.quick['TimeSpentonFire-Average'] || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Most Fire</strong></p>
+            <p>{{hero.quick['TimeSpentonFire-MostinGame'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Most Fire</strong></p>
-                <p>{{hero.competitive['TimeSpentonFire-MostinGame'] || '---'}} </p>
-              </v-card-text>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Most Fire</strong></p>
-                <p>{{hero.quick['TimeSpentonFire-MostinGame'] || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+        <!-- Medals -->
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <v-icon class="goldMedal">fiber_manual_record</v-icon>
-                <p>{{hero.competitive['Medals-Gold'] || '---'}} </p>
-              </v-card-text>
+        <v-card-column class="medalColumn">
+          <v-card-text class="card_text medalText" v-if="viewMode ==='Competitive'">
+            <v-icon class="goldMedal">fiber_manual_record</v-icon>
+            <p>{{hero.competitive['Medals-Gold'] || '---'}} </p>
+          </v-card-text>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <v-icon class="goldMedal">fiber_manual_record</v-icon>
-                <p>{{hero.quick['Medals-Gold'] || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+          <v-card-text class="card_text medalText" v-if="viewMode ==='Quickplay'">
+            <v-icon class="goldMedal">fiber_manual_record</v-icon>
+            <p>{{hero.quick['Medals-Gold'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <v-icon class="silverMedal">fiber_manual_record</v-icon>
-                <p>{{hero.competitive['Medals-Silver'] || '---'}} </p>
-              </v-card-text>
+        <v-card-column class="medalColumn">
+          <v-card-text class="card_text medalText" v-if="viewMode ==='Competitive'">
+            <v-icon class="silverMedal">fiber_manual_record</v-icon>
+            <p>{{hero.competitive['Medals-Silver'] || '---'}} </p>
+          </v-card-text>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <v-icon class="silverMedal">fiber_manual_record</v-icon>
-                <p>{{hero.quick['Medals-Silver'] || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+          <v-card-text class="card_text medalText" v-if="viewMode ==='Quickplay'">
+            <v-icon class="silverMedal">fiber_manual_record</v-icon>
+            <p>{{hero.quick['Medals-Silver'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <v-icon class="bronzeMedal">fiber_manual_record</v-icon>
-                <p>{{hero.competitive['Medals-Bronze'] || '---'}} </p>
-              </v-card-text>
+        <v-card-column class="medalColumn">
+          <v-card-text class="card_text medalText" v-if="viewMode ==='Competitive'">
+            <v-icon class="bronzeMedal">fiber_manual_record</v-icon>
+            <p>{{hero.competitive['Medals-Bronze'] || '---'}} </p>
+          </v-card-text>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <v-icon class="bronzeMedal">fiber_manual_record</v-icon>
-                <p>{{hero.quick['Medals-Bronze'] || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+          <v-card-text class="card_text medalText" v-if="viewMode ==='Quickplay'">
+            <v-icon class="bronzeMedal">fiber_manual_record</v-icon>
+            <p>{{hero.quick['Medals-Bronze'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Cards</strong></p>
-                <p>{{hero.competitive.Cards || hero.competitive.Card || '---'}} </p>
-              </v-card-text>
+        <!-- End Medals -->
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Cards</strong></p>
-                <p>{{hero.quick.Cards || hero.quick.Card || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Cards</strong></p>
+            <p>{{hero.competitive.Cards || hero.competitive.Card || '---'}} </p>
+          </v-card-text>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Eliminations</strong></p>
-                <p>{{hero.competitive.Eliminations || hero.competitive.Elimination || '---'}} </p>
-              </v-card-text>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Cards</strong></p>
+            <p>{{hero.quick.Cards || hero.quick.Card || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Eliminations</strong></p>
-                <p>{{hero.quick.Eliminations || hero.quick.Elimination || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Eliminations</strong></p>
+            <p>{{hero.competitive.Eliminations || hero.competitive.Elimination || '---'}} </p>
+          </v-card-text>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Average Eliminations</strong></p>
-                <p>{{hero.competitive['Eliminations-Average'] || '---' }} </p>
-              </v-card-text>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Eliminations</strong></p>
+            <p>{{hero.quick.Eliminations || hero.quick.Elimination || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Average Eliminations</strong></p>
-                <p>{{hero.quick['Eliminations-Average'] || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Average Eliminations</strong></p>
+            <p>{{hero.competitive['Eliminations-Average'] || '---' }} </p>
+          </v-card-text>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Deaths</strong></p>
-                <p>{{hero.competitive.Deaths || hero.competitive.Death || '---'}} </p>
-              </v-card-text>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Average Eliminations</strong></p>
+            <p>{{hero.quick['Eliminations-Average'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Deaths</strong></p>
-                <p>{{hero.quick.Deaths || hero.quick.Death || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Deaths</strong></p>
+            <p>{{hero.competitive.Deaths || hero.competitive.Death || '---'}} </p>
+          </v-card-text>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Average Deaths</strong></p>
-                <p>{{hero.competitive['Deaths-Average'] || '---' }} </p>
-              </v-card-text>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Deaths</strong></p>
+            <p>{{hero.quick.Deaths || hero.quick.Death || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Average Deaths</strong></p>
-                <p>{{hero.quick['Deaths-Average'] || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Average Deaths</strong></p>
+            <p>{{hero.competitive['Deaths-Average'] || '---' }} </p>
+          </v-card-text>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Eliminations per Life</strong></p>
-                <p>{{hero.competitive['EliminationsperLife'] || '---' }} </p>
-              </v-card-text>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Average Deaths</strong></p>
+            <p>{{hero.quick['Deaths-Average'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Eliminations per Lfe</strong></p>
-                <p>{{hero.quick['EliminationsperLife'] || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Eliminations per Life</strong></p>
+            <p>{{hero.competitive['EliminationsperLife'] || '---' }} </p>
+          </v-card-text>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Best Kill Streak</strong></p>
-                <p>{{hero.competitive['KillStreak-Best'] || '---' }} </p>
-              </v-card-text>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Eliminations per Lfe</strong></p>
+            <p>{{hero.quick['EliminationsperLife'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Best Kill Streak</strong></p>
-                <p>{{hero.quick['KillStreak-Best'] || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Best Kill Streak</strong></p>
+            <p>{{hero.competitive['KillStreak-Best'] || '---' }} </p>
+          </v-card-text>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-                <p><strong>Weapon Accuracy</strong></p>
-                <p>{{hero.competitive['WeaponAccuracy'] || '---' }} </p>
-              </v-card-text>
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Best Kill Streak</strong></p>
+            <p>{{hero.quick['KillStreak-Best'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
-              <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-                <p><strong>Weapon Accuracy</strong></p>
-                <p>{{hero.quick['WeaponAccuracy'] || '---'}} </p>
-              </v-card-text>
-            </v-card-column>
+        <v-card-column>
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Weapon Accuracy</strong></p>
+            <p>{{hero.competitive['WeaponAccuracy'] || '---' }} </p>
+          </v-card-text>
 
-          </v-card-row>
-
+          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
+            <p><strong>Weapon Accuracy</strong></p>
+            <p>{{hero.quick['WeaponAccuracy'] || '---'}} </p>
+          </v-card-text>
         </v-card-column>
 
       </v-card-row>
 
-      <hr/>
+    </v-card-column>
 
-      <!-- Role specific Stats -->
-      <v-card-row v-show="fullStats" class="roleStatRow">
+  </v-card-row>
+
+  <hr/>
+
+  <!-- Role specific Stats -->
+  <v-card-row v-show="fullStats" class="roleStatRow">
+    <v-card-column>
+
+      <!-- Row Heading -->
+      <v-card-row class="statHeader">
+        <p>{{hero.role}} Stats</p>
+      </v-card-row>
+
+      <v-card-row>
 
         <!-- Support Stats -->
         <v-card-column>
@@ -386,13 +399,22 @@
             <p>{{hero.quick['OffensiveAssists-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
-
-
       </v-card-row>
-      <hr/>
+    </v-card-column>
 
-      <!-- Hero Specific Stats -->
-      <v-card-row v-show="fullStats" class="heroStatRow">
+  </v-card-row>
+  <hr/>
+
+  <!-- Hero Specific Stats -->
+  <v-card-row v-show="fullStats" class="heroStatRow">
+    <v-card-column>
+
+      <!-- Row Heading -->
+      <v-card-row class="statHeader">
+        <p>Hero Stats</p>
+      </v-card-row>
+
+      <v-card-row>
         <v-card-column>
           <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.name === 'Ana'">
             <p><strong>Enemies Slept</strong></p>
@@ -572,9 +594,10 @@
             <p>{{hero.quick['UnscopedAccuracy-BestinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
-
       </v-card-row>
-    </v-card>
+    </v-card-column>
+  </v-card-row>
+</v-card>
 </template>
 
 <script>
@@ -627,8 +650,24 @@ p {
   text-align: left;
 }
 
+.card__text {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 .cardTitleRow {
   height: 45px;
+}
+
+.statHeader {
+  font-weight: bold;
+  text-decoration: underline;
+  justify-content: center;
+  margin: 0;
+}
+
+.statHeader p {
+  margin: 0;
 }
 
 #avatar {
@@ -637,13 +676,21 @@ p {
   min-height: 100px;
 }
 
+.medalColumn {
+  flex-grow: .3;
+}
+
+.medalText {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .goldMedal {
   color: #eacf00;
 }
 
 .silverMedal {
   color: #d4d8d8;
-  /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
 }
 
 .bronzeMedal {
@@ -653,5 +700,4 @@ p {
 .medalColumn {
   width: 25px;
 }
-
 </style>
