@@ -37,7 +37,9 @@ export default {
   }
 
   button {
-    background-color: grey
+    background-color: #bec1c4;
+    height: 36px;
+    width: 60px;
   }
 
 </style>

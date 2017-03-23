@@ -6,7 +6,11 @@
     <br/>
     <br/>
     <div id="viewButtonsDiv" v-if="currentBattletag.tag.length > 0">
-      <button id="switchViewBtn" class="viewToggle" @click="switchView">{{viewMode}}</button>
+      <!-- Render a blue button if the view is competitive -->
+      <button id="switchViewBtn" v-show="viewMode === 'Competitive'" class="viewToggle indigo" @click="switchView">{{viewMode}}</button>
+      <!-- Render a red button if the view is quickplay -->
+      <button id="switchViewBtn" v-show="viewMode === 'Quickplay'" class="viewToggle red" @click="switchView">{{viewMode}}</button>
+
       <button class="viewToggle" @click="switchRoleView('all')">All</button>
       <button class="viewToggle" @click="switchRoleView('damage')">Damage</button>
       <button class="viewToggle" @click="switchRoleView('tank')">Tank</button>
