@@ -256,149 +256,261 @@
       <v-card-row>
 
         <!-- Support Stats -->
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Healing Done</strong></p>
             <p>{{hero.competitive['HealingDone'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Healing Done</strong></p>
             <p>{{hero.quick['HealingDone'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Avg Healing</strong></p>
             <p>{{hero.competitive['HealingDone-Average'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg Healing</strong></p>
             <p>{{hero.quick['HealingDone-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Most Healing in Game</strong></p>
             <p>{{hero.competitive['HealingDone-MostinGame'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most Healing in Game</strong></p>
             <p>{{hero.quick['HealingDone-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Most Healing in Life</strong></p>
             <p>{{hero.competitive['HealingDone-MostinLife'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most Healing in Life</strong></p>
             <p>{{hero.quick['HealingDone-MostinLife'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Self Healing</strong></p>
             <p>{{hero.competitive['SelfHealing'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Self Healing</strong></p>
             <p>{{hero.quick['SelfHealing'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Avg Self Healing</strong></p>
             <p>{{hero.competitive['SelfHealing-Average'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg Self Healing</strong></p>
             <p>{{hero.quick['SelfHealing-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Defensive Assists</strong></p>
             <p>{{hero.competitive['DefensiveAssists'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Defensive Assists</strong></p>
             <p>{{hero.quick['DefensiveAssists'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Avg D. Assists</strong></p>
             <p>{{hero.competitive['DefensiveAssists-Average'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg D. Assists</strong></p>
             <p>{{hero.quick['DefensiveAssists-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Most D. Assists</strong></p>
             <p>{{hero.competitive['DefensiveAssists-MostinGame'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most D. Assists</strong></p>
             <p>{{hero.quick['DefensiveAssists-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Offensive Assists</strong></p>
             <p>{{hero.competitive['OffensiveAssists'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Offensive Assists</strong></p>
             <p>{{hero.quick['OffensiveAssists'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Avg O. Assists</strong></p>
             <p>{{hero.competitive['OffensiveAssists-Average'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg O. Assists</strong></p>
             <p>{{hero.quick['OffensiveAssists-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive' && hero.role === 'support'">
+        <v-card-column  v-if="hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
             <p><strong>Most O. Assists</strong></p>
             <p>{{hero.competitive['OffensiveAssists-MostinGame'] || '---' }} </p>
           </v-card-text>
 
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay' && hero.role === 'support'">
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most O. Assists</strong></p>
             <p>{{hero.quick['OffensiveAssists-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
+
+        <!-- End Support Stats -->
+
+        <!-- Tank Stats -->
+        <v-card-column v-if="hero.role === 'tank'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'" >
+            <p><strong>Damage Blocked</strong></p>
+            <p>{{hero.competitive['DamageBlocked'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
+            <p><strong>Damage Blocked</strong></p>
+            <p>{{hero.quick['DamageBlocked'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.role === 'tank'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'" >
+            <p><strong>Avg Damage Blocked</strong></p>
+            <p>{{hero.competitive['DamageBlocked-Average'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
+            <p><strong>Avg Damage Blocked</strong></p>
+            <p>{{hero.quick['DamageBlocked-Average'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.role === 'tank'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'" >
+            <p><strong>Most Damage Blocked</strong></p>
+            <p>{{hero.competitive['DamageBlocked-MostinGame'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
+            <p><strong>Most Damage Blocked</strong></p>
+            <p>{{hero.quick['DamageBlocked-MostinGame'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.role === 'tank'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'" >
+            <p><strong>Objective Time</strong></p>
+            <p>{{hero.competitive['ObjectiveTime'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
+            <p><strong>Objective Time</strong></p>
+            <p>{{hero.quick['ObjectiveTime'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.role === 'tank'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'" >
+            <p><strong>Avg Obj Time</strong></p>
+            <p>{{hero.competitive['ObjectiveTime-Average'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
+            <p><strong>Avg Obj Time</strong></p>
+            <p>{{hero.quick['ObjectiveTime-Average'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.role === 'tank'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'" >
+            <p><strong>Most Obj Time</strong></p>
+            <p>{{hero.competitive['ObjectiveTime-MostinGame'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
+            <p><strong>Most Obj Time</strong></p>
+            <p>{{hero.quick['ObjectiveTime-MostinGame'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.role === 'tank'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'" >
+            <p><strong>Objective Kills</strong></p>
+            <p>{{hero.competitive['ObjectiveKills'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
+            <p><strong>Objective Kills</strong></p>
+            <p>{{hero.quick['ObjectiveKills'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.role === 'tank'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'" >
+            <p><strong>Avg Obj Kills</strong></p>
+            <p>{{hero.competitive['ObjectiveKills-Average'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
+            <p><strong>Avg Obj Kills</strong></p>
+            <p>{{hero.quick['ObjectiveKills-Average'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.role === 'tank'">
+          <v-card-text class="card_text" v-show="viewMode ==='Competitive'" >
+            <p><strong>Most Obj Kills</strong></p>
+            <p>{{hero.competitive['ObjectiveKills-MostinGame'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
+            <p><strong>Most Obj Kills</strong></p>
+            <p>{{hero.quick['ObjectiveKills-MostinGame'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
       </v-card-row>
     </v-card-column>
 
