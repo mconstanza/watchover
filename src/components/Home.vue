@@ -81,12 +81,13 @@ a {
 
 #HomeContainer {
   text-align: center;
+  justify-content: center;
   font-family: 'Overwatch';
 }
 
 #HeadingContainer {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: wrap;
   justify-content: center;
 }
 
@@ -96,8 +97,7 @@ a {
   justify-content: center;
 }
 
-.card {
-  margin-right: 20px;
+.heroCard {
   margin-bottom: 20px;
 }
 
@@ -113,7 +113,6 @@ a {
 
 .card {
   max-width: 100%;
-  /*height: 400px;*/
 }
 
 #avatar {

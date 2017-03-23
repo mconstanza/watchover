@@ -39,6 +39,29 @@
 
             </v-card-column>
 
+            <v-card-column>
+
+              <v-card-text v-if="viewMode == 'Competitive'">
+                <p><strong>Games Played</strong></p>
+                <p>{{currentBattletag.profile.games.competitive.played}}</p>
+              </v-card-text>
+
+              <v-card-text v-else-if="viewMode == 'Quickplay'">
+                <p><strong>Wins</strong></p>
+                <p>{{currentBattletag.profile.games.quick.wins}}</p>
+              </v-card-text>
+
+            </v-card-column>
+
+            <v-card-column v-show="viewMode == 'Competitive'">
+
+              <v-card-text >
+                <p><strong>Wins</strong></p>
+                <p>{{currentBattletag.profile.games.competitive.wins}}</p>
+              </v-card-text>
+
+            </v-card-column>
+
           </v-card-row>
         </v-card-column>
 
@@ -80,8 +103,11 @@ a {
   color: #42b983;
 }
 
+p {
+  white-space: nowrap;
+}
+
 .card {
-  max-width: 100%;
   height: 400px;
   justify-content: flex-start;
   text-align: left;
@@ -89,6 +115,7 @@ a {
 
 #avatar {
   max-width: 100px;
+  min-width: 100px;
   min-height: 100px;
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <v-card >
+    <v-card class="heroCard">
       <!-- Title -->
       <v-card-row class="indigo cardTitleRow">
         <v-card-title @click="toggleHeroStats">
@@ -49,15 +49,15 @@
               </v-card-text>
             </v-card-column>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <v-card-column v-show="viewMode ==='Competitive'">
+              <v-card-text class="card_text" >
                 <p><strong>Games Lost</strong></p>
                 <p>{{hero.competitive.GamesLost || '---'}} </p>
               </v-card-text>
             </v-card-column>
 
-            <v-card-column>
-              <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <v-card-column v-show="viewMode ==='Competitive'">
+              <v-card-text class="card_text" >
                 <p><strong>Win %</strong></p>
                 <p>{{hero.competitive.WinPercentage || '---'}} </p>
               </v-card-text>
@@ -623,7 +623,7 @@ p {
   white-space: nowrap;
 }
 
-.card {
+.heroCard {
   text-align: left;
 }
 
@@ -632,7 +632,7 @@ p {
 }
 
 #avatar {
-  min-width: 75px;
+  min-width: 100px;
   max-width: 100px;
   min-height: 100px;
 }
