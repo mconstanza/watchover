@@ -99,10 +99,12 @@ a {
 
 .heroCard {
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .card__row {
   align-items: flex-start;
+  flex-flow: row wrap;
 }
 
 .viewToggle {

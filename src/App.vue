@@ -44,7 +44,7 @@ export default {
             role: 'defense',
             loading: true
           },
-          'D.Va': {
+          DVa: {
             name: 'D.Va',
             image: '/static/Dva.png',
             role: 'tank',
@@ -74,7 +74,7 @@ export default {
             role: 'support',
             loading: true
           },
-          McCree: {
+          Mccree: {
             name: 'McCree',
             image: '/static/McCree.png',
             role: 'offense',
@@ -226,12 +226,12 @@ export default {
     loadHeroes: function () {
       this.loadHeroData('Ana')
       this.loadHeroData('Bastion')
-      this.loadHeroData('D.Va')
+      this.loadHeroData('DVa')
       this.loadHeroData('Genji')
       this.loadHeroData('Hanzo')
       this.loadHeroData('Junkrat')
       this.loadHeroData('Lucio')
-      this.loadHeroData('McCree')
+      this.loadHeroData('Mccree')
       this.loadHeroData('Mei')
       this.loadHeroData('Mercy')
       this.loadHeroData('Pharah')
@@ -291,6 +291,11 @@ export default {
 
 #toolbar {
   text-align: left;
-
 }
+
+.card__row {
+  align-items: flex-start;
+  flex-flow: row wrap;
+}
+
 </style>
