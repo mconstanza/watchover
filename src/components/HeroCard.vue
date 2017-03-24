@@ -330,12 +330,12 @@
 
         <v-card-column  v-if="hero.role === 'support'">
           <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
-            <p><strong>Defensive Assists</strong></p>
+            <p><strong>D. Assists</strong></p>
             <p>{{hero.competitive['DefensiveAssists'] || '---' }} </p>
           </v-card-text>
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
-            <p><strong>Defensive Assists</strong></p>
+            <p><strong>D. Assists</strong></p>
             <p>{{hero.quick['DefensiveAssists'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
@@ -366,12 +366,12 @@
 
         <v-card-column  v-if="hero.role === 'support'">
           <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
-            <p><strong>Offensive Assists</strong></p>
+            <p><strong>O. Assists</strong></p>
             <p>{{hero.competitive['OffensiveAssists'] || '---' }} </p>
           </v-card-text>
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
-            <p><strong>Offensive Assists</strong></p>
+            <p><strong>O. Assists</strong></p>
             <p>{{hero.quick['OffensiveAssists'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
@@ -514,7 +514,7 @@
         <!-- End Tank Stats -->
         <!-- Damage and Defense Hero Stats -->
 
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
+        <v-card-column v-if="hero.role === 'offense' || hero.role === 'defense'">
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
             <p><strong>Solo Kills</strong></p>
             <p>{{hero.competitive['SoloKills'] || '---' }} </p>
@@ -526,7 +526,7 @@
           </v-card-text>
         </v-card-column>
 
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
+        <v-card-column v-if="hero.role === 'offense' || hero.role === 'defense'">
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
             <p><strong>Avg Solo Kills</strong></p>
             <p>{{hero.competitive['SoloKills-Average'] || '---' }} </p>
@@ -538,7 +538,7 @@
           </v-card-text>
         </v-card-column>
 
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
+        <v-card-column v-if="hero.role === 'offense' || hero.role === 'defense'">
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
             <p><strong>Most Solo Kills</strong></p>
             <p>{{hero.competitive['SoloKills-MostinGame'] || '---' }} </p>
@@ -550,7 +550,7 @@
           </v-card-text>
         </v-card-column>
 
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
+        <v-card-column v-if="hero.role === 'offense' || hero.role === 'defense'">
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
             <p><strong>Final Blows</strong></p>
             <p>{{hero.competitive['FinalBlows'] || '---' }} </p>
@@ -562,7 +562,7 @@
           </v-card-text>
         </v-card-column>
 
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
+        <v-card-column v-if="hero.role === 'offense' || hero.role === 'defense'">
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
             <p><strong>Avg Final Blows</strong></p>
             <p>{{hero.competitive['FinalBlows-Average'] || '---' }} </p>
@@ -574,7 +574,7 @@
           </v-card-text>
         </v-card-column>
 
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
+        <v-card-column v-if="hero.role === 'offense' || hero.role === 'defense'">
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
             <p><strong>Most Final Blows</strong></p>
             <p>{{hero.competitive['FinalBlows-MostinGame'] || '---' }} </p>
@@ -586,7 +586,7 @@
           </v-card-text>
         </v-card-column>
 
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
+        <v-card-column v-if="hero.role === 'offense' || hero.role === 'defense'">
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
             <p><strong>Melee Final Blows</strong></p>
             <p>{{hero.competitive['MeleeFinalBlows'] || hero.competitive['MeleeFinalBlow'] || '---' }} </p>
@@ -598,7 +598,7 @@
           </v-card-text>
         </v-card-column>
 
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
+        <v-card-column v-if="hero.role === 'offense' || hero.role === 'defense'">
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
             <p><strong>Avg Melee Final Blows</strong></p>
             <p>{{hero.competitive['MeleeFinalBlows-Average'] || hero.competitive['MeleeFinalBlow-Average'] || '---' }} </p>
@@ -610,7 +610,7 @@
           </v-card-text>
         </v-card-column>
 
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
+        <v-card-column v-if="hero.role === 'offense' || hero.role === 'defense'">
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
             <p><strong>Most Melee Final Blows</strong></p>
             <p>{{hero.competitive['MeleeFinalBlows-MostinGame'] || hero.competitive['MeleeFinalBlow-MostinGame'] || '---' }} </p>
@@ -619,54 +619,6 @@
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Melee Final Blows</strong></p>
             <p>{{hero.quick['MeleeFinalBlows-MostinGame'] || hero.quick['MeleeFinalBlow-MostinGame'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Critical Hits</strong></p>
-            <p>{{hero.competitive['CriticalHits'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
-            <p><strong>Critical Hits</strong></p>
-            <p>{{hero.quick['CriticalHits'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Avg Critical Hits</strong></p>
-            <p>{{hero.competitive['CriticalHits-Average'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
-            <p><strong>Avg Critical Hits</strong></p>
-            <p>{{hero.quick['CriticalHits-Average'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Most Critical Hits</strong></p>
-            <p>{{hero.competitive['CriticalHits-MostinGame'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
-            <p><strong>Most Critical Hits</strong></p>
-            <p>{{hero.quick['CriticalHits-MostinGame'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column v-if="hero.role === 'offense' || 'defense'">
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Critical Hit %</strong></p>
-            <p>{{hero.competitive['CriticalHitAccuracy'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
-            <p><strong>Critical Hit %</strong></p>
-            <p>{{hero.quick['CriticalHitAccuracy'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -686,6 +638,58 @@
       </v-card-row>
 
       <v-card-row>
+
+      <!-- ============================================================================================================================ -->
+      <!-- GENERAL ------------------------------------------------------------------------------------------------------------------>
+      <!-- ============================================================================================================================ -->
+
+      <v-card-column v-if="hero.name !== 'Ana' || hero.name !== 'Junkrat' || hero.name !== 'Pharah' || hero.name !== 'Symmetra' || hero.name !== 'Mei' || hero.name !== 'Reinhardt' || hero.name !== 'Winston' || hero.name !== 'Zarya'">
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Critical Hits</strong></p>
+            <p>{{hero.competitive['CriticalHits'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
+            <p><strong>Critical Hits</strong></p>
+            <p>{{hero.quick['CriticalHits'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.name === 'Bastion' || 'D.Va' || 'Genji' || 'Hanzo' || 'Lucio' || 'McCree' || 'Mei' || 'Reaper' || 'Roadhog' || 'Soldier: 76' || 'Sombra' || 'Tracer' || 'Torbjörn' || 'Widowmaker' || 'Zenyatta'">
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Avg Critical Hits</strong></p>
+            <p>{{hero.competitive['CriticalHits-Average'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
+            <p><strong>Avg Critical Hits</strong></p>
+            <p>{{hero.quick['CriticalHits-Average'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.name === 'Bastion' || 'D.Va' || 'Genji' || 'Hanzo' || 'Lucio' || 'McCree' || 'Mei' || 'Reaper' || 'Roadhog' || 'Soldier: 76' || 'Sombra' || 'Tracer' || 'Torbjörn' || 'Widowmaker' || 'Zenyatta'">
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Most Critical Hits</strong></p>
+            <p>{{hero.competitive['CriticalHits-MostinGame'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
+            <p><strong>Most Critical Hits</strong></p>
+            <p>{{hero.quick['CriticalHits-MostinGame'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.name === 'Bastion' || 'D.Va' || 'Genji' || 'Hanzo' || 'Lucio' || 'McCree' || 'Mei' || 'Reaper' || 'Roadhog' || 'Soldier: 76' || 'Sombra' || 'Tracer' || 'Torbjörn' || 'Widowmaker' || 'Zenyatta'">
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Critical Hit %</strong></p>
+            <p>{{hero.competitive['CriticalHitAccuracy'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
+            <p><strong>Critical Hit %</strong></p>
+            <p>{{hero.quick['CriticalHitAccuracy'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
 
         <!-- ============================================================================================================================ -->
         <!-- ANA ------------------------------------------------------------------------------------------------------------------>
@@ -1100,6 +1104,82 @@
           </v-card-text>
         </v-card-column>
 
+        <!-- ============================================================================================================================ -->
+        <!-- Hanzo ------------------------------------------------------------------------------------------------------------------>
+        <!-- ============================================================================================================================ -->
+
+        <v-card-column v-if="hero.name === 'Hanzo'">
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Dragonstrike Kills</strong></p>
+            <p>{{hero.competitive['DragonstrikeKills'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
+            <p><strong>Dragonstrike Kills</strong></p>
+            <p>{{hero.quick['DragonstrikeKills'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.name === 'Hanzo'">
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Avg Dragonstrike Kills</strong></p>
+            <p>{{hero.competitive['DragonstrikeKills-Average'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
+            <p><strong>Avg Dragonstrike Kills</strong></p>
+            <p>{{hero.quick['DragonstrikeKills-Average'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.name === 'Hanzo'">
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Most Dragonstrike Kills</strong></p>
+            <p>{{hero.competitive['DragonstrikeKills-MostinGame'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
+            <p><strong>Most Dragonstrike Kills</strong></p>
+            <p>{{hero.quick['DragonstrikeKills-MostinGame'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.name === 'Hanzo'">
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Scatter Arrow Kills</strong></p>
+            <p>{{hero.competitive['ScatterArrowKills'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
+            <p><strong>Scatter Arrow Kills</strong></p>
+            <p>{{hero.quick['ScatterArrowKills'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.name === 'Hanzo'">
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Avg Scatter Arrow Kills</strong></p>
+            <p>{{hero.competitive['ScatterArrowKills-Average'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
+            <p><strong>Avg Scatter Arrow Kills</strong></p>
+            <p>{{hero.quick['ScatterArrowKills-Average'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
+        <v-card-column v-if="hero.name === 'Hanzo'">
+          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
+            <p><strong>Most Scatter Arrow Kills</strong></p>
+            <p>{{hero.competitive['ScatterArrowKills-MostinGame'] || '---' }} </p>
+          </v-card-text>
+
+          <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
+            <p><strong>Most Scatter Arrow Kills</strong></p>
+            <p>{{hero.quick['ScatterArrowKills-MostinGame'] || '---'}} </p>
+          </v-card-text>
+        </v-card-column>
+
       </v-card-row>
       <!-- End Hero Stats Row -->
     </v-card-column>
@@ -1154,7 +1234,7 @@ p {
 }
 
 .heroCard {
-  text-align: left;
+  text-align: center;
 }
 
 .card__text {
