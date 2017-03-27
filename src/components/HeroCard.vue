@@ -214,12 +214,12 @@
 
         <v-card-column>
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Best Kill Streak</strong></p>
+            <p><strong>Best Streak</strong></p>
             <p>{{hero.competitive['KillStreak-Best'] || '---' }} </p>
           </v-card-text>
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Best Kill Streak</strong></p>
+            <p><strong>Best Streak</strong></p>
             <p>{{hero.quick['KillStreak-Best'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
@@ -262,12 +262,12 @@
 
         <v-card-column>
           <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
-            <p><strong>Most Damage in Game</strong></p>
+            <p><strong>Most Damage</strong></p>
             <p>{{hero.competitive['DamageDone-MostinGame'] || '---' }} </p>
           </v-card-text>
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
-            <p><strong>Most Damage in Game</strong></p>
+            <p><strong>Most Damage</strong></p>
             <p>{{hero.quick['DamageDone-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>

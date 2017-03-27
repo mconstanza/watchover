@@ -279,7 +279,7 @@ export default {
 <style>
 @font-face {
     font-family: Overwatch;
-    src: url(http://us.battle.net/forums/static/fonts/bignoodletoo/bignoodletoo.woff);
+    src: url(https://us.battle.net/forums/static/fonts/bignoodletoo/bignoodletoo.woff);
 }
 #appContainer {
   font-family: 'Overwatch', Helvetica, Arial, sans-serif;
