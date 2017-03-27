@@ -1,6 +1,6 @@
 <template>
   <div id='appContainer'>
-    <v-toolbar id="toolbar" class="indigo">
+    <v-toolbar id="toolbar">
       <v-toolbar-title>WatchOver</v-toolbar-title>
       <v-spacer />
       <user-search @clicked ="onClickSearch"/>
@@ -8,7 +8,7 @@
 
     <main>
       <v-content>
-        <router-view :viewMode="view.mode" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :current-battletag="currentBattletag" ></router-view>
+        <router-view :viewMode="view.mode" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :current-battletag="currentBattletag" ></router-view>
       </v-content>
     </main>
   </div>
@@ -24,6 +24,8 @@ export default {
   },
   data () {
     return {
+      loading: true,
+      heroQueryString: 'Ana%2CBastion%2CDVa%2CGenji%2CHanzo%2CJunkrat%2CLucio%2CMccree%2CMei%2CMercy%2CPharah%2CReaper%2CReinhardt%2CRoadhog%2CSoldier76%2CSombra%2CSymmetra%2CTracer%2CTorbjoern%2CWidowmaker%2CWinston%2CZarya%2CZenyatta',
       currentBattletag: {
         tag: '',
         profile: {},
@@ -35,140 +37,117 @@ export default {
           Ana: {
             name: 'Ana',
             image: '/static/Ana.png',
-            role: 'support',
-            loading: true
+            role: 'support'
           },
           Bastion: {
             name: 'Bastion',
             image: '/static/Bastion.png',
-            role: 'defense',
-            loading: true
+            role: 'defense'
           },
           DVa: {
             name: 'D.Va',
             image: '/static/Dva.png',
-            role: 'tank',
-            loading: true
+            role: 'tank'
           },
           Genji: {
             name: 'Genji',
             image: '/static/Genji.png',
-            role: 'offense',
-            loading: true
+            role: 'offense'
           },
           Hanzo: {
             name: 'Hanzo',
             image: '/static/Hanzo.png',
-            role: 'defense',
-            loading: true
+            role: 'defense'
           },
           Junkrat: {
             name: 'Junkrat',
             image: '/static/Junkrat.png',
-            role: 'defense',
-            loading: true
+            role: 'defense'
           },
           Lucio: {
             name: 'Lúcio',
             image: '/static/Lucio.png',
-            role: 'support',
-            loading: true
+            role: 'support'
           },
           Mccree: {
             name: 'McCree',
             image: '/static/McCree.png',
-            role: 'offense',
-            loading: true
+            role: 'offense'
           },
           Mei: {
             name: 'Mei',
             image: '/static/Mei.png',
-            role: 'defense',
-            loading: true
+            role: 'defense'
           },
           Mercy: {
             name: 'Mercy',
             image: '/static/Mercy.png',
-            role: 'support',
-            loading: true
+            role: 'support'
           },
           Pharah: {
             name: 'Pharah',
             image: '/static/Pharah.png',
-            role: 'offense',
-            loading: true
+            role: 'offense'
           },
           Reaper: {
             name: 'Reaper',
             image: '/static/Reaper.png',
-            role: 'offense',
-            loading: true
+            role: 'offense'
           },
           Reinhardt: {
             name: 'Reinhardt',
             image: '/static/Reinhardt.png',
-            role: 'tank',
-            loading: true
+            role: 'tank'
           },
           Roadhog: {
             name: 'Roadhog',
             image: '/static/Roadhog.png',
-            role: 'tank',
-            loading: true
+            role: 'tank'
           },
           Soldier76: {
             name: 'Soldier: 76',
             image: '/static/Soldier.png',
-            role: 'offense',
-            loading: true
+            role: 'offense'
           },
           Sombra: {
             name: 'Sombra',
             image: '/static/Sombra.png',
-            role: 'offense',
-            loading: true
+            role: 'offense'
           },
           Symmetra: {
             name: 'Symmetra',
             image: '/static/Symmetra.png',
-            role: 'support',
-            loading: true
+            role: 'support'
           },
           Tracer: {
             name: 'Tracer',
             image: '/static/Tracer.png',
-            role: 'offense',
-            loading: true
+            role: 'offense'
           },
           Torbjoern: {
             name: 'Torbjörn',
             image: '/static/Torb.png',
-            role: 'defense',
-            loading: true
+            role: 'defense'
           },
           Widowmaker: {
             name: 'Widowmaker',
             image: '/static/Widowmaker.png',
-            role: 'defense',
-            loading: true
+            role: 'defense'
           },
           Winston: {
             name: 'Harambe',
             image: '/static/Harambe.png',
-            role: 'tank',
-            loading: true
+            role: 'tank'
           },
           Zarya: {
             name: 'Zarya',
             image: '/static/Zarya.png',
-            role: 'tank',
-            loading: true
+            role: 'tank'
           },
           Zenyatta: {
             name: 'Zenyatta',
             image: '/static/Zenyatta.png',
-            role: 'support',
-            loading: true
+            role: 'support'
           }
         }
       },
@@ -186,67 +165,35 @@ export default {
   methods: {
     onClickSearch: function (query) {
       this.currentBattletag.tag = query
-      let battletag = this.currentBattletag.tag.replace('#', '-')
-      // get basic profile info
-      axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/profile')
-      .then(response => {
-        this.currentBattletag.profile = response.data.data
-      })
-      // get basic combined hero data in competitive
-      axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/competitive/allHeroes/')
-      .then(response => {
-        this.currentBattletag.combinedStats.competitive = response.data.data
-      })
-      // get basic combined hero data in quickplay
-      axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/quickplay/allHeroes/')
-      .then(response => {
-        this.currentBattletag.combinedStats.quick = response.data.data
-      })
-
-      this.loadHeroes()
-    },
-    loadHeroData: function (hero) {
-      let battletag = this.currentBattletag.tag.replace('#', '-')
-      this.currentBattletag.heroStats[hero].loading = true
-      // get all competitive data for a hero
-      axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/competitive/hero/' + hero + '/')
-      .then(response => {
-        this.currentBattletag.heroStats[hero].competitive = response.data[hero]
-        this.currentBattletag.heroStats[hero].loading = false
-      })
-      // get all quickplay data for a hero
-      axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/quickplay/hero/' + hero + '/')
-      .then(response => {
-        this.currentBattletag.heroStats[hero].quick = response.data[hero]
-      })
+      this.loadHeroData()
     },
     switchView: function (view) {
       this.view.mode = view
     },
-    loadHeroes: function () {
-      this.loadHeroData('Ana')
-      this.loadHeroData('Bastion')
-      this.loadHeroData('DVa')
-      this.loadHeroData('Genji')
-      this.loadHeroData('Hanzo')
-      this.loadHeroData('Junkrat')
-      this.loadHeroData('Lucio')
-      this.loadHeroData('Mccree')
-      this.loadHeroData('Mei')
-      this.loadHeroData('Mercy')
-      this.loadHeroData('Pharah')
-      this.loadHeroData('Reaper')
-      this.loadHeroData('Reinhardt')
-      this.loadHeroData('Roadhog')
-      this.loadHeroData('Soldier76')
-      this.loadHeroData('Sombra')
-      this.loadHeroData('Symmetra')
-      this.loadHeroData('Torbjoern')
-      this.loadHeroData('Tracer')
-      this.loadHeroData('Widowmaker')
-      this.loadHeroData('Winston')
-      this.loadHeroData('Zarya')
-      this.loadHeroData('Zenyatta')
+    loadHeroData: function () {
+      this.loading = true
+      let battletag = this.currentBattletag.tag.replace('#', '-')
+      axios.all([
+        axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/profile'),
+        axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/competitive/allHeroes/'),
+        axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/quickplay/allHeroes/'),
+        axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/competitive/hero/' + this.heroQueryString + '/'),
+        axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/quickplay/hero/' + this.heroQueryString + '/')
+      ])
+      .then((response) => {
+        console.log('response', response)
+        this.currentBattletag.profile = response[0].data.data
+        this.currentBattletag.combinedStats.competitive = response[1].data
+        this.currentBattletag.combinedStats.quickplay = response[2].data
+
+        for (var hero in response[3].data) {
+          this.currentBattletag.heroStats[hero].competitive = response[3].data[hero]
+        }
+        for (hero in response[4].data) {
+          this.currentBattletag.heroStats[hero].quickplay = response[4].data[hero]
+        }
+        this.loading = false
+      })
     },
     switchRoleView: function (role) {
       if (role === 'all') {
@@ -277,6 +224,7 @@ export default {
 </script>
 
 <style>
+
 @font-face {
     font-family: Overwatch;
     src: url(https://us.battle.net/forums/static/fonts/bignoodletoo/bignoodletoo.woff);
@@ -291,6 +239,11 @@ export default {
 
 #toolbar {
   text-align: left;
+  background: #060606; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #060606 0%, #584f4a 51%, #faa02e 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #060606 0%,#584f4a 51%,#faa02e 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #060606 0%,#584f4a 51%,#faa02e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#060606', endColorstr='#faa02e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .card__row {

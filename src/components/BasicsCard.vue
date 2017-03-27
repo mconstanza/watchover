@@ -1,7 +1,7 @@
 <template>
     <v-card class="basicCard">
 
-      <v-card-row class="indigo">
+      <v-card-row class="basicCardTitle">
         <v-card-title>
           <span class="white--text">{{currentBattletag.tag}}, AKA: {{currentBattletag.profile.username}}</span>
         </v-card-title>
@@ -126,6 +126,14 @@ p {
   max-width: 100px;
   min-width: 100px;
   min-height: 100px;
+}
+
+.basicCardTitle {
+  background: #060606; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #060606 0%, #584f4a 51%, #faa02e 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #060606 0%,#584f4a 51%,#faa02e 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #060606 0%,#584f4a 51%,#faa02e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#060606', endColorstr='#faa02e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 </style>

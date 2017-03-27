@@ -1,25 +1,32 @@
 <template>
   <div id="HomeContainer">
     <div id="HeadingContainer">
-      <basics-card v-if="currentBattletag.tag != ''" :viewMode="viewMode" :currentBattletag="currentBattletag"></basics-card>
+      <basics-card v-if="!loading" :viewMode="viewMode" :currentBattletag="currentBattletag"></basics-card>
     </div>
     <br/>
     <br/>
-    <div id="viewButtonsDiv" v-if="currentBattletag.tag.length > 0">
+    <div id="viewButtonsDiv" v-if="!loading">
       <!-- Render a blue button if the view is competitive -->
       <button id="switchViewBtn" v-show="viewMode === 'Competitive'" class="viewToggle indigo" @click="switchView">{{viewMode}}</button>
       <!-- Render a red button if the view is quickplay -->
       <button id="switchViewBtn" v-show="viewMode === 'Quickplay'" class="viewToggle red" @click="switchView">{{viewMode}}</button>
 
-      <button class="viewToggle" @click="switchRoleView('all')">All</button>
-      <button class="viewToggle" @click="switchRoleView('damage')">Damage</button>
-      <button class="viewToggle" @click="switchRoleView('tank')">Tank</button>
-      <button class="viewToggle" @click="switchRoleView('support')">Support</button>
+      <button class="viewToggle indigo" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')">All Heroes</button>
+      <button class="viewToggle" v-show="!view.roles.defense || !view.roles.offense || !view.roles.tank || !view.roles.support" @click="switchRoleView('all')">All Heroes</button>
+
+      <button class="viewToggle indigo" v-show="view.roles.defense && view.roles.offense" @click="switchRoleView('damage')">Damage</button>
+      <button class="viewToggle" v-show="!view.roles.defense && !view.roles.offense" @click="switchRoleView('damage')">Damage</button>
+
+      <button class="viewToggle indigo" v-show="view.roles.tank" @click="switchRoleView('tank')">Tank</button>
+      <button class="viewToggle" v-show="!view.roles.tank" @click="switchRoleView('tank')">Tank</button>
+
+      <button class="viewToggle indigo" v-show="view.roles.support" @click="switchRoleView('support')">Support</button>
+      <button class="viewToggle" v-show="!view.roles.support" @click="switchRoleView('support')">Support</button>
     </div>
     <br />
     <br />
     <div id="CardContainer">
-      <hero-card v-for="hero in currentBattletag.heroStats" v-if="!hero.loading" v-show="view.roles[hero.role]" :hero="hero" :key="hero.name" :viewMode="viewMode" ></hero-card>
+      <hero-card v-if="!loading" v-for="hero in currentBattletag.heroStats" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card>
     </div>
   </div>
 </template>
@@ -38,7 +45,7 @@ export default {
     basicsCard,
     heroCard
   },
-  props: ['currentBattletag', 'viewMode', 'view'],
+  props: ['loading', 'currentBattletag', 'viewMode', 'view'],
   methods: {
     switchView: function (event) {
       if (this.viewMode === 'Competitive') {

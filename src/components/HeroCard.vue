@@ -1,9 +1,9 @@
 <template>
 <v-card class="heroCard">
   <!-- Title -->
-  <v-card-row class="indigo cardTitleRow">
+  <v-card-row class="cardTitleRow" :id="headerId(hero)">
     <v-card-title @click="toggleHeroStats">
-      <span class="white--text">{{hero.name}}</span>
+      <span class="white--text heroName">{{hero.name}}</span>
       <v-spacer></v-spacer>
       <span>
             <v-icon v-if="fullStats">expand_more</v-icon>
@@ -33,7 +33,7 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Time Played</strong></p>
-            <p>{{hero.quick.TimePlayed || '---'}}</p>
+            <p>{{hero.quickplay.TimePlayed || '---'}}</p>
           </v-card-text>
         </v-card-column>
 
@@ -45,7 +45,7 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Games Won</strong></p>
-            <p>{{hero.quick.GamesWon || '---'}} </p>
+            <p>{{hero.quickplay.GamesWon || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -71,7 +71,7 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Time on Fire</strong></p>
-            <p>{{hero.quick.TimeSpentonFire || '---'}} </p>
+            <p>{{hero.quickplay.TimeSpentonFire || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -83,7 +83,7 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Avg Fire</strong></p>
-            <p>{{hero.quick['TimeSpentonFire-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['TimeSpentonFire-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -95,7 +95,7 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Most Fire</strong></p>
-            <p>{{hero.quick['TimeSpentonFire-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['TimeSpentonFire-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -110,7 +110,7 @@
 
           <v-card-text class="card_text medalText" v-if="viewMode ==='Quickplay'">
             <v-icon class="goldMedal">fiber_manual_record</v-icon>
-            <p>{{hero.quick['Medals-Gold'] || '---'}} </p>
+            <p>{{hero.quickplay['Medals-Gold'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -122,7 +122,7 @@
 
           <v-card-text class="card_text medalText" v-if="viewMode ==='Quickplay'">
             <v-icon class="silverMedal">fiber_manual_record</v-icon>
-            <p>{{hero.quick['Medals-Silver'] || '---'}} </p>
+            <p>{{hero.quickplay['Medals-Silver'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -134,7 +134,7 @@
 
           <v-card-text class="card_text medalText" v-if="viewMode ==='Quickplay'">
             <v-icon class="bronzeMedal">fiber_manual_record</v-icon>
-            <p>{{hero.quick['Medals-Bronze'] || '---'}} </p>
+            <p>{{hero.quickplay['Medals-Bronze'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -148,19 +148,19 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Cards</strong></p>
-            <p>{{hero.quick.Cards || hero.quick.Card || '---'}} </p>
+            <p>{{hero.quickplay.Cards || hero.quickplay.Card || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
         <v-card-column>
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Eliminations</strong></p>
+            <p><strong>Elims</strong></p>
             <p>{{hero.competitive.Eliminations || hero.competitive.Elimination || '---'}} </p>
           </v-card-text>
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Eliminations</strong></p>
-            <p>{{hero.quick.Eliminations || hero.quick.Elimination || '---'}} </p>
+            <p><strong>Elims</strong></p>
+            <p>{{hero.quickplay.Eliminations || hero.quickplay.Elimination || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -172,7 +172,7 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Avg Elims</strong></p>
-            <p>{{hero.quick['Eliminations-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['Eliminations-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -184,7 +184,7 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Deaths</strong></p>
-            <p>{{hero.quick.Deaths || hero.quick.Death || '---'}} </p>
+            <p>{{hero.quickplay.Deaths || hero.quickplay.Death || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -196,7 +196,7 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Avg Deaths</strong></p>
-            <p>{{hero.quick['Deaths-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['Deaths-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -208,7 +208,7 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Elims/Life</strong></p>
-            <p>{{hero.quick['EliminationsperLife'] || '---'}} </p>
+            <p>{{hero.quickplay['EliminationsperLife'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -220,7 +220,7 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Best Streak</strong></p>
-            <p>{{hero.quick['KillStreak-Best'] || '---'}} </p>
+            <p>{{hero.quickplay['KillStreak-Best'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -232,7 +232,7 @@
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
             <p><strong>Weapon Accuracy</strong></p>
-            <p>{{hero.quick['WeaponAccuracy'] || '---'}} </p>
+            <p>{{hero.quickplay['WeaponAccuracy'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -244,7 +244,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Damage Done</strong></p>
-            <p>{{hero.quick['DamageDone'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageDone'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -256,7 +256,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg Damage</strong></p>
-            <p>{{hero.quick['DamageDone-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageDone-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -268,7 +268,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most Damage</strong></p>
-            <p>{{hero.quick['DamageDone-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageDone-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -300,7 +300,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Healing Done</strong></p>
-            <p>{{hero.quick['HealingDone'] || '---'}} </p>
+            <p>{{hero.quickplay['HealingDone'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -312,7 +312,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg Healing</strong></p>
-            <p>{{hero.quick['HealingDone-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['HealingDone-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -324,7 +324,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most Healing in Game</strong></p>
-            <p>{{hero.quick['HealingDone-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['HealingDone-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -336,7 +336,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most Healing in Life</strong></p>
-            <p>{{hero.quick['HealingDone-MostinLife'] || '---'}} </p>
+            <p>{{hero.quickplay['HealingDone-MostinLife'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -348,7 +348,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Self Healing</strong></p>
-            <p>{{hero.quick['SelfHealing'] || '---'}} </p>
+            <p>{{hero.quickplay['SelfHealing'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -360,7 +360,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg Self Healing</strong></p>
-            <p>{{hero.quick['SelfHealing-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['SelfHealing-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -372,7 +372,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>D. Assists</strong></p>
-            <p>{{hero.quick['DefensiveAssists'] || '---'}} </p>
+            <p>{{hero.quickplay['DefensiveAssists'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -384,7 +384,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg D. Assists</strong></p>
-            <p>{{hero.quick['DefensiveAssists-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['DefensiveAssists-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -396,7 +396,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most D. Assists</strong></p>
-            <p>{{hero.quick['DefensiveAssists-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['DefensiveAssists-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -408,7 +408,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>O. Assists</strong></p>
-            <p>{{hero.quick['OffensiveAssists'] || '---'}} </p>
+            <p>{{hero.quickplay['OffensiveAssists'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -420,7 +420,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg O. Assists</strong></p>
-            <p>{{hero.quick['OffensiveAssists-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['OffensiveAssists-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -432,7 +432,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most O. Assists</strong></p>
-            <p>{{hero.quick['OffensiveAssists-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['OffensiveAssists-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -447,7 +447,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Damage Blocked</strong></p>
-            <p>{{hero.quick['DamageBlocked'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageBlocked'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -459,7 +459,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg Damage Blocked</strong></p>
-            <p>{{hero.quick['DamageBlocked-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageBlocked-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -471,7 +471,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most Damage Blocked</strong></p>
-            <p>{{hero.quick['DamageBlocked-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageBlocked-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -483,7 +483,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Objective Time</strong></p>
-            <p>{{hero.quick['ObjectiveTime'] || '---'}} </p>
+            <p>{{hero.quickplay['ObjectiveTime'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -495,7 +495,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg Obj Time</strong></p>
-            <p>{{hero.quick['ObjectiveTime-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['ObjectiveTime-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -507,7 +507,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most Obj Time</strong></p>
-            <p>{{hero.quick['ObjectiveTime-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['ObjectiveTime-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -519,7 +519,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Objective Kills</strong></p>
-            <p>{{hero.quick['ObjectiveKills'] || '---'}} </p>
+            <p>{{hero.quickplay['ObjectiveKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -531,7 +531,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg Obj Kills</strong></p>
-            <p>{{hero.quick['ObjectiveKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['ObjectiveKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -543,7 +543,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most Obj Kills</strong></p>
-            <p>{{hero.quick['ObjectiveKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['ObjectiveKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -558,7 +558,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Solo Kills</strong></p>
-            <p>{{hero.quick['SoloKills'] || '---'}} </p>
+            <p>{{hero.quickplay['SoloKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -570,7 +570,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Solo Kills</strong></p>
-            <p>{{hero.quick['SoloKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['SoloKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -582,7 +582,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Solo Kills</strong></p>
-            <p>{{hero.quick['SoloKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['SoloKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -594,7 +594,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Final Blows</strong></p>
-            <p>{{hero.quick['FinalBlows'] || '---'}} </p>
+            <p>{{hero.quickplay['FinalBlows'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -606,7 +606,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Final Blows</strong></p>
-            <p>{{hero.quick['FinalBlows-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['FinalBlows-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -618,7 +618,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Final Blows</strong></p>
-            <p>{{hero.quick['FinalBlows-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['FinalBlows-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -630,7 +630,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Melee Final Blows</strong></p>
-            <p>{{hero.quick['MeleeFinalBlows'] || hero.quick['MeleeFinalBlow'] || '---'}} </p>
+            <p>{{hero.quickplay['MeleeFinalBlows'] || hero.quickplay['MeleeFinalBlow'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -642,7 +642,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Melee Final Blows</strong></p>
-            <p>{{hero.quick['MeleeFinalBlows-Average'] || hero.quick['MeleeFinalBlow-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['MeleeFinalBlows-Average'] || hero.quickplay['MeleeFinalBlow-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -654,7 +654,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Melee Final Blows</strong></p>
-            <p>{{hero.quick['MeleeFinalBlows-MostinGame'] || hero.quick['MeleeFinalBlow-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['MeleeFinalBlows-MostinGame'] || hero.quickplay['MeleeFinalBlow-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -687,7 +687,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Crits</strong></p>
-            <p>{{hero.quick['CriticalHits'] || '---'}} </p>
+            <p>{{hero.quickplay['CriticalHits'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -699,7 +699,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Crits</strong></p>
-            <p>{{hero.quick['CriticalHits-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['CriticalHits-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -711,7 +711,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Crits</strong></p>
-            <p>{{hero.quick['CriticalHits-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['CriticalHits-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -723,7 +723,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Crit %</strong></p>
-            <p>{{hero.quick['CriticalHitAccuracy'] || '---'}} </p>
+            <p>{{hero.quickplay['CriticalHitAccuracy'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -739,7 +739,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Enemies Slept</strong></p>
-            <p>{{hero.quick['EnemiesSlept'] || '---'}} </p>
+            <p>{{hero.quickplay['EnemiesSlept'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -751,7 +751,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Enemies Slept</strong></p>
-            <p>{{hero.quick['EnemiesSlept-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['EnemiesSlept-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -763,7 +763,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Enemies Slept</strong></p>
-            <p>{{hero.quick['EnemiesSlept-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['EnemiesSlept-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -775,7 +775,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Nano Boosts</strong></p>
-            <p>{{hero.quick['NanoBoostsApplied'] || '---'}} </p>
+            <p>{{hero.quickplay['NanoBoostsApplied'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -787,7 +787,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Nano Boosts</strong></p>
-            <p>{{hero.quick['NanoBoostsApplied-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['NanoBoostsApplied-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -799,7 +799,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Nano Boosts</strong></p>
-            <p>{{hero.quick['NanoBoostsApplied-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['NanoBoostsApplied-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -811,7 +811,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Nano Boost Assits</strong></p>
-            <p>{{hero.quick['NanoBoostAssists'] || '---'}} </p>
+            <p>{{hero.quickplay['NanoBoostAssists'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -823,7 +823,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Nano Assits</strong></p>
-            <p>{{hero.quick['NanoBoostAssists-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['NanoBoostAssists-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -835,7 +835,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Nano Assits</strong></p>
-            <p>{{hero.quick['NanoBoostAssists-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['NanoBoostAssists-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -847,7 +847,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Scoped Hits</strong></p>
-            <p>{{hero.quick['ScopedHits'] || '---'}} </p>
+            <p>{{hero.quickplay['ScopedHits'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -859,7 +859,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Scoped Accuracy</strong></p>
-            <p>{{hero.quick['ScopedAccuracy'] || '---'}} </p>
+            <p>{{hero.quickplay['ScopedAccuracy'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -871,7 +871,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Scoped Best</strong></p>
-            <p>{{hero.quick['ScopedAccuracy-BestinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['ScopedAccuracy-BestinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -883,7 +883,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Unscoped Hits</strong></p>
-            <p>{{hero.quick['UnscopedShots'] || '---'}} </p>
+            <p>{{hero.quickplay['UnscopedShots'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -895,7 +895,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Unscoped Accuracy</strong></p>
-            <p>{{hero.quick['UnscopedAccuracy'] || '---'}} </p>
+            <p>{{hero.quickplay['UnscopedAccuracy'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -907,7 +907,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Unscoped Best</strong></p>
-            <p>{{hero.quick['UnscopedAccuracy-BestinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['UnscopedAccuracy-BestinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -923,7 +923,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Shots Fired</strong></p>
-            <p>{{hero.quick['ShotsFired'] || '---'}} </p>
+            <p>{{hero.quickplay['ShotsFired'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -935,7 +935,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Shots Hit</strong></p>
-            <p>{{hero.quick['ShotsHit'] || '---'}} </p>
+            <p>{{hero.quickplay['ShotsHit'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -947,7 +947,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Recon Kills</strong></p>
-            <p>{{hero.quick['ReconKills'] || '---'}} </p>
+            <p>{{hero.quickplay['ReconKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -959,7 +959,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Recon Kills</strong></p>
-            <p>{{hero.quick['ReconKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['ReconKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -971,7 +971,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Recon Kills</strong></p>
-            <p>{{hero.quick['ReconKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['ReconKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -983,7 +983,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Sentry Kills</strong></p>
-            <p>{{hero.quick['SentryKills'] || '---'}} </p>
+            <p>{{hero.quickplay['SentryKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -995,7 +995,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Sentry Kills</strong></p>
-            <p>{{hero.quick['SentryKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['SentryKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1007,7 +1007,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Sentry Kills</strong></p>
-            <p>{{hero.quick['SentryKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['SentryKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1019,7 +1019,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Tank Kills</strong></p>
-            <p>{{hero.quick['TankKills'] || '---'}} </p>
+            <p>{{hero.quickplay['TankKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1031,7 +1031,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Tank Kills</strong></p>
-            <p>{{hero.quick['TankKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['TankKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1043,7 +1043,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Tank Kills</strong></p>
-            <p>{{hero.quick['TankKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['TankKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1055,7 +1055,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Self Healing</strong></p>
-            <p>{{hero.quick['SelfHealing'] || '---'}} </p>
+            <p>{{hero.quickplay['SelfHealing'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1067,7 +1067,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Self Healing</strong></p>
-            <p>{{hero.quick['SelfHealing-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['SelfHealing-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1079,7 +1079,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Self Healing</strong></p>
-            <p>{{hero.quick['SelfHealing-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['SelfHealing-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1095,7 +1095,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Mech Deaths</strong></p>
-            <p>{{hero.quick['MechDeaths'] || '---'}} </p>
+            <p>{{hero.quickplay['MechDeaths'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1107,7 +1107,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Mechs Called</strong></p>
-            <p>{{hero.quick['MechsCalled'] || '---'}} </p>
+            <p>{{hero.quickplay['MechsCalled'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1119,7 +1119,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Self-Destruct Kills</strong></p>
-            <p>{{hero.quick['Self-DestructKills'] || '---'}} </p>
+            <p>{{hero.quickplay['Self-DestructKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1131,7 +1131,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Self-Destruct Kills</strong></p>
-            <p>{{hero.quick['Self-DestructKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['Self-DestructKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1143,7 +1143,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Self-Destruct Kills</strong></p>
-            <p>{{hero.quick['Self-DestructKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['Self-DestructKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1160,7 +1160,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Dragonblades</strong></p>
-            <p>{{hero.quick['Dragonblades'] || '---'}} </p>
+            <p>{{hero.quickplay['Dragonblades'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1172,7 +1172,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Dragonblade Kills</strong></p>
-            <p>{{hero.quick['DragonbladeKills'] || '---'}} </p>
+            <p>{{hero.quickplay['DragonbladeKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1184,7 +1184,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Dragonblade Kills</strong></p>
-            <p>{{hero.quick['DragonbladeKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['DragonbladeKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1196,7 +1196,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Dragonblade Kills</strong></p>
-            <p>{{hero.quick['DragonbladeKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['DragonbladeKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1212,7 +1212,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Dragonstrike Kills</strong></p>
-            <p>{{hero.quick['DragonstrikeKills'] || '---'}} </p>
+            <p>{{hero.quickplay['DragonstrikeKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1224,7 +1224,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Dragonstrike Kills</strong></p>
-            <p>{{hero.quick['DragonstrikeKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['DragonstrikeKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1236,7 +1236,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Dragonstrike Kills</strong></p>
-            <p>{{hero.quick['DragonstrikeKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['DragonstrikeKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1248,7 +1248,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Scatter Arrow Kills</strong></p>
-            <p>{{hero.quick['ScatterArrowKills'] || '---'}} </p>
+            <p>{{hero.quickplay['ScatterArrowKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1260,7 +1260,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Scatter Arrow Kills</strong></p>
-            <p>{{hero.quick['ScatterArrowKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['ScatterArrowKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1272,7 +1272,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Scatter Arrow Kills</strong></p>
-            <p>{{hero.quick['ScatterArrowKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['ScatterArrowKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1288,7 +1288,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Enemies Trapped</strong></p>
-            <p>{{hero.quick['EnemiesTrapped'] || '---'}} </p>
+            <p>{{hero.quickplay['EnemiesTrapped'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1300,7 +1300,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Enemies Trapped</strong></p>
-            <p>{{hero.quick['EnemiesTrapped-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['EnemiesTrapped-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1312,7 +1312,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>RIP Tire Kills</strong></p>
-            <p>{{hero.quick['RIP-TireKills'] || '---'}} </p>
+            <p>{{hero.quickplay['RIP-TireKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1324,7 +1324,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg RIP Tire Kills</strong></p>
-            <p>{{hero.quick['RIP-TireKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['RIP-TireKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1336,7 +1336,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most RIP Tire Kills</strong></p>
-            <p>{{hero.quick['RIP-TireKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['RIP-TireKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1352,7 +1352,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Environmental Kills</strong></p>
-            <p>{{hero.quick['EnvironmentalKills'] || '---'}} </p>
+            <p>{{hero.quickplay['EnvironmentalKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1364,7 +1364,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Sound Barriers</strong></p>
-            <p>{{hero.quick['SoundBarriersProvided'] || '---'}} </p>
+            <p>{{hero.quickplay['SoundBarriersProvided'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1376,7 +1376,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Sound Barriers</strong></p>
-            <p>{{hero.quick['SoundBarriersProvided-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['SoundBarriersProvided-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1388,7 +1388,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Sound Barriers</strong></p>
-            <p>{{hero.quick['SoundBarriersProvided-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['SoundBarriersProvided-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1404,7 +1404,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Fan the Hammer Kills</strong></p>
-            <p>{{hero.quick['FantheHammerKills'] || '---'}} </p>
+            <p>{{hero.quickplay['FantheHammerKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1416,7 +1416,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Fan the Hammer Kills</strong></p>
-            <p>{{hero.quick['FantheHammerKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['FantheHammerKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1428,7 +1428,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Fan the Hammer Kills</strong></p>
-            <p>{{hero.quick['FantheHammerKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['FantheHammerKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1440,7 +1440,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Deadeye Kills</strong></p>
-            <p>{{hero.quick['DeadeyeKills'] || '---'}} </p>
+            <p>{{hero.quickplay['DeadeyeKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1452,7 +1452,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Deadeye Kills</strong></p>
-            <p>{{hero.quick['DeadeyeKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['DeadeyeKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1464,7 +1464,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Deadeye Kills</strong></p>
-            <p>{{hero.quick['DeadeyeKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['DeadeyeKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1480,7 +1480,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Blizzard Kills</strong></p>
-            <p>{{hero.quick['BlizzardKills'] || '---'}} </p>
+            <p>{{hero.quickplay['BlizzardKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1492,7 +1492,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Blizzard Kills</strong></p>
-            <p>{{hero.quick['BlizzardKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['BlizzardKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1504,7 +1504,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Blizzard Kills</strong></p>
-            <p>{{hero.quick['BlizzardKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['BlizzardKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1516,7 +1516,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Enemies Frozen</strong></p>
-            <p>{{hero.quick['EnemiesFrozen'] || '---'}} </p>
+            <p>{{hero.quickplay['EnemiesFrozen'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1528,7 +1528,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Enemies Frozen</strong></p>
-            <p>{{hero.quick['EnemiesFrozen-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['EnemiesFrozen-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1540,7 +1540,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Enemies Frozen</strong></p>
-            <p>{{hero.quick['EnemiesFrozen-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['EnemiesFrozen-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1556,7 +1556,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Players Resurrected</strong></p>
-            <p>{{hero.quick['PlayersResurrected'] || '---'}} </p>
+            <p>{{hero.quickplay['PlayersResurrected'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1568,7 +1568,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Players Resurrected</strong></p>
-            <p>{{hero.quick['PlayersResurrected-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['PlayersResurrected-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1580,7 +1580,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Players Resurrected</strong></p>
-            <p>{{hero.quick['PlayersResurrected-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['PlayersResurrected-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1592,7 +1592,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Damage Amplified</strong></p>
-            <p>{{hero.quick['DamageAmplified'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageAmplified'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1604,7 +1604,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Damage Amplified</strong></p>
-            <p>{{hero.quick['DamageAmplified-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageAmplified-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1616,7 +1616,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Damage Amplified</strong></p>
-            <p>{{hero.quick['DamageAmplified-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageAmplified-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1628,7 +1628,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Blaster Kills</strong></p>
-            <p>{{hero.quick['BlasterKills'] || '---'}} </p>
+            <p>{{hero.quickplay['BlasterKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1640,7 +1640,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Blaster Kills</strong></p>
-            <p>{{hero.quick['BlasterKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['BlasterKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1652,7 +1652,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Blaster Kills</strong></p>
-            <p>{{hero.quick['BlasterKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['BlasterKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1668,7 +1668,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Direct Hits</strong></p>
-            <p>{{hero.quick['RocketDirectHits'] || '---'}} </p>
+            <p>{{hero.quickplay['RocketDirectHits'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1680,7 +1680,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Direct Hits</strong></p>
-            <p>{{hero.quick['RocketDirectHits-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['RocketDirectHits-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1692,7 +1692,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Direct Hits</strong></p>
-            <p>{{hero.quick['RocketDirectHits-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['RocketDirectHits-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1704,7 +1704,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Barrage Kills</strong></p>
-            <p>{{hero.quick['BarrageKills'] || '---'}} </p>
+            <p>{{hero.quickplay['BarrageKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1716,7 +1716,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Barrage Kills</strong></p>
-            <p>{{hero.quick['BarrageKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['BarrageKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1728,7 +1728,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Barrage Kills</strong></p>
-            <p>{{hero.quick['BarrageKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['BarrageKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1744,7 +1744,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Souls Consumed</strong></p>
-            <p>{{hero.quick['SoulsConsumed'] || '---'}} </p>
+            <p>{{hero.quickplay['SoulsConsumed'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1756,7 +1756,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Souls Consumed</strong></p>
-            <p>{{hero.quick['SoulsConsumed-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['SoulsConsumed-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1768,7 +1768,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Souls Consumed</strong></p>
-            <p>{{hero.quick['SoulsConsumed-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['SoulsConsumed-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1780,7 +1780,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Death Blossom Kills</strong></p>
-            <p>{{hero.quick['DeathBlossomKills'] || '---'}} </p>
+            <p>{{hero.quickplay['DeathBlossomKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1792,7 +1792,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Death Blossom Kills</strong></p>
-            <p>{{hero.quick['DeathBlossomKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['DeathBlossomKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1804,7 +1804,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Death Blossom Kills</strong></p>
-            <p>{{hero.quick['DeathBlossomKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['DeathBlossomKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1820,7 +1820,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Charge Kills</strong></p>
-            <p>{{hero.quick['ChargeKills'] || '---'}} </p>
+            <p>{{hero.quickplay['ChargeKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1832,7 +1832,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Charge Kills</strong></p>
-            <p>{{hero.quick['ChargeKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['ChargeKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1844,7 +1844,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Charge Kills</strong></p>
-            <p>{{hero.quick['ChargeKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['ChargeKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1856,7 +1856,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Fire Strike Kills</strong></p>
-            <p>{{hero.quick['FireStrikeKills'] || '---'}} </p>
+            <p>{{hero.quickplay['FireStrikeKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1868,7 +1868,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Fire Strike Kills</strong></p>
-            <p>{{hero.quick['FireStrikeKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['FireStrikeKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1880,7 +1880,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Fire Strike Kills</strong></p>
-            <p>{{hero.quick['FireStrikeKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['FireStrikeKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1892,7 +1892,7 @@
 
             <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
               <p><strong>Earthshatter Kills</strong></p>
-              <p>{{hero.quick['EarthshatterKills'] || '---'}} </p>
+              <p>{{hero.quickplay['EarthshatterKills'] || '---'}} </p>
             </v-card-text>
           </v-card-column>
 
@@ -1904,7 +1904,7 @@
 
             <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
               <p><strong>Avg Earthshatter Kills</strong></p>
-              <p>{{hero.quick['EarthshatterKills-Average'] || '---'}} </p>
+              <p>{{hero.quickplay['EarthshatterKills-Average'] || '---'}} </p>
             </v-card-text>
           </v-card-column>
 
@@ -1916,7 +1916,7 @@
 
             <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
               <p><strong>Most Earthshatter Kills</strong></p>
-              <p>{{hero.quick['EarthshatterKills-MostinGame'] || '---'}} </p>
+              <p>{{hero.quickplay['EarthshatterKills-MostinGame'] || '---'}} </p>
             </v-card-text>
         </v-card-column>
 
@@ -1932,7 +1932,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Hooks Attempted</strong></p>
-            <p>{{hero.quick['HooksAttempted'] || '---'}} </p>
+            <p>{{hero.quickplay['HooksAttempted'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1944,7 +1944,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Hook Accuracy</strong></p>
-            <p>{{hero.quick['HookAccuracy'] || '---'}} </p>
+            <p>{{hero.quickplay['HookAccuracy'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1956,7 +1956,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Best Hook Accuracy</strong></p>
-            <p>{{hero.quick['HookAccuracy-BestinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['HookAccuracy-BestinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1968,7 +1968,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Enemies Hooked</strong></p>
-            <p>{{hero.quick['EnemiesHooked'] || '---'}} </p>
+            <p>{{hero.quickplay['EnemiesHooked'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1980,7 +1980,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Enemies Hooked</strong></p>
-            <p>{{hero.quick['EnemiesHooked-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['EnemiesHooked-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -1992,7 +1992,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Enemies Hooked</strong></p>
-            <p>{{hero.quick['EnemiesHooked-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['EnemiesHooked-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2004,7 +2004,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Whole Hog Kills</strong></p>
-            <p>{{hero.quick['WholeHogKills'] || '---'}} </p>
+            <p>{{hero.quickplay['WholeHogKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2016,7 +2016,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Whole Hog Kills</strong></p>
-            <p>{{hero.quick['WholeHogKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['WholeHogKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2028,7 +2028,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Whole Hog Kills</strong></p>
-            <p>{{hero.quick['WholeHogKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['WholeHogKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2044,7 +2044,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Helix Rocket Kills</strong></p>
-            <p>{{hero.quick['HelixRocketKIlls'] || '---'}} </p>
+            <p>{{hero.quickplay['HelixRocketKIlls'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2056,7 +2056,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg H. Rocket Kills</strong></p>
-            <p>{{hero.quick['HelixRocketKIlls-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['HelixRocketKIlls-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2068,7 +2068,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most H. Rocket Kills</strong></p>
-            <p>{{hero.quick['HelixRocketKIlls-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['HelixRocketKIlls-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2080,7 +2080,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Tactical Visor Kills</strong></p>
-            <p>{{hero.quick['TacticalVisorKills'] || '---'}} </p>
+            <p>{{hero.quickplay['TacticalVisorKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2092,7 +2092,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg T. Visor Kills</strong></p>
-            <p>{{hero.quick['TacticalVisorKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['TacticalVisorKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2104,7 +2104,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most T. Visor Kills</strong></p>
-            <p>{{hero.quick['TacticalVisorKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['TacticalVisorKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2116,7 +2116,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Healing Done</strong></p>
-            <p>{{hero.quick['HealingDone'] || '---'}} </p>
+            <p>{{hero.quickplay['HealingDone'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2128,7 +2128,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Avg Healing</strong></p>
-            <p>{{hero.quick['HealingDone-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['HealingDone-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2140,7 +2140,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most Healing in Game</strong></p>
-            <p>{{hero.quick['HealingDone-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['HealingDone-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2152,7 +2152,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Most Healing in Life</strong></p>
-            <p>{{hero.quick['HealingDone-MostinLife'] || '---'}} </p>
+            <p>{{hero.quickplay['HealingDone-MostinLife'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2164,7 +2164,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Biotic Fields Deployed</strong></p>
-            <p>{{hero.quick['BioticFieldsDeployed'] || '---'}} </p>
+            <p>{{hero.quickplay['BioticFieldsDeployed'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2176,7 +2176,7 @@
 
           <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
             <p><strong>Biotic Field Healing</strong></p>
-            <p>{{hero.quick['BioticFieldHealingDone'] || '---'}} </p>
+            <p>{{hero.quickplay['BioticFieldHealingDone'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2198,7 +2198,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Teleporter Uptime</strong></p>
-            <p>{{hero.quick['TeleporterUptime'] || '---'}} </p>
+            <p>{{hero.quickplay['TeleporterUptime'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2210,7 +2210,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Teleporter Uptime</strong></p>
-            <p>{{hero.quick['TeleporterUptime-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['TeleporterUptime-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2222,7 +2222,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Best Teleporter Uptime</strong></p>
-            <p>{{hero.quick['TeleporterUptime-BestinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['TeleporterUptime-BestinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2234,7 +2234,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Players Teleported</strong></p>
-            <p>{{hero.quick['PlayersTeleported'] || '---'}} </p>
+            <p>{{hero.quickplay['PlayersTeleported'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2246,7 +2246,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Players Teleported</strong></p>
-            <p>{{hero.quick['PlayersTeleported-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['PlayersTeleported-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2258,7 +2258,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Players Teleported</strong></p>
-            <p>{{hero.quick['PlayersTeleported-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['PlayersTeleported-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2270,7 +2270,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Sentry Turret Kills</strong></p>
-            <p>{{hero.quick['SentryTurretKills'] || '---'}} </p>
+            <p>{{hero.quickplay['SentryTurretKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2282,7 +2282,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Sentry Turret Kills</strong></p>
-            <p>{{hero.quick['SentryTurretKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['SentryTurretKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2294,7 +2294,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Sentry Turret Kills</strong></p>
-            <p>{{hero.quick['SentryTurretKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['SentryTurretKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2306,7 +2306,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Damage Blocked</strong></p>
-            <p>{{hero.quick['DamageBlocked'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageBlocked'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2318,7 +2318,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Damage Blocked</strong></p>
-            <p>{{hero.quick['DamageBlocked-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageBlocked-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2330,7 +2330,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Damage Blocked</strong></p>
-            <p>{{hero.quick['DamageBlocked-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['DamageBlocked-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2346,7 +2346,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Pulse Bombs Attached</strong></p>
-            <p>{{hero.quick['PulseBombsAttached'] || '---'}} </p>
+            <p>{{hero.quickplay['PulseBombsAttached'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2358,7 +2358,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Pulse Bombs Attached</strong></p>
-            <p>{{hero.quick['PulseBombsAttached-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['PulseBombsAttached-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2370,7 +2370,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Pulse Bombs Attached</strong></p>
-            <p>{{hero.quick['PulseBombsAttached-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['PulseBombsAttached-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2382,7 +2382,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Pulse Bomb Kills</strong></p>
-            <p>{{hero.quick['PulseBombKills'] || '---'}} </p>
+            <p>{{hero.quickplay['PulseBombKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2394,7 +2394,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Pulse Bomb Kills</strong></p>
-            <p>{{hero.quick['PulseBombKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['PulseBombKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2406,7 +2406,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Pulse Bomb Kills</strong></p>
-            <p>{{hero.quick['PulseBombKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['PulseBombKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2422,7 +2422,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Torbj&#xF6;rn Kills</strong></p>
-            <p>{{hero.quick['Torbj&#xF6;rnKills'] || '---'}} </p>
+            <p>{{hero.quickplay['Torbj&#xF6;rnKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2434,7 +2434,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Torbj&#xF6;rn Kills</strong></p>
-            <p>{{hero.quick['Torbj&#xF6;rnKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['Torbj&#xF6;rnKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2446,7 +2446,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Torbj&#xF6;rn Kills</strong></p>
-            <p>{{hero.quick['Torbj&#xF6;rnKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['Torbj&#xF6;rnKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2458,7 +2458,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Turret Kills</strong></p>
-            <p>{{hero.quick['TurretKills'] || '---'}} </p>
+            <p>{{hero.quickplay['TurretKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2470,7 +2470,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Turret Kills</strong></p>
-            <p>{{hero.quick['TurretKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['TurretKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2482,7 +2482,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Molten Core Kills</strong></p>
-            <p>{{hero.quick['MoltenCoreKills'] || '---'}} </p>
+            <p>{{hero.quickplay['MoltenCoreKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2494,7 +2494,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Molten Core Kills</strong></p>
-            <p>{{hero.quick['MoltenCoreKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['MoltenCoreKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2506,7 +2506,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Molten Core Kills</strong></p>
-            <p>{{hero.quick['MoltenCoreKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['MoltenCoreKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2518,7 +2518,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Armor Packs Created</strong></p>
-            <p>{{hero.quick['ArmorPacksCreated'] || '---'}} </p>
+            <p>{{hero.quickplay['ArmorPacksCreated'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2530,7 +2530,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Armor Packs Created</strong></p>
-            <p>{{hero.quick['ArmorPacksCreated-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['ArmorPacksCreated-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2546,7 +2546,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Scoped Shots</strong></p>
-            <p>{{hero.quick['ScopedShots'] || '---'}} </p>
+            <p>{{hero.quickplay['ScopedShots'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2558,7 +2558,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Scoped Accuracy</strong></p>
-            <p>{{hero.quick['ScopedAccuracy'] || '---'}} </p>
+            <p>{{hero.quickplay['ScopedAccuracy'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2570,7 +2570,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Best Scoped Accuracy</strong></p>
-            <p>{{hero.quick['ScopedAccuracy-BestinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['ScopedAccuracy-BestinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2582,7 +2582,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Scoped Critical Hits</strong></p>
-            <p>{{hero.quick['ScopedCriticalHits'] || '---'}} </p>
+            <p>{{hero.quickplay['ScopedCriticalHits'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2594,7 +2594,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Scoped Critical Hits</strong></p>
-            <p>{{hero.quick['ScopedCriticalHits-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['ScopedCriticalHits-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2606,7 +2606,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Scoped Critical Hits</strong></p>
-            <p>{{hero.quick['ScopedCriticalHits-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['ScopedCriticalHits-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2618,7 +2618,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Venom Mine Kills</strong></p>
-            <p>{{hero.quick['VenomMineKills'] || '---'}} </p>
+            <p>{{hero.quickplay['VenomMineKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2630,7 +2630,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Venom Mine Kills</strong></p>
-            <p>{{hero.quick['VenomMineKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['VenomMineKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2642,7 +2642,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Venom Mine Kills</strong></p>
-            <p>{{hero.quick['VenomMineKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['VenomMineKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2658,7 +2658,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Jump Pack Kills</strong></p>
-            <p>{{hero.quick['JumpPackKills'] || '---'}} </p>
+            <p>{{hero.quickplay['JumpPackKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2670,7 +2670,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Jump Pack Kills</strong></p>
-            <p>{{hero.quick['JumpPackKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['JumpPackKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2682,7 +2682,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Jump Pack Kills</strong></p>
-            <p>{{hero.quick['JumpPackKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['JumpPackKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2694,7 +2694,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Primal Rage Kills</strong></p>
-            <p>{{hero.quick['PrimalRageKills'] || '---'}} </p>
+            <p>{{hero.quickplay['PrimalRageKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2706,7 +2706,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Primal Rage Kills</strong></p>
-            <p>{{hero.quick['PrimalRageKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['PrimalRageKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2718,7 +2718,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Primal Rage Kills</strong></p>
-            <p>{{hero.quick['PrimalRageKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['PrimalRageKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2730,7 +2730,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Players Knocked Back</strong></p>
-            <p>{{hero.quick['PlayersKnockedBack'] || '---'}} </p>
+            <p>{{hero.quickplay['PlayersKnockedBack'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2742,7 +2742,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Players Knocked Back</strong></p>
-            <p>{{hero.quick['PlayersKnockedBack-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['PlayersKnockedBack-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2754,7 +2754,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Players Knocked Back</strong></p>
-            <p>{{hero.quick['PlayersKnockedBack-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['PlayersKnockedBack-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2766,7 +2766,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Environmental Kills</strong></p>
-            <p>{{hero.quick['EnvironmentalKills'] || '---'}} </p>
+            <p>{{hero.quickplay['EnvironmentalKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2782,7 +2782,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Lifetime Energy Accumulation</strong></p>
-            <p>{{hero.quick['LifetimeEnergyAccumulation'] || '---'}} </p>
+            <p>{{hero.quickplay['LifetimeEnergyAccumulation'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2794,7 +2794,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>High Energy Kills</strong></p>
-            <p>{{hero.quick['HighEnergyKills'] || '---'}} </p>
+            <p>{{hero.quickplay['HighEnergyKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2806,7 +2806,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg High Energy Kills</strong></p>
-            <p>{{hero.quick['HighEnergyKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['HighEnergyKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2818,7 +2818,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most High Energy Kills</strong></p>
-            <p>{{hero.quick['HighEnergyKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['HighEnergyKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2830,7 +2830,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Projected Barriers Applied</strong></p>
-            <p>{{hero.quick['ProjectedBarriersApplied'] || '---'}} </p>
+            <p>{{hero.quickplay['ProjectedBarriersApplied'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2842,7 +2842,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Projected Barriers Applied</strong></p>
-            <p>{{hero.quick['ProjectedBarriersApplied-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['ProjectedBarriersApplied-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2854,7 +2854,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Projected Barriers Applied</strong></p>
-            <p>{{hero.quick['ProjectedBarriersApplied-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['ProjectedBarriersApplied-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2866,7 +2866,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Lifetime Graviton Surge Kills</strong></p>
-            <p>{{hero.quick['LifetimeGravitonSurgeKills'] || '---'}} </p>
+            <p>{{hero.quickplay['LifetimeGravitonSurgeKills'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2878,7 +2878,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Avg Graviton Surge Kills</strong></p>
-            <p>{{hero.quick['GravitonSurgeKills-Average'] || '---'}} </p>
+            <p>{{hero.quickplay['GravitonSurgeKills-Average'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2890,7 +2890,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Most Graviton Surge Kills</strong></p>
-            <p>{{hero.quick['GravitonSurgeKills-MostinGame'] || '---'}} </p>
+            <p>{{hero.quickplay['GravitonSurgeKills-MostinGame'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2906,7 +2906,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Orb Healing</strong></p>
-            <p>{{this.numberWithCommas(this.spliceInt(hero.quick['HealingDone']) - this.spliceInt(hero.quick['TranscendenceHealing'])) || '---'}} </p>
+            <p>{{this.numberWithCommas(this.spliceInt(hero.quickplay['HealingDone']) - this.spliceInt(hero.quickplay['TranscendenceHealing'])) || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2918,7 +2918,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Transcendence Healing</strong></p>
-            <p>{{hero.quick['TranscendenceHealing'] || '---'}} </p>
+            <p>{{hero.quickplay['TranscendenceHealing'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2930,7 +2930,7 @@
 
           <v-card-text class="card_text" v-else-if="viewMode ==='Quickplay'">
             <p><strong>Best Transcendence Healing</strong></p>
-            <p>{{hero.quick['TranscendenceHealing-Best'] || '---'}} </p>
+            <p>{{hero.quickplay['TranscendenceHealing-Best'] || '---'}} </p>
           </v-card-text>
         </v-card-column>
 
@@ -2971,6 +2971,20 @@ export default {
       var parts = x.toString().split('.')
       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       return parts.join('.')
+    },
+    headerId: function (hero) {
+      switch (hero.name) {
+        case 'D.Va':
+          return 'DVa'
+        case 'Lúcio':
+          return 'Lucio'
+        case 'Soldier: 76':
+          return 'Soldier76'
+        case 'Torbjörn':
+          return 'Torbjoern'
+        default:
+          return hero.name
+      }
     }
   }
 }
@@ -3012,6 +3026,11 @@ p {
 
 .cardTitleRow {
   height: 45px;
+  border: 1px solid black
+}
+
+.heroName {
+  text-shadow: -1px 1px 10px black
 }
 
 .statHeader {
@@ -3055,4 +3074,106 @@ p {
 .medalColumn {
   width: 25px;
 }
+
+/*Hero-specific Header Colors*/
+#Ana {
+  background-color: #41598a;
+}
+
+#Bastion {
+  background-color: #b9b9b9;
+}
+
+#DVa {
+  background-color: #ffd2ef;
+}
+
+#Genji {
+  background-color: #24ef37;
+}
+
+#Hanzo {
+  background-color: #75656f;
+}
+
+#Junkrat {
+  background-color: #efae34;
+}
+
+#Lucio {
+  background: #f2dc27; /* Old browsers */
+  background: -moz-linear-gradient(left, #3ae80d 0%, #f2dc27 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #3ae80d 0%,#f2dc27 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #3ae80d 0%,#f2dc27 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3ae80d', endColorstr='#f2dc27',GradientType=1 ); /* IE6-9 */
+}
+
+#McCree {
+  background-color: #cd3432;
+}
+
+#Mei {
+  background-color: #95e6f7;
+}
+
+#Mercy {
+  background-color: #fefe4e;
+}
+
+#Pharah {
+  background-color: #4d7ccb;
+}
+
+#Reaper {
+  background-color: #414139;
+}
+
+#Reinhardt {
+  background-color: #9ba0a0;
+}
+
+#Roadhog {
+  background: #f0cd4b; /* Old browsers */
+  background: -moz-linear-gradient(left, #362f34 0%, #f0cd4b 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #362f34 0%,#f0cd4b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #362f34 0%,#f0cd4b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#362f34', endColorstr='#f0cd4b',GradientType=1 ); /* IE6-9 */
+}
+
+#Soldier76 {
+  background-color: #2d4776;
+}
+
+#Sombra {
+  background-color: #e24bfa;
+}
+
+#Symmetra {
+  background-color: #7fecfc;
+}
+
+#Tracer {
+  background-color: #f5bd27;
+}
+
+#Torbjoern {
+  background-color: #9b3435;
+}
+
+#Widowmaker {
+  background-color: #504057;
+}
+
+#Harambe {
+  background-color: #cccdcb;
+}
+
+#Zarya {
+  background-color: #e15284;
+}
+
+#Zenyatta {
+  background-color: #ccb059;
+}
+
 </style>
