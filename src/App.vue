@@ -104,15 +104,15 @@ export default {
             role: 'offense',
             loading: true
           },
-          Roadhog: {
-            name: 'Roadhog',
-            image: '/static/Roadhog.png',
-            role: 'tank',
-            loading: true
-          },
           Reinhardt: {
             name: 'Reinhardt',
             image: '/static/Reinhardt.png',
+            role: 'tank',
+            loading: true
+          },
+          Roadhog: {
+            name: 'Roadhog',
+            image: '/static/Roadhog.png',
             role: 'tank',
             loading: true
           },
