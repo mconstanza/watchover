@@ -8,7 +8,7 @@
 
     <main>
       <v-content>
-        <router-view :viewMode="view.mode" :loadHeroData="loadHeroData" @clicked ="onClickSearch" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :current-battletag="currentBattletag" ></router-view>
+        <router-view :viewMode="view.mode" :toggleLoading="toggleLoading" :loadHeroData="loadHeroData" @clicked ="onClickSearch" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :current-battletag="currentBattletag" ></router-view>
       </v-content>
     </main>
   </div>
@@ -25,9 +25,10 @@ export default {
   },
   data () {
     return {
-      loading: true,
+      loading: false,
       heroQueryString: 'Ana%2CBastion%2CDVa%2CGenji%2CHanzo%2CJunkrat%2CLucio%2CMccree%2CMei%2CMercy%2CPharah%2CReaper%2CReinhardt%2CRoadhog%2CSoldier76%2CSombra%2CSymmetra%2CTracer%2CTorbjoern%2CWidowmaker%2CWinston%2CZarya%2CZenyatta',
       currentBattletag: {
+        loaded: false,
         tag: '',
         platform: 'pc',
         region: 'us',
@@ -166,7 +167,15 @@ export default {
     }
   },
   methods: {
+    toggleLoading: function () {
+      if (this.loading === true) {
+        this.loading = false
+      } else if (this.loading === false) {
+        this.loading = true
+      }
+    },
     onClickSearch: function (query) {
+      this.currentBattletag.loaded = false
       this.currentBattletag.tag = query.battletag
       this.currentBattletag.platform = query.platform.toLowerCase()
       this.currentBattletag.region = query.region.toLowerCase()
@@ -204,6 +213,7 @@ export default {
         for (hero in response[4].data) {
           this.currentBattletag.heroStats[hero].quickplay = response[4].data[hero]
         }
+        this.currentBattletag.loaded = true
         this.loading = false
       })
     },

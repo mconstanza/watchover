@@ -3017,16 +3017,21 @@ p {
 
 .heroCard {
   text-align: center;
+  background: transparent;
+  /*opacity: .8;*/
+  text-shadow: -1px 1px 20px black;
 }
 
 .card__text {
   padding-left: 15px;
   padding-right: 15px;
+  color:white;
+  font-family: sans-serif;
 }
 
 .cardTitleRow {
   height: 45px;
-  border: 1px solid black
+  border: 1px solid black;
 }
 
 .heroName {
@@ -3038,6 +3043,7 @@ p {
   text-decoration: underline;
   justify-content: center;
   margin: 0;
+  color: white;
 }
 
 .statHeader p {
@@ -3174,6 +3180,10 @@ p {
 
 #Zenyatta {
   background-color: #ccb059;
+}
+
+.card .cardTitleRow:hover {
+  -webkit-filter: brightness(120%);
 }
 
 </style>

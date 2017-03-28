@@ -1,7 +1,13 @@
 <template>
   <div id="ProfileContainer">
+    <!-- Loading Screen -->
+    <div id='loadingDiv' v-if="loading">
+      <v-progress-circular v-bind:size="200" indeterminate />
+    </div>
+    <!-- Loading Screen -->
     <div id="HeadingContainer">
-      <basics-card v-if="!loading" :viewMode="viewMode" :currentBattletag="currentBattletag"></basics-card>
+      <!-- <basics-card v-if="!loading" :viewMode="viewMode" :currentBattletag="currentBattletag"></basics-card> -->
+      <player-header :currentBattletag="currentBattletag" ></player-header>
     </div>
     <br/>
     <br/>
@@ -34,6 +40,7 @@
 <script>
 import basicsCard from './BasicsCard.vue'
 import heroCard from './HeroCard.vue'
+import playerHeader from './PlayerHeader.vue'
 export default {
   name: 'profile',
   data () {
@@ -43,9 +50,10 @@ export default {
   },
   components: {
     basicsCard,
-    heroCard
+    heroCard,
+    playerHeader
   },
-  props: ['loading', 'currentBattletag', 'viewMode', 'view', 'loadHeroData'],
+  props: ['loading', 'currentBattletag', 'viewMode', 'view', 'loadHeroData', 'toggleLoading'],
   methods: {
     switchView: function (event) {
       if (this.viewMode === 'Competitive') {
@@ -59,7 +67,10 @@ export default {
     }
   },
   created: function () {
-    this.loadHeroData()
+    if (!this.currentBattletag.loaded) {
+      this.toggleLoading()
+      this.loadHeroData()
+    }
   }
 }
 </script>
@@ -83,6 +94,10 @@ li {
 
 a {
   color: #42b983;
+}
+
+#loadingDiv {
+  margin-top: 100px;
 }
 
 .basicCard {

@@ -111,8 +111,8 @@ input {
   border: 1px solid black;
   min-height: 36px;
   width: 200px;
+  padding: 0 25px;
   border-radius: 2px;
-  text-align: center;
 }
 
 #inputContainer .battletagCol {
@@ -127,7 +127,7 @@ input {
 
 #battletagCard {
   margin-top: 50px;
-  height: 150px;
+  height: 150px !important;
 }
 
 .card {
@@ -137,6 +137,7 @@ input {
 select {
   min-width: 50px;
   border: 1px solid black;
+  padding: 0 10px;
 }
 
 button {
