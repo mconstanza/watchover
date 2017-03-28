@@ -1,61 +1,82 @@
 <template>
-  <div id="HomeContainer">
-    <div id="HeadingContainer">
-      <basics-card v-if="!loading" :viewMode="viewMode" :currentBattletag="currentBattletag"></basics-card>
-    </div>
-    <br/>
-    <br/>
-    <div id="viewButtonsDiv" v-if="!loading">
-      <!-- Render a blue button if the view is competitive -->
-      <button id="switchViewBtn" v-show="viewMode === 'Competitive'" class="viewToggle indigo" @click="switchView">{{viewMode}}</button>
-      <!-- Render a red button if the view is quickplay -->
-      <button id="switchViewBtn" v-show="viewMode === 'Quickplay'" class="viewToggle red" @click="switchView">{{viewMode}}</button>
+<v-container fluid>
+  <v-row>
+    <v-col md12>
+      <v-row>
+        <v-col md4>
 
-      <button class="viewToggle indigo" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')">All Heroes</button>
-      <button class="viewToggle" v-show="!view.roles.defense || !view.roles.offense || !view.roles.tank || !view.roles.support" @click="switchRoleView('all')">All Heroes</button>
+        </v-col>
 
-      <button class="viewToggle indigo" v-show="view.roles.defense && view.roles.offense" @click="switchRoleView('damage')">Damage</button>
-      <button class="viewToggle" v-show="!view.roles.defense && !view.roles.offense" @click="switchRoleView('damage')">Damage</button>
+        <v-col md4>
+          <v-card id='battletagCard'>
+            <v-row>
 
-      <button class="viewToggle indigo" v-show="view.roles.tank" @click="switchRoleView('tank')">Tank</button>
-      <button class="viewToggle" v-show="!view.roles.tank" @click="switchRoleView('tank')">Tank</button>
+              <v-col md2>
+                <p>Platform</p>
+                <select class='select' name="Platform" v-model="query.platform">
+                      <option>PC</option>
+                      <option>XBL</option>
+                      <option>PSN</option>
+                    </select>
+              </v-col>
 
-      <button class="viewToggle indigo" v-show="view.roles.support" @click="switchRoleView('support')">Support</button>
-      <button class="viewToggle" v-show="!view.roles.support" @click="switchRoleView('support')">Support</button>
-    </div>
-    <br />
-    <br />
-    <div id="CardContainer">
-      <hero-card v-if="!loading" v-for="hero in currentBattletag.heroStats" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card>
-    </div>
-  </div>
+              <v-col md2>
+                <p>Region</p>
+                <select class='select' name="Region" v-model="query.region">
+                      <option>US</option>
+                      <option>EU</option>
+                      <option>CN</option>
+                      <option>KR</option>
+                    </select>
+              </v-col>
+
+              <v-col md8 class='battletagCol'>
+
+                <v-row>
+                  <p>Battletag</p>
+                </v-row>
+
+                <v-row id='inputRow'>
+                  <div id="inputContainer">
+                    <input type="text" @keyup.enter="onClickButton" v-model.trim="query.battletag" name="user-search" label="Search" placeholder="Battletag is case sensitive!"/>
+                    <button id="submit" @click="onClickButton">Onward</button>
+                  </div>
+                </v-row>
+
+              </v-col>
+
+            </v-row>
+          </v-card>
+        </v-col>
+
+        <v-col md4>
+
+        </v-col>
+
+      </v-row>
+    </v-col>
+  </v-row>
+</v-container>
 </template>
 
 <script>
-import basicsCard from './BasicsCard.vue'
-import heroCard from './HeroCard.vue'
 export default {
   name: 'home',
   data () {
     return {
-      msg: 'test'
+      query: {
+        region: 'US',
+        platform: 'PC',
+        battletag: ''
+      }
+
     }
-  },
-  components: {
-    basicsCard,
-    heroCard
   },
   props: ['loading', 'currentBattletag', 'viewMode', 'view'],
   methods: {
-    switchView: function (event) {
-      if (this.viewMode === 'Competitive') {
-        this.$emit('switchView', 'Quickplay')
-      } else if (this.viewMode === 'Quickplay') {
-        this.$emit('switchView', 'Competitive')
-      }
-    },
-    switchRoleView: function (role) {
-      this.$emit('switchRoleView', role)
+    onClickButton: function (event) {
+      console.log('clicked')
+      this.$emit('clicked', this.query)
     }
   }
 }
@@ -82,51 +103,45 @@ a {
   color: #42b983;
 }
 
-.basicCard {
-  margin-top: 20px;
-}
 
-#HomeContainer {
+/*Input Field*/
+
+input {
+  background-color: white;
+  border: 1px solid black;
+  min-height: 36px;
+  width: 200px;
+  border-radius: 2px;
   text-align: center;
-  justify-content: center;
-  font-family: 'Overwatch';
 }
 
-#HeadingContainer {
-  display: flex;
-  flex-flow: wrap;
-  justify-content: center;
+#inputContainer .battletagCol {
+  text-align: center;
+  align-items: center;
 }
 
-#CardContainer {
-  display: flex;
-  flex-wrap: wrap;
+.row {
+  align-items: center;
   justify-content: center;
 }
 
-.heroCard {
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.card__row {
-  align-items: flex-start;
-  flex-flow: row wrap;
-}
-
-.viewToggle {
-  width: 80px;
-  height: 35px;
-  background-color: #bec1c4;
+#battletagCard {
+  margin-top: 50px;
+  height: 150px;
 }
 
 .card {
-  max-width: 100%;
+  height: 150px;
 }
 
-#avatar {
-  max-width: 150px;
-  min-height: 150px;
+select {
+  min-width: 50px;
+  border: 1px solid black;
 }
 
+button {
+  background-color: #bec1c4;
+  height: 36px;
+  width: 75px;
+}
 </style>

@@ -1,14 +1,14 @@
 <template>
   <div id='appContainer'>
     <v-toolbar id="toolbar">
-      <v-toolbar-title>WatchOver</v-toolbar-title>
+      <router-link to="/"><v-toolbar-title>WatchOver</v-toolbar-title></router-link>
       <v-spacer />
-      <user-search @clicked ="onClickSearch"/>
+      <!-- <user-search @clicked ="onClickSearch"/> -->
     </v-toolbar>
 
     <main>
       <v-content>
-        <router-view :viewMode="view.mode" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :current-battletag="currentBattletag" ></router-view>
+        <router-view :viewMode="view.mode" :loadHeroData="loadHeroData" @clicked ="onClickSearch" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :current-battletag="currentBattletag" ></router-view>
       </v-content>
     </main>
   </div>
@@ -17,6 +17,7 @@
 <script>
 import userSearch from './components/user-search.vue'
 import axios from 'axios'
+import router from './router/index.js'
 export default {
   name: 'app',
   components: {
@@ -28,6 +29,8 @@ export default {
       heroQueryString: 'Ana%2CBastion%2CDVa%2CGenji%2CHanzo%2CJunkrat%2CLucio%2CMccree%2CMei%2CMercy%2CPharah%2CReaper%2CReinhardt%2CRoadhog%2CSoldier76%2CSombra%2CSymmetra%2CTracer%2CTorbjoern%2CWidowmaker%2CWinston%2CZarya%2CZenyatta',
       currentBattletag: {
         tag: '',
+        platform: 'pc',
+        region: 'us',
         profile: {},
         combinedStats: {
           quick: [],
@@ -164,21 +167,30 @@ export default {
   },
   methods: {
     onClickSearch: function (query) {
-      this.currentBattletag.tag = query
-      this.loadHeroData()
+      this.currentBattletag.tag = query.battletag
+      this.currentBattletag.platform = query.platform.toLowerCase()
+      this.currentBattletag.region = query.region.toLowerCase()
+      let battletag = this.currentBattletag.tag.replace('#', '-')
+      let platform = this.currentBattletag.platform
+      let region = this.currentBattletag.region
+      router.push('/profile/' + platform + '/' + region + '/' + battletag + '/')
     },
     switchView: function (view) {
       this.view.mode = view
     },
     loadHeroData: function () {
       this.loading = true
-      let battletag = this.currentBattletag.tag.replace('#', '-')
+      this.currentBattletag.tag = this.$route.params.battletag.replace('-', '#')
+      let battletag = this.$route.params.battletag || this.currentBattletag.tag.replace('#', '-')
+      let platform = this.$route.params.platform || this.currentBattletag.platform
+      let region = this.$route.params.region || this.currentBattletag.region
+      console.log(battletag, platform, region)
       axios.all([
-        axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/profile'),
-        axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/competitive/allHeroes/'),
-        axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/quickplay/allHeroes/'),
-        axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/competitive/hero/' + this.heroQueryString + '/'),
-        axios.get('https://api.lootbox.eu/pc/us/' + battletag + '/quickplay/hero/' + this.heroQueryString + '/')
+        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/profile'),
+        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/competitive/allHeroes/'),
+        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/quickplay/allHeroes/'),
+        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/competitive/hero/' + this.heroQueryString + '/'),
+        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/quickplay/hero/' + this.heroQueryString + '/')
       ])
       .then((response) => {
         console.log('response', response)
@@ -225,6 +237,28 @@ export default {
 
 <style>
 
+html {
+
+}
+
+body {
+  background: black;
+  background: #060606; /* Old browsers */
+  background: -moz-linear-gradient(left, #060606 0%, #584f4a 51%, #faa02e 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #060606 0%,#584f4a 51%,#faa02e 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #060606 0%,#584f4a 51%,#faa02e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#060606', endColorstr='#faa02e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+main {
+  background: transparent;
+  min-height: 100vh;
+}
+
+.content {
+  background: transparent;
+}
+
 @font-face {
     font-family: Overwatch;
     src: url(https://us.battle.net/forums/static/fonts/bignoodletoo/bignoodletoo.woff);
@@ -235,15 +269,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background: transparent;
 }
 
 #toolbar {
   text-align: left;
-  background: #060606; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #060606 0%, #584f4a 51%, #faa02e 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #060606 0%,#584f4a 51%,#faa02e 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #060606 0%,#584f4a 51%,#faa02e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#060606', endColorstr='#faa02e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: transparent;
 }
 
 .card__row {
