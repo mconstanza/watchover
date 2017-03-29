@@ -1,15 +1,43 @@
 <template>
-  <div>
-    <input
-      type="text"
-      @keyup.enter="onClickButton"
-      v-model.trim="query"
-      name="user-search"
-      label="Search"
-      placeholder="   Search by Battletag"
-    ></input>
-    <button @click="onClickButton" light default>Search</button>
-  </div>
+  <v-container id='battletagCard'>
+    <v-row>
+
+      <v-col md2>
+        <p>Platform</p>
+        <select class='select' name="Platform" v-model="query.platform">
+              <option>PC</option>
+              <option>XBL</option>
+              <option>PSN</option>
+            </select>
+      </v-col>
+
+      <v-col md2>
+        <p>Region</p>
+        <select class='select' name="Region" v-model="query.region">
+              <option>US</option>
+              <option>EU</option>
+              <option>CN</option>
+              <option>KR</option>
+            </select>
+      </v-col>
+
+      <v-col md8 class='battletagCol'>
+
+        <v-row>
+          <p id="battletagP">Battletag</p>
+        </v-row>
+
+        <v-row id='inputRow'>
+          <div id="inputContainer">
+            <input type="text" @keyup.enter="onClickButton" v-model.trim="query.battletag" name="user-search" label="Search" placeholder="Battletag is case sensitive!"/>
+            <button id="submit" @click="onClickButton">Onward</button>
+          </div>
+        </v-row>
+
+      </v-col>
+
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -17,7 +45,11 @@ export default {
   name: 'user-search',
   data () {
     return {
-      query: ''
+      query: {
+        region: 'US',
+        platform: 'PC',
+        battletag: ''
+      }
     }
   },
   methods: {
@@ -28,18 +60,51 @@ export default {
 }
 </script>
 
-<style>
-  input {
-    background-color: white;
-    height: 36px;
-    width: 200px;
-    border-radius: 2px;
-  }
+<style scoped>
 
   button {
     background-color: #bec1c4;
     height: 36px;
     width: 60px;
+  }
+
+  input {
+    background-color: white;
+    border: 1px solid black;
+    min-height: 36px;
+    width: 175px;
+    padding: 0 25px;
+    border-radius: 2px;
+  }
+
+  #inputContainer .battletagCol {
+    text-align: center;
+    align-items: center;
+  }
+
+  .row {
+    align-items: center;
+    justify-content: center;
+  }
+
+  select {
+    min-width: 50px;
+    border: 1px solid black;
+    padding: 0 5px;
+  }
+
+  select option {
+    color: black;
+  }
+
+  button {
+    background-color: #bec1c4;
+    height: 36px;
+    width: 50px;
+  }
+
+  #battletagP {
+    margin-bottom: 0;
   }
 
 </style>

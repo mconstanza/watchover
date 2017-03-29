@@ -3027,6 +3027,7 @@ p {
   padding-right: 15px;
   color:white;
   font-family: sans-serif;
+  font-size: 10px;
 }
 
 .cardTitleRow {

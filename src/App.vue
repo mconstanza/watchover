@@ -1,9 +1,11 @@
 <template>
   <div id='appContainer'>
+    
     <v-toolbar id="toolbar">
-      <router-link to="/"><v-toolbar-title>WatchOver</v-toolbar-title></router-link>
-      <v-spacer />
-      <!-- <user-search @clicked ="onClickSearch"/> -->
+      <v-toolbar-title><router-link to="/">WatchOver</router-link></v-toolbar-title>
+      <v-toolbar-items>
+        <v-toolbar-item><user-search @clicked ="onClickSearch"/></v-toolbar-item>
+      </v-toolbar-items>
     </v-toolbar>
 
     <main>
@@ -254,10 +256,10 @@ html {
 body {
   background: black;
   background: #060606; /* Old browsers */
-  background: -moz-linear-gradient(left, #060606 0%, #584f4a 51%, #faa02e 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(left, #060606 0%,#584f4a 51%,#faa02e 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to right, #060606 0%,#584f4a 51%,#faa02e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#060606', endColorstr='#faa02e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: -moz-linear-gradient(left, #222222 0%,  #222222 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #222222 0%,#222222 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #222222 0%,#222222 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 main {

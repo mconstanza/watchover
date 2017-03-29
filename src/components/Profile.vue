@@ -1,32 +1,36 @@
 <template>
   <div id="ProfileContainer">
+
     <!-- Loading Screen -->
     <div id='loadingDiv' v-if="loading">
       <v-progress-circular v-bind:size="200" indeterminate />
     </div>
-    <!-- Loading Screen -->
-    <div id="HeadingContainer">
-      <!-- <basics-card v-if="!loading" :viewMode="viewMode" :currentBattletag="currentBattletag"></basics-card> -->
+
+    <!-- Player Header -->
+    <div v-if="!loading" id="HeadingContainer">
       <player-header :currentBattletag="currentBattletag" ></player-header>
     </div>
+
     <br/>
     <br/>
+
+    <!-- Toggle Views -->
     <div id="viewButtonsDiv" v-if="!loading">
       <!-- Render a blue button if the view is competitive -->
-      <button id="switchViewBtn" v-show="viewMode === 'Competitive'" class="viewToggle indigo" @click="switchView">{{viewMode}}</button>
+      <button id="switchViewBtn" v-show="viewMode === 'Competitive'" class="viewToggle activeViewButton" @click="switchView">{{viewMode}}</button>
       <!-- Render a red button if the view is quickplay -->
       <button id="switchViewBtn" v-show="viewMode === 'Quickplay'" class="viewToggle red" @click="switchView">{{viewMode}}</button>
 
-      <button class="viewToggle indigo" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')">All Heroes</button>
+      <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')">All Heroes</button>
       <button class="viewToggle" v-show="!view.roles.defense || !view.roles.offense || !view.roles.tank || !view.roles.support" @click="switchRoleView('all')">All Heroes</button>
 
-      <button class="viewToggle indigo" v-show="view.roles.defense && view.roles.offense" @click="switchRoleView('damage')">Damage</button>
+      <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense" @click="switchRoleView('damage')">Damage</button>
       <button class="viewToggle" v-show="!view.roles.defense && !view.roles.offense" @click="switchRoleView('damage')">Damage</button>
 
-      <button class="viewToggle indigo" v-show="view.roles.tank" @click="switchRoleView('tank')">Tank</button>
+      <button class="viewToggle activeViewButton" v-show="view.roles.tank" @click="switchRoleView('tank')">Tank</button>
       <button class="viewToggle" v-show="!view.roles.tank" @click="switchRoleView('tank')">Tank</button>
 
-      <button class="viewToggle indigo" v-show="view.roles.support" @click="switchRoleView('support')">Support</button>
+      <button class="viewToggle activeViewButton" v-show="view.roles.support" @click="switchRoleView('support')">Support</button>
       <button class="viewToggle" v-show="!view.roles.support" @click="switchRoleView('support')">Support</button>
     </div>
     <br />
@@ -145,6 +149,10 @@ a {
 #avatar {
   max-width: 150px;
   min-height: 150px;
+}
+
+.activeViewButton {
+  background-color: #f29a2c;
 }
 
 </style>
