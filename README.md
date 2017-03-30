@@ -1,7 +1,9 @@
-WatchOver
-=========
+[WatchOver](https://mconstanza.github.io/watchOver/)
+====================================================
 
 An Overwatch profile analyzer I built to see what Vue.js was all about.
+
+https://mconstanza.github.io/watchOver/
 
 Built Using
 ===========
