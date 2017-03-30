@@ -1,27 +1,21 @@
-# watch-over
+WatchOver
+=========
 
-> Overwatch profile analyzer
+An Overwatch profile analyzer I built to see what Vue.js was all about.
 
-## Build Setup
+Built Using
+===========
 
-``` bash
-# install dependencies
-npm install
+-	Node.js
+-	Vue.js
+-	Vuetify.js for CSS
+-	[Lootbox API](https://lootbox.eu/) for Overwatch data
 
-# serve with hot reload at localhost:8080
-npm run dev
+Author
+======
 
-# build for production with minification
-npm run build
+mConstanza
 
-# build for production and view the bundle analyzer report
-npm run build --report
+-	[Github](https://github.com/mconstanza)
 
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+-	[Portfolio](https://mconstanza.github.io/portfolio/)
