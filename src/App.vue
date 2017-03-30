@@ -42,117 +42,117 @@ export default {
         heroStats: {
           Ana: {
             name: 'Ana',
-            image: './static/Ana.png',
+            image: 'static/Ana.png',
             role: 'support'
           },
           Bastion: {
             name: 'Bastion',
-            image: './static/Bastion.png',
+            image: 'static/Bastion.png',
             role: 'defense'
           },
           DVa: {
             name: 'D.Va',
-            image: './static/Dva.png',
+            image: 'static/Dva.png',
             role: 'tank'
           },
           Genji: {
             name: 'Genji',
-            image: './static/Genji.png',
+            image: 'static/Genji.png',
             role: 'offense'
           },
           Hanzo: {
             name: 'Hanzo',
-            image: './static/Hanzo.png',
+            image: 'static/Hanzo.png',
             role: 'defense'
           },
           Junkrat: {
             name: 'Junkrat',
-            image: './static/Junkrat.png',
+            image: 'static/Junkrat.png',
             role: 'defense'
           },
           Lucio: {
             name: 'Lúcio',
-            image: './static/Lucio.png',
+            image: 'static/Lucio.png',
             role: 'support'
           },
           Mccree: {
             name: 'McCree',
-            image: './static/McCree.png',
+            image: 'static/McCree.png',
             role: 'offense'
           },
           Mei: {
             name: 'Mei',
-            image: './static/Mei.png',
+            image: 'static/Mei.png',
             role: 'defense'
           },
           Mercy: {
             name: 'Mercy',
-            image: './static/Mercy.png',
+            image: 'static/Mercy.png',
             role: 'support'
           },
           Pharah: {
             name: 'Pharah',
-            image: './static/Pharah.png',
+            image: 'static/Pharah.png',
             role: 'offense'
           },
           Reaper: {
             name: 'Reaper',
-            image: './static/Reaper.png',
+            image: 'static/Reaper.png',
             role: 'offense'
           },
           Reinhardt: {
             name: 'Reinhardt',
-            image: './static/Reinhardt.png',
+            image: 'static/Reinhardt.png',
             role: 'tank'
           },
           Roadhog: {
             name: 'Roadhog',
-            image: './static/Roadhog.png',
+            image: 'static/Roadhog.png',
             role: 'tank'
           },
           Soldier76: {
             name: 'Soldier: 76',
-            image: './static/Soldier.png',
+            image: 'static/Soldier.png',
             role: 'offense'
           },
           Sombra: {
             name: 'Sombra',
-            image: './static/Sombra.png',
+            image: 'static/Sombra.png',
             role: 'offense'
           },
           Symmetra: {
             name: 'Symmetra',
-            image: './static/Symmetra.png',
+            image: 'static/Symmetra.png',
             role: 'support'
           },
           Tracer: {
             name: 'Tracer',
-            image: './static/Tracer.png',
+            image: 'static/Tracer.png',
             role: 'offense'
           },
           Torbjoern: {
             name: 'Torbjörn',
-            image: './static/Torb.png',
+            image: 'static/Torb.png',
             role: 'defense'
           },
           Widowmaker: {
             name: 'Widowmaker',
-            image: './static/Widowmaker.png',
+            image: 'static/Widowmaker.png',
             role: 'defense'
           },
           Winston: {
             name: 'Harambe',
-            image: './static/Harambe.png',
+            image: 'static/Harambe.png',
             role: 'tank'
           },
           Zarya: {
             name: 'Zarya',
-            image: './static/Zarya.png',
+            image: 'static/Zarya.png',
             role: 'tank'
           },
           Zenyatta: {
             name: 'Zenyatta',
-            image: './static/Zenyatta.png',
+            image: 'static/Zenyatta.png',
             role: 'support'
           }
         }
