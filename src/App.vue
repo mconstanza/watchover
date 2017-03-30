@@ -1,5 +1,5 @@
 <template>
-  <div id='appContainer'>
+  <div id='appContainer' :style="appStyleObject">
 
     <v-toolbar id="toolbar">
       <v-toolbar-title id="brand"><router-link to="/">WatchOver</router-link></v-toolbar-title>
@@ -28,6 +28,9 @@ export default {
   data () {
     return {
       loading: false,
+      appStyleObject: {
+        backgroundImage: '/static/Dorado_004.jpg'
+      },
       heroQueryString: 'Ana%2CBastion%2CDVa%2CGenji%2CHanzo%2CJunkrat%2CLucio%2CMccree%2CMei%2CMercy%2CPharah%2CReaper%2CReinhardt%2CRoadhog%2CSoldier76%2CSombra%2CSymmetra%2CTracer%2CTorbjoern%2CWidowmaker%2CWinston%2CZarya%2CZenyatta',
       currentBattletag: {
         loaded: false,
@@ -169,6 +172,18 @@ export default {
     }
   },
   methods: {
+    renderBackground: function () {
+      let proImage = 'static/Dorado_004.jpg'
+      let devImage = '/static/Dorado_004.jpg'
+
+      if (process.env.NODE_ENV === 'production') {
+        console.log('production background')
+        this.appStyleObject.backgroundImage = 'url(' + proImage + ')'
+      } else {
+        console.log('dev background')
+        this.appStyleObject.backgroundImage = 'url(' + devImage + ')'
+      }
+    },
     toggleLoading: function () {
       if (this.loading === true) {
         this.loading = false
@@ -195,7 +210,7 @@ export default {
       let battletag = this.$route.params.battletag || this.currentBattletag.tag.replace('#', '-')
       let platform = this.$route.params.platform || this.currentBattletag.platform
       let region = this.$route.params.region || this.currentBattletag.region
-      console.log(battletag, platform, region)
+
       axios.all([
         axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/profile'),
         axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/competitive/allHeroes/'),
@@ -204,7 +219,6 @@ export default {
         axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/quickplay/hero/' + this.heroQueryString + '/')
       ])
       .then((response) => {
-        console.log('response', response)
         this.currentBattletag.profile = response[0].data.data
         this.currentBattletag.combinedStats.competitive = response[1].data
         this.currentBattletag.combinedStats.quickplay = response[2].data
@@ -242,6 +256,9 @@ export default {
         this.view.roles.tank = false
       }
     }
+  },
+  created: function () {
+    this.renderBackground()
   }
 }
 
@@ -260,7 +277,6 @@ body {
   background: -webkit-linear-gradient(left, #222222 0%,#222222 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, #222222 0%,#222222 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  background-image: url('/static/Dorado_004.jpg')
 }
 
 main {

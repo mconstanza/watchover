@@ -13,6 +13,11 @@ Built Using
 -	Vuetify.js for CSS
 -	[Lootbox API](https://lootbox.eu/) for Overwatch data
 
+Deployment Note
+===============
+
+Because of the way Vue builds links, all '/static' references in dist/index.html should be changed simply to 'static'
+
 Author
 ======
 
