@@ -3,7 +3,7 @@
 
     <!-- Loading Screen -->
     <div id='loadingDiv' v-if="loading">
-      <v-progress-circular v-bind:size="200" indeterminate />
+      <v-progress-circular class="goldenrod" v-bind:size="200" indeterminate />
     </div>
 
     <!-- Player Header -->
@@ -71,10 +71,14 @@ export default {
     }
   },
   created: function () {
-    if (!this.currentBattletag.loaded) {
+    if (!this.currentBattletag.loaded || this.currentBattletag.tag !== this.$route.params.battletag.replace('-', '#')) {
       this.toggleLoading()
       this.loadHeroData()
     }
+  },
+  watch: {
+    // call again the method if the route changes
+    '$route': 'loadHeroData'
   }
 }
 </script>
@@ -153,6 +157,10 @@ a {
 
 .activeViewButton {
   background-color: #f29a2c;
+}
+
+.goldenrod {
+  color: #f29a2c;
 }
 
 </style>

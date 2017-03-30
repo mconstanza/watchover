@@ -62,12 +62,6 @@ export default {
 
 <style scoped>
 
-  button {
-    background-color: #bec1c4;
-    height: 36px;
-    width: 60px;
-  }
-
   input {
     background-color: white;
     border: 1px solid black;
@@ -98,9 +92,10 @@ export default {
   }
 
   button {
-    background-color: #bec1c4;
+    background-color: #f29a2c;
     height: 36px;
     width: 50px;
+    border-radius: 3px;
   }
 
   #battletagP {

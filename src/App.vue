@@ -1,8 +1,8 @@
 <template>
   <div id='appContainer'>
-    
+
     <v-toolbar id="toolbar">
-      <v-toolbar-title><router-link to="/">WatchOver</router-link></v-toolbar-title>
+      <v-toolbar-title id="brand"><router-link to="/">WatchOver</router-link></v-toolbar-title>
       <v-toolbar-items>
         <v-toolbar-item><user-search @clicked ="onClickSearch"/></v-toolbar-item>
       </v-toolbar-items>
@@ -292,6 +292,10 @@ main {
 .card__row {
   align-items: flex-start;
   flex-flow: row wrap;
+}
+
+#brand a{
+  color: #f29a2c;
 }
 
 </style>

@@ -141,7 +141,8 @@ select {
 }
 
 button {
-  background-color: #bec1c4;
+  background-color: #f29a2c;
+  border-radius: 3px;
   height: 36px;
   width: 75px;
 }
