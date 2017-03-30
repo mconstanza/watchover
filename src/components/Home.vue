@@ -113,6 +113,9 @@ input {
   width: 200px;
   padding: 0 25px;
   border-radius: 2px;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  -o-transform: skew(-20deg);
 }
 
 #inputContainer .battletagCol {
@@ -138,6 +141,9 @@ select {
   min-width: 50px;
   border: 1px solid black;
   padding: 0 10px;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  -o-transform: skew(-20deg);
 }
 
 button {
@@ -145,5 +151,8 @@ button {
   border-radius: 3px;
   height: 36px;
   width: 75px;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  -o-transform: skew(-20deg);
 }
 </style>

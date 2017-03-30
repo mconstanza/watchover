@@ -144,6 +144,9 @@ a {
   width: 80px;
   height: 35px;
   background-color: #bec1c4;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  -o-transform: skew(-20deg);
 }
 
 .card {

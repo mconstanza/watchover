@@ -69,6 +69,9 @@ export default {
     width: 175px;
     padding: 0 25px;
     border-radius: 2px;
+    -webkit-transform: skew(-20deg);
+    -moz-transform: skew(-20deg);
+    -o-transform: skew(-20deg);
   }
 
   #inputContainer .battletagCol {
@@ -85,6 +88,9 @@ export default {
     min-width: 50px;
     border: 1px solid black;
     padding: 0 5px;
+    -webkit-transform: skew(-20deg);
+    -moz-transform: skew(-20deg);
+    -o-transform: skew(-20deg);
   }
 
   select option {
@@ -94,8 +100,11 @@ export default {
   button {
     background-color: #f29a2c;
     height: 36px;
-    width: 50px;
+    width: 75px;
     border-radius: 3px;
+    -webkit-transform: skew(-20deg);
+    -moz-transform: skew(-20deg);
+    -o-transform: skew(-20deg);
   }
 
   #battletagP {
