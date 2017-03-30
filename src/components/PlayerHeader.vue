@@ -88,4 +88,8 @@ p {
   text-align: left;
 }
 
+#playerHeader {
+
+}
+
 </style>

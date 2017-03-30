@@ -9,7 +9,7 @@
 
         <v-col md4>
           <v-card id='battletagCard'>
-            <v-row>
+            <v-row id="battletagCardInputRow">
 
               <v-col md2>
                 <p>Platform</p>
@@ -124,13 +124,19 @@ input {
 }
 
 .row {
-  align-items: center;
+  /*align-items: center;*/
   justify-content: center;
 }
 
 #battletagCard {
   margin-top: 50px;
   height: 150px !important;
+  align-items: center;
+}
+
+#battletagCardInputRow {
+ height: 100%;
+ padding-top: 25px;
 }
 
 .card {

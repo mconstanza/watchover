@@ -260,6 +260,7 @@ body {
   background: -webkit-linear-gradient(left, #222222 0%,#222222 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, #222222 0%,#222222 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background-image: url('/static/Dorado_004.jpg')
 }
 
 main {

@@ -9,32 +9,28 @@
     <!-- Player Header -->
     <div v-if="!loading" id="HeadingContainer">
       <player-header :currentBattletag="currentBattletag" ></player-header>
+
+      <!-- Toggle Views -->
+      <div id="viewButtonsDiv" v-if="!loading">
+        <!-- Render a blue button if the view is competitive -->
+        <button id="switchViewBtn" v-show="viewMode === 'Competitive'" class="viewToggle activeViewButton" @click="switchView">{{viewMode}}</button>
+        <!-- Render a red button if the view is quickplay -->
+        <button id="switchViewBtn" v-show="viewMode === 'Quickplay'" class="viewToggle red" @click="switchView">{{viewMode}}</button>
+
+        <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')">All Heroes</button>
+        <button class="viewToggle" v-show="!view.roles.defense || !view.roles.offense || !view.roles.tank || !view.roles.support" @click="switchRoleView('all')">All Heroes</button>
+
+        <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense" @click="switchRoleView('damage')">Damage</button>
+        <button class="viewToggle" v-show="!view.roles.defense && !view.roles.offense" @click="switchRoleView('damage')">Damage</button>
+
+        <button class="viewToggle activeViewButton" v-show="view.roles.tank" @click="switchRoleView('tank')">Tank</button>
+        <button class="viewToggle" v-show="!view.roles.tank" @click="switchRoleView('tank')">Tank</button>
+
+        <button class="viewToggle activeViewButton" v-show="view.roles.support" @click="switchRoleView('support')">Support</button>
+        <button class="viewToggle" v-show="!view.roles.support" @click="switchRoleView('support')">Support</button>
+      </div>
     </div>
 
-    <br/>
-    <br/>
-
-    <!-- Toggle Views -->
-    <div id="viewButtonsDiv" v-if="!loading">
-      <!-- Render a blue button if the view is competitive -->
-      <button id="switchViewBtn" v-show="viewMode === 'Competitive'" class="viewToggle activeViewButton" @click="switchView">{{viewMode}}</button>
-      <!-- Render a red button if the view is quickplay -->
-      <button id="switchViewBtn" v-show="viewMode === 'Quickplay'" class="viewToggle red" @click="switchView">{{viewMode}}</button>
-
-      <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')">All Heroes</button>
-      <button class="viewToggle" v-show="!view.roles.defense || !view.roles.offense || !view.roles.tank || !view.roles.support" @click="switchRoleView('all')">All Heroes</button>
-
-      <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense" @click="switchRoleView('damage')">Damage</button>
-      <button class="viewToggle" v-show="!view.roles.defense && !view.roles.offense" @click="switchRoleView('damage')">Damage</button>
-
-      <button class="viewToggle activeViewButton" v-show="view.roles.tank" @click="switchRoleView('tank')">Tank</button>
-      <button class="viewToggle" v-show="!view.roles.tank" @click="switchRoleView('tank')">Tank</button>
-
-      <button class="viewToggle activeViewButton" v-show="view.roles.support" @click="switchRoleView('support')">Support</button>
-      <button class="viewToggle" v-show="!view.roles.support" @click="switchRoleView('support')">Support</button>
-    </div>
-    <br />
-    <br />
     <div id="CardContainer">
       <hero-card v-if="!loading" v-for="hero in currentBattletag.heroStats" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card>
     </div>
@@ -42,7 +38,6 @@
 </template>
 
 <script>
-import basicsCard from './BasicsCard.vue'
 import heroCard from './HeroCard.vue'
 import playerHeader from './PlayerHeader.vue'
 export default {
@@ -53,7 +48,6 @@ export default {
     }
   },
   components: {
-    basicsCard,
     heroCard,
     playerHeader
   },
@@ -122,6 +116,14 @@ a {
   display: flex;
   flex-flow: wrap;
   justify-content: center;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  background: black;
+  background: #060606; /* Old browsers */
+  background: -moz-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 #CardContainer {
@@ -133,11 +135,16 @@ a {
 .heroCard {
   margin-bottom: 20px;
   flex-wrap: wrap;
+
 }
 
 .card__row {
   align-items: flex-start;
   flex-flow: row wrap;
+}
+
+#viewButtonsDiv {
+
 }
 
 .viewToggle {
