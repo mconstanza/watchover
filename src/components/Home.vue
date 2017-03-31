@@ -142,6 +142,7 @@ input {
   max-width: 496px;
   align-items: center;
   align-self: center;
+  border-radius: 10px;
   -webkit-transform: skew(-15deg);
   -moz-transform: skew(-15deg);
   -o-transform: skew(-15deg);
