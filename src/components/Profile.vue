@@ -154,6 +154,7 @@ a {
   -moz-transform: skew(-20deg);
   -o-transform: skew(-20deg);
   border: 1px solid black;
+  border-radius: 3px;
 }
 
 .card {

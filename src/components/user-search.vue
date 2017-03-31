@@ -110,6 +110,7 @@ export default {
     -webkit-transform: skew(-20deg);
     -moz-transform: skew(-20deg);
     -o-transform: skew(-20deg);
+    border: 1px solid black;
   }
 
   #battletagP {
