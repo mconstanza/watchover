@@ -3056,9 +3056,10 @@ p {
 }
 
 #avatar {
-  min-width: 100px;
-  max-width: 100px;
-  min-height: 100px;
+  min-width: 80px;
+  max-width: 80px;
+  min-height: 80px;
+  border-radius: 10px;
 }
 
 .medalColumn {

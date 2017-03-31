@@ -304,11 +304,20 @@ main {
 #toolbar {
   text-align: left;
   background: transparent;
+  padding: 0 0 0 10px;
+}
+
+.toolbar__item{
+  padding-right: 0;
 }
 
 .card__row {
   align-items: flex-start;
   flex-flow: row wrap;
+}
+
+#brand {
+  width: 50px;
 }
 
 #brand a{

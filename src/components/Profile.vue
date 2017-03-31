@@ -9,26 +9,26 @@
     <!-- Player Header -->
     <div v-if="!loading" id="HeadingContainer">
       <player-header :currentBattletag="currentBattletag" ></player-header>
+    </div>
 
-      <!-- Toggle Views -->
-      <div id="viewButtonsDiv" v-if="!loading">
-        <!-- Render a blue button if the view is competitive -->
-        <button id="switchViewBtn" v-show="viewMode === 'Competitive'" class="viewToggle activeViewButton" @click="switchView">{{viewMode}}</button>
-        <!-- Render a red button if the view is quickplay -->
-        <button id="switchViewBtn" v-show="viewMode === 'Quickplay'" class="viewToggle red" @click="switchView">{{viewMode}}</button>
+    <!-- Toggle Views -->
+    <div id="viewButtonsDiv" v-if="!loading">
+      <!-- Render a blue button if the view is competitive -->
+      <button id="switchViewBtn" v-show="viewMode === 'Competitive'" class="viewToggle activeViewButton" @click="switchView">{{viewMode}}</button>
+      <!-- Render a red button if the view is quickplay -->
+      <button id="switchViewBtn" v-show="viewMode === 'Quickplay'" class="viewToggle red" @click="switchView">{{viewMode}}</button>
 
-        <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')">All Heroes</button>
-        <button class="viewToggle" v-show="!view.roles.defense || !view.roles.offense || !view.roles.tank || !view.roles.support" @click="switchRoleView('all')">All Heroes</button>
+      <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')">All Heroes</button>
+      <button class="viewToggle" v-show="!view.roles.defense || !view.roles.offense || !view.roles.tank || !view.roles.support" @click="switchRoleView('all')">All Heroes</button>
 
-        <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense" @click="switchRoleView('damage')">Damage</button>
-        <button class="viewToggle" v-show="!view.roles.defense && !view.roles.offense" @click="switchRoleView('damage')">Damage</button>
+      <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense" @click="switchRoleView('damage')">Damage</button>
+      <button class="viewToggle" v-show="!view.roles.defense && !view.roles.offense" @click="switchRoleView('damage')">Damage</button>
 
-        <button class="viewToggle activeViewButton" v-show="view.roles.tank" @click="switchRoleView('tank')">Tank</button>
-        <button class="viewToggle" v-show="!view.roles.tank" @click="switchRoleView('tank')">Tank</button>
+      <button class="viewToggle activeViewButton" v-show="view.roles.tank" @click="switchRoleView('tank')">Tank</button>
+      <button class="viewToggle" v-show="!view.roles.tank" @click="switchRoleView('tank')">Tank</button>
 
-        <button class="viewToggle activeViewButton" v-show="view.roles.support" @click="switchRoleView('support')">Support</button>
-        <button class="viewToggle" v-show="!view.roles.support" @click="switchRoleView('support')">Support</button>
-      </div>
+      <button class="viewToggle activeViewButton" v-show="view.roles.support" @click="switchRoleView('support')">Support</button>
+      <button class="viewToggle" v-show="!view.roles.support" @click="switchRoleView('support')">Support</button>
     </div>
 
     <div id="CardContainer">
@@ -113,11 +113,8 @@ a {
 }
 
 #HeadingContainer {
-  display: flex;
-  flex-flow: wrap;
-  justify-content: center;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
+  height: 200px;
+  padding-top: 20px;
   background: black;
   background: #060606; /* Old browsers */
   background: -moz-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* FF3.6-15 */
@@ -144,7 +141,9 @@ a {
 }
 
 #viewButtonsDiv {
-
+  color: white;
+  margin-bottom: 30px;
+  width: 100%;
 }
 
 .viewToggle {
@@ -154,6 +153,7 @@ a {
   -webkit-transform: skew(-20deg);
   -moz-transform: skew(-20deg);
   -o-transform: skew(-20deg);
+  border: 1px solid black;
 }
 
 .card {

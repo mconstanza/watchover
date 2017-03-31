@@ -3,17 +3,15 @@
       <v-row>
 
         <v-col md6>
-          <v-container>
+          <v-container fluid>
             <v-row>
-              <v-col md1>
-                <!-- EMPTY COLUMN FOR OFFSET -->
-              </v-col>
-              <v-col md2>
+
+              <v-col lg2 md3 sm3>
                 <div class="headerAvatar">
                   <img class="avatarImage" :src="currentBattletag.profile.avatar" width="80" height="80">
                 </div>
               </v-col>
-              <v-col md9 class="headerNameCol">
+              <v-col lg10 md9 sm9 class="headerNameCol">
                 <h3 class='whiteText'>
                   <span>{{currentBattletag.tag}}</span>
                   <small class='subHeader'> on {{currentBattletag.platform}} ({{currentBattletag.region}})</small>

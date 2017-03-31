@@ -64,6 +64,7 @@ export default {
 
   input {
     background-color: white;
+    color: black;
     border: 1px solid black;
     min-height: 36px;
     width: 175px;
@@ -82,6 +83,10 @@ export default {
   .row {
     align-items: center;
     justify-content: center;
+  }
+
+  .toolbar__item:hover {
+    background: none;
   }
 
   select {
@@ -110,5 +115,6 @@ export default {
   #battletagP {
     margin-bottom: 0;
   }
+
 
 </style>
