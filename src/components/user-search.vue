@@ -1,9 +1,8 @@
 <template>
-  <v-container id='battletagCard'>
+  <v-container fluid id='battletagCardSmall'>
     <v-row>
 
       <v-col md2>
-        <p>Platform</p>
         <select class='select' name="Platform" v-model="query.platform">
               <option>PC</option>
               <option>XBL</option>
@@ -12,7 +11,6 @@
       </v-col>
 
       <v-col md2>
-        <p>Region</p>
         <select class='select' name="Region" v-model="query.region">
               <option>US</option>
               <option>EU</option>
@@ -22,10 +20,6 @@
       </v-col>
 
       <v-col md8 class='battletagCol'>
-
-        <v-row>
-          <p id="battletagP">Battletag</p>
-        </v-row>
 
         <v-row id='inputRow'>
           <div id="inputContainer">
@@ -62,60 +56,66 @@ export default {
 
 <style scoped>
 
-  input {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-    min-height: 36px;
-    width: 175px;
-    padding: 0 25px;
-    border-radius: 2px;
-    -webkit-transform: skew(-20deg);
-    -moz-transform: skew(-20deg);
-    -o-transform: skew(-20deg);
-  }
+#battletagCardSmall {
+  padding-right: 15px;
+}
+input {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  min-height: 36px;
+  width: 175px;
+  padding: 0 25px;
+  border-radius: 2px;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  -o-transform: skew(-20deg);
+}
 
-  #inputContainer .battletagCol {
-    text-align: center;
-    align-items: center;
-  }
+#inputContainer .battletagCol {
+  text-align: center;
+  align-items: center;
+}
 
-  .row {
-    align-items: center;
-    justify-content: center;
-  }
+.row {
+  align-items: center;
+  justify-content: center;
+}
 
-  .toolbar__item:hover {
-    background: none;
-  }
+.toolbar__item:hover {
+  background: none;
+}
 
-  select {
-    min-width: 50px;
-    border: 1px solid black;
-    padding: 0 5px;
-    -webkit-transform: skew(-20deg);
-    -moz-transform: skew(-20deg);
-    -o-transform: skew(-20deg);
-  }
+select {
+  min-width: 50px;
+  background-color: white;
+  padding-left: 15px;
+  margin-right: 10px;
+  border: 1px solid black;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  -o-transform: skew(-20deg);
+  color: black;
+}
 
-  select option {
-    color: black;
-  }
+select option {
+  color: black;
+}
 
-  button {
-    background-color: #f29a2c;
-    height: 36px;
-    width: 75px;
-    border-radius: 3px;
-    -webkit-transform: skew(-20deg);
-    -moz-transform: skew(-20deg);
-    -o-transform: skew(-20deg);
-    border: 1px solid black;
-  }
+button {
+  background-color: #f29a2c;
+  height: 36px;
+  width: 75px;
+  border-radius: 3px;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  -o-transform: skew(-20deg);
+  border: 1px solid black;
+}
 
-  #battletagP {
-    margin-bottom: 0;
-  }
+#battletagP {
+  margin-bottom: 0;
+}
 
 
 </style>

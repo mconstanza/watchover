@@ -1,13 +1,13 @@
 <template>
 <v-container fluid>
   <v-row>
-    <v-col md12>
+    <v-col lg12 md12 sm12>
       <v-row>
-        <v-col md4>
+        <v-col lg4 md2 sm0>
 
         </v-col>
 
-        <v-col md4>
+        <v-col lg4 md8 sm12 id="battletagCardCol">
           <v-card id='battletagCard'>
             <v-row id="battletagCardInputRow">
 
@@ -49,7 +49,7 @@
           </v-card>
         </v-col>
 
-        <v-col md4>
+        <v-col lg4 md2 sm0>
 
         </v-col>
 
@@ -124,32 +124,78 @@ input {
 }
 
 .row {
-  /*align-items: center;*/
+  justify-content: center;
+}
+
+#battletagCardCol {
+  text-align: center;
+  display: flex;
+  flex-basis: 0;
+  align-items: center;
   justify-content: center;
 }
 
 #battletagCard {
   margin-top: 50px;
   height: 150px !important;
+  min-width: 496px;
+  max-width: 496px;
   align-items: center;
+  align-self: center;
+  -webkit-transform: skew(-20deg);
+  -moz-transform: skew(-20deg);
+  -o-transform: skew(-20deg);
+  background: black;
+  background: #060606; /* Old browsers */
+  background: -moz-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+#battletagCard p {
+  padding-left: 30px;
+  color: white;
 }
 
 #battletagCardInputRow {
  height: 100%;
  padding-top: 25px;
+ -webkit-transform: skew(20deg);
+ -moz-transform: skew(20deg);
+ -o-transform: skew(20deg);
 }
 
 .card {
   height: 150px;
 }
 
+#toolbar {
+  text-align: left;
+  background: transparent;
+  padding: 0 0 0 10px;
+}
+
+.toolbar__item{
+  padding-right: 0;
+}
+
 select {
   min-width: 50px;
+  background-color: white;
+  padding-left: 15px;
+  margin-left: 10px;
   border: 1px solid black;
-  padding: 0 10px;
   -webkit-transform: skew(-20deg);
   -moz-transform: skew(-20deg);
   -o-transform: skew(-20deg);
+}
+
+option {
+  -webkit-transform: skew(40deg);
+  -moz-transform: skew(40deg);
+  -o-transform: skew(40deg);
+  color: black;
 }
 
 button {
@@ -160,5 +206,6 @@ button {
   -webkit-transform: skew(-20deg);
   -moz-transform: skew(-20deg);
   -o-transform: skew(-20deg);
+  color:white;
 }
 </style>
