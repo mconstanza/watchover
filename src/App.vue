@@ -303,8 +303,14 @@ main {
 
 #toolbar {
   text-align: left;
-  background: transparent;
+  /*background: transparent;*/
   padding: 0 0 0 10px;
+  background: black;
+  background: #060606; /* Old browsers */
+  background: -moz-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .toolbar__item{
@@ -322,6 +328,7 @@ main {
 
 #brand a{
   color: #f29a2c;
+  font-size: 30px;
 }
 
 </style>

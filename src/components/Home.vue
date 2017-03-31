@@ -39,7 +39,7 @@
                 <v-row id='inputRow'>
                   <div id="inputContainer">
                     <input type="text" @keyup.enter="onClickButton" v-model.trim="query.battletag" name="user-search" label="Search" placeholder="Battletag is case sensitive!"/>
-                    <button id="submit" @click="onClickButton">Onward</button>
+                    <button id="submit" @click="onClickButton"><div class="buttonText">Onward</div></button>
                   </div>
                 </v-row>
 
@@ -113,9 +113,9 @@ input {
   width: 200px;
   padding: 0 25px;
   border-radius: 2px;
-  -webkit-transform: skew(-20deg);
-  -moz-transform: skew(-20deg);
-  -o-transform: skew(-20deg);
+  -webkit-transform: skew(-15deg);
+  -moz-transform: skew(-15deg);
+  -o-transform: skew(-15deg);
 }
 
 #inputContainer .battletagCol {
@@ -136,15 +136,15 @@ input {
 }
 
 #battletagCard {
-  margin-top: 50px;
+  margin-top: 75px;
   height: 150px !important;
   min-width: 496px;
   max-width: 496px;
   align-items: center;
   align-self: center;
-  -webkit-transform: skew(-20deg);
-  -moz-transform: skew(-20deg);
-  -o-transform: skew(-20deg);
+  -webkit-transform: skew(-15deg);
+  -moz-transform: skew(-15deg);
+  -o-transform: skew(-15deg);
   background: black;
   background: #060606; /* Old browsers */
   background: -moz-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* FF3.6-15 */
@@ -161,9 +161,9 @@ input {
 #battletagCardInputRow {
  height: 100%;
  padding-top: 25px;
- -webkit-transform: skew(20deg);
- -moz-transform: skew(20deg);
- -o-transform: skew(20deg);
+ -webkit-transform: skew(15deg);
+ -moz-transform: skew(15deg);
+ -o-transform: skew(15deg);
 }
 
 .card {
@@ -186,9 +186,10 @@ select {
   padding-left: 15px;
   margin-left: 10px;
   border: 1px solid black;
-  -webkit-transform: skew(-20deg);
-  -moz-transform: skew(-20deg);
-  -o-transform: skew(-20deg);
+  -webkit-transform: skew(-15deg);
+  -moz-transform: skew(-15deg);
+  -o-transform: skew(-15deg);
+  -webkit-appearance: menulist;
 }
 
 option {
@@ -200,12 +201,19 @@ option {
 
 button {
   background-color: #f29a2c;
+  border: 1px solid black;
   border-radius: 3px;
   height: 36px;
   width: 75px;
-  -webkit-transform: skew(-20deg);
-  -moz-transform: skew(-20deg);
-  -o-transform: skew(-20deg);
+  -webkit-transform: skew(-15deg);
+  -moz-transform: skew(-15deg);
+  -o-transform: skew(-15deg);
   color:white;
+}
+
+.buttonText {
+  -webkit-transform: skew(15deg);
+  -moz-transform: skew(15deg);
+  -o-transform: skew(15deg);
 }
 </style>

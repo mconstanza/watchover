@@ -24,7 +24,7 @@
         <v-row id='inputRow'>
           <div id="inputContainer">
             <input type="text" @keyup.enter="onClickButton" v-model.trim="query.battletag" name="user-search" label="Search" placeholder="Battletag is case sensitive!"/>
-            <button id="submit" @click="onClickButton">Onward</button>
+            <button id="submit" @click="onClickButton"><div class="buttonText">Onward</div></button>
           </div>
         </v-row>
 
@@ -67,9 +67,9 @@ input {
   width: 175px;
   padding: 0 25px;
   border-radius: 2px;
-  -webkit-transform: skew(-20deg);
-  -moz-transform: skew(-20deg);
-  -o-transform: skew(-20deg);
+  -webkit-transform: skew(-15deg);
+  -moz-transform: skew(-15deg);
+  -o-transform: skew(-15deg);
 }
 
 #inputContainer .battletagCol {
@@ -92,9 +92,10 @@ select {
   padding-left: 15px;
   margin-right: 10px;
   border: 1px solid black;
-  -webkit-transform: skew(-20deg);
-  -moz-transform: skew(-20deg);
-  -o-transform: skew(-20deg);
+  -webkit-transform: skew(-15deg);
+  -moz-transform: skew(-15deg);
+  -o-transform: skew(-15deg);
+  -webkit-appearance: menulist;
   color: black;
 }
 
@@ -107,10 +108,16 @@ button {
   height: 36px;
   width: 75px;
   border-radius: 3px;
-  -webkit-transform: skew(-20deg);
-  -moz-transform: skew(-20deg);
-  -o-transform: skew(-20deg);
+  -webkit-transform: skew(-15deg);
+  -moz-transform: skew(-15deg);
+  -o-transform: skew(-15deg);
   border: 1px solid black;
+}
+
+.buttonText {
+  -webkit-transform: skew(15deg);
+  -moz-transform: skew(15deg);
+  -o-transform: skew(15deg);
 }
 
 #battletagP {
