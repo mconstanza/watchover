@@ -8,7 +8,7 @@
 
     <!-- Player Header -->
     <div v-if="!loading" id="HeadingContainer">
-      <player-header :currentBattletag="currentBattletag" ></player-header>
+      <player-header v-if="!loading" :currentBattletag="currentBattletag"></player-header>
     </div>
 
     <!-- Toggle Views -->
@@ -32,9 +32,9 @@
     </div>
 
     <div id="CardContainer">
-      <hero-card v-if="!loading" v-for="hero in currentBattletag.heroStats" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card>
+      <hero-card v-if="!loading" v-for="hero in currentBattletag.heroes" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card>
     </div>
-    
+
   </div>
 </template>
 
@@ -67,7 +67,7 @@ export default {
   },
   created: function () {
     if (!this.currentBattletag.loaded || this.currentBattletag.tag !== this.$route.params.battletag.replace('-', '#')) {
-      this.toggleLoading()
+      // this.toggleLoading()
       this.loadHeroData()
     }
   },

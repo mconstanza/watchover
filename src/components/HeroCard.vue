@@ -28,7 +28,8 @@
         <v-card-column>
           <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
             <p><strong>Time Played</strong></p>
-            <p>{{hero.competitive.TimePlayed || '---'}} </p>
+
+            <p>{{hero.competitive.playtime || '---'}} </p>
           </v-card-text>
 
           <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
@@ -2945,7 +2946,7 @@
 <script>
 export default {
   name: 'hero-card',
-  props: ['hero', 'viewMode'],
+  props: ['hero', 'viewMode', 'quickplay'],
   data () {
     return {
       fullStats: false,

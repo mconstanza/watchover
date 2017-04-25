@@ -8,7 +8,7 @@
 
               <v-col lg2 md3 sm3>
                 <div class="headerAvatar">
-                  <img class="avatarImage" :src="currentBattletag.profile.avatar" width="80" height="80">
+                  <img class="avatarImage" :src="currentBattletag.profile.stats.competitive.overall_stats.avatar" width="80" height="80">
                 </div>
               </v-col>
               <v-col lg10 md9 sm9 class="headerNameCol">

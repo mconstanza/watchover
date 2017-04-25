@@ -10,7 +10,7 @@
 
     <main>
       <v-content>
-        <router-view :viewMode="view.mode" :toggleLoading="toggleLoading" :loadHeroData="loadHeroData" @clicked ="onClickSearch" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :current-battletag="currentBattletag" ></router-view>
+        <router-view :viewMode="view.mode" :toggleLoading="toggleLoading" :loadHeroData="loadHeroData" @clicked ="onClickSearch" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :currentBattletag="currentBattletag" ></router-view>
       </v-content>
     </main>
   </div>
@@ -31,100 +31,115 @@ export default {
       appStyleObject: {
         backgroundImage: '/static/Dorado_004.jpg'
       },
-      heroQueryString: 'Ana%2CBastion%2CDVa%2CGenji%2CHanzo%2CJunkrat%2CLucio%2CMccree%2CMei%2CMercy%2CPharah%2CReaper%2CReinhardt%2CRoadhog%2CSoldier76%2CSombra%2CSymmetra%2CTracer%2CTorbjoern%2CWidowmaker%2CWinston%2CZarya%2CZenyatta',
       currentBattletag: {
         loaded: false,
         tag: '',
         platform: 'pc',
         region: 'us',
-        profile: {},
-        combinedStats: {
-          quick: [],
-          competitive: []
+        profile: {
+          achievements: {},
+          stats: {}
         },
-        heroStats: {
+        heroes: {
           Ana: {
             name: 'Ana',
+            sortName: 'ana',
             image: 'static/Ana.png',
             role: 'support'
           },
           Bastion: {
             name: 'Bastion',
+            sortName: 'bastion',
             image: 'static/Bastion.png',
             role: 'defense'
           },
           DVa: {
             name: 'D.Va',
+            sortName: 'dva',
             image: 'static/Dva.png',
             role: 'tank'
           },
           Genji: {
             name: 'Genji',
+            sortName: 'genji',
             image: 'static/Genji.png',
             role: 'offense'
           },
           Hanzo: {
             name: 'Hanzo',
+            sortName: 'hanzo',
             image: 'static/Hanzo.png',
             role: 'defense'
           },
           Junkrat: {
             name: 'Junkrat',
+            sortName: 'junkrat',
             image: 'static/Junkrat.png',
             role: 'defense'
           },
           Lucio: {
             name: 'Lúcio',
+            sortName: 'lucio',
             image: 'static/Lucio.png',
             role: 'support'
           },
           Mccree: {
             name: 'McCree',
+            sortName: 'mccree',
             image: 'static/McCree.png',
             role: 'offense'
           },
           Mei: {
             name: 'Mei',
+            sortName: 'mei',
             image: 'static/Mei.png',
             role: 'defense'
           },
           Mercy: {
             name: 'Mercy',
+            sortName: 'mercy',
             image: 'static/Mercy.png',
             role: 'support'
           },
           Pharah: {
             name: 'Pharah',
+            sortName: 'pharah',
             image: 'static/Pharah.png',
             role: 'offense'
           },
           Reaper: {
             name: 'Reaper',
+            sortName: 'reaper',
             image: 'static/Reaper.png',
             role: 'offense'
           },
           Reinhardt: {
             name: 'Reinhardt',
+            sortName: 'reinhardt',
             image: 'static/Reinhardt.png',
             role: 'tank'
           },
           Roadhog: {
             name: 'Roadhog',
+            sortName: 'roadhog',
             image: 'static/Roadhog.png',
             role: 'tank'
           },
           Soldier76: {
             name: 'Soldier: 76',
+            sortName: 'soldier76',
             image: 'static/Soldier.png',
             role: 'offense'
           },
           Sombra: {
             name: 'Sombra',
+            sortName: 'sombra',
             image: 'static/Sombra.png',
             role: 'offense'
           },
           Symmetra: {
             name: 'Symmetra',
+            sortName: 'symmetra',
             image: 'static/Symmetra.png',
             role: 'support'
           },
@@ -133,28 +148,33 @@ export default {
             image: 'static/Tracer.png',
             role: 'offense'
           },
-          Torbjoern: {
+          Torbjorn: {
             name: 'Torbjörn',
+            sortName: 'torbjorn',
             image: 'static/Torb.png',
             role: 'defense'
           },
           Widowmaker: {
             name: 'Widowmaker',
+            sortName: 'widowmaker',
             image: 'static/Widowmaker.png',
             role: 'defense'
           },
           Winston: {
             name: 'Harambe',
+            sortName: 'winston',
             image: 'static/Harambe.png',
             role: 'tank'
           },
           Zarya: {
             name: 'Zarya',
+            sortName: 'zarya',
             image: 'static/Zarya.png',
             role: 'tank'
           },
           Zenyatta: {
             name: 'Zenyatta',
+            sortName: 'zenyatta',
             image: 'static/Zenyatta.png',
             role: 'support'
           }
@@ -197,9 +217,7 @@ export default {
       this.currentBattletag.platform = query.platform.toLowerCase()
       this.currentBattletag.region = query.region.toLowerCase()
       let battletag = this.currentBattletag.tag.replace('#', '-')
-      let platform = this.currentBattletag.platform
-      let region = this.currentBattletag.region
-      router.push('/profile/' + platform + '/' + region + '/' + battletag + '/')
+      router.push('/profile/' + battletag + '/')
     },
     switchView: function (view) {
       this.view.mode = view
@@ -208,27 +226,39 @@ export default {
       this.loading = true
       this.currentBattletag.tag = this.$route.params.battletag.replace('-', '#')
       let battletag = this.$route.params.battletag || this.currentBattletag.tag.replace('#', '-')
-      let platform = this.$route.params.platform || this.currentBattletag.platform
-      let region = this.$route.params.region || this.currentBattletag.region
 
-      axios.all([
-        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/profile'),
-        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/competitive/allHeroes/'),
-        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/quickplay/allHeroes/'),
-        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/competitive/hero/' + this.heroQueryString + '/'),
-        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/quickplay/hero/' + this.heroQueryString + '/')
-      ])
+      axios.get('https://owapi.net/api/v3/u/' + battletag + '/blob')
+
       .then((response) => {
-        this.currentBattletag.profile = response[0].data.data
-        this.currentBattletag.combinedStats.competitive = response[1].data
-        this.currentBattletag.combinedStats.quickplay = response[2].data
+        // console.log(response.data)
+        if (response.data.us) {
+          this.currentBattletag.profile.achievements = response.data.us.achievements
+          this.currentBattletag.profile.stats = response.data.us.stats
+        } else if (response.data.kr) {
+          this.currentBattletag.profile.achievements = response.data.kr.achievements
+          this.currentBattletag.profile.stats = response.data.kr.stats
+        } else if (response.data.eu) {
+          this.currentBattletag.profile.achievements = response.data.eu.achievements
+          this.currentBattletag.profile.stats = response.data.eu.stats
+        }
+        // sort hero data
 
-        for (var hero in response[3].data) {
-          this.currentBattletag.heroStats[hero].competitive = response[3].data[hero]
+        let quickplayHeroData = response.data[this.currentBattletag.region].heroes.stats.quickplay
+        let competitiveHeroData = response.data[this.currentBattletag.region].heroes.stats.competitive
+        let quickplayPlaytimeHeroData = response.data[this.currentBattletag.region].heroes.playtime.quickplay
+        let competitivePlaytimeHeroData = response.data[this.currentBattletag.region].heroes.playtime.competitive
+
+        for (var hero in this.currentBattletag.heroes) {
+          if (quickplayHeroData.hasOwnProperty(this.currentBattletag.heroes[hero].sortName)) {
+            this.currentBattletag.heroes[hero].quickplay = quickplayHeroData[this.currentBattletag.heroes[hero].sortName]
+            this.currentBattletag.heroes[hero].quickplay.playtime = quickplayPlaytimeHeroData[this.currentBattletag.heroes[hero].sortName]
+          }
+          if (competitiveHeroData.hasOwnProperty(this.currentBattletag.heroes[hero].sortName)) {
+            this.currentBattletag.heroes[hero].competitive = competitiveHeroData[this.currentBattletag.heroes[hero].sortName]
+            this.currentBattletag.heroes[hero].competitive.playtime = competitivePlaytimeHeroData[this.currentBattletag.heroes[hero].sortName]
+          }
         }
-        for (hero in response[4].data) {
-          this.currentBattletag.heroStats[hero].quickplay = response[4].data[hero]
-        }
+        // change loading state
         this.currentBattletag.loaded = true
         this.loading = false
       })
