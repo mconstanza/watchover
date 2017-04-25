@@ -133,7 +133,6 @@ a {
 .heroCard {
   margin-bottom: 20px;
   flex-wrap: wrap;
-
 }
 
 .card__row {
@@ -162,10 +161,6 @@ a {
   -webkit-transform: skew(15deg);
   -moz-transform: skew(15deg);
   -o-transform: skew(15deg);
-}
-
-.card {
-  max-width: 100%;
 }
 
 #avatar {

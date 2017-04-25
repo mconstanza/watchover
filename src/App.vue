@@ -45,138 +45,184 @@ export default {
             name: 'Ana',
             sortName: 'ana',
             image: 'static/Ana.png',
-            role: 'support'
+            role: 'support',
+            competitive: {},
+            quickplay: {}
           },
           Bastion: {
             name: 'Bastion',
             sortName: 'bastion',
             image: 'static/Bastion.png',
-            role: 'defense'
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
           },
           DVa: {
             name: 'D.Va',
             sortName: 'dva',
             image: 'static/Dva.png',
-            role: 'tank'
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
           },
           Genji: {
             name: 'Genji',
             sortName: 'genji',
             image: 'static/Genji.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Hanzo: {
             name: 'Hanzo',
             sortName: 'hanzo',
             image: 'static/Hanzo.png',
-            role: 'defense'
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
           },
           Junkrat: {
             name: 'Junkrat',
             sortName: 'junkrat',
             image: 'static/Junkrat.png',
-            role: 'defense'
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
           },
           Lucio: {
             name: 'Lúcio',
             sortName: 'lucio',
             image: 'static/Lucio.png',
-            role: 'support'
+            role: 'support',
+            competitive: {},
+            quickplay: {}
           },
           Mccree: {
             name: 'McCree',
             sortName: 'mccree',
             image: 'static/McCree.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Mei: {
             name: 'Mei',
             sortName: 'mei',
             image: 'static/Mei.png',
-            role: 'defense'
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
           },
           Mercy: {
             name: 'Mercy',
             sortName: 'mercy',
             image: 'static/Mercy.png',
-            role: 'support'
+            role: 'support',
+            competitive: {},
+            quickplay: {}
           },
           Pharah: {
             name: 'Pharah',
             sortName: 'pharah',
             image: 'static/Pharah.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Reaper: {
             name: 'Reaper',
             sortName: 'reaper',
             image: 'static/Reaper.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Reinhardt: {
             name: 'Reinhardt',
             sortName: 'reinhardt',
             image: 'static/Reinhardt.png',
-            role: 'tank'
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
           },
           Roadhog: {
             name: 'Roadhog',
             sortName: 'roadhog',
             image: 'static/Roadhog.png',
-            role: 'tank'
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
           },
           Soldier76: {
             name: 'Soldier: 76',
             sortName: 'soldier76',
             image: 'static/Soldier.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Sombra: {
             name: 'Sombra',
             sortName: 'sombra',
             image: 'static/Sombra.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Symmetra: {
             name: 'Symmetra',
             sortName: 'symmetra',
             image: 'static/Symmetra.png',
-            role: 'support'
-          },
-          Tracer: {
-            name: 'Tracer',
-            image: 'static/Tracer.png',
-            role: 'offense'
+            role: 'support',
+            competitive: {},
+            quickplay: {}
           },
           Torbjorn: {
             name: 'Torbjörn',
             sortName: 'torbjorn',
             image: 'static/Torb.png',
-            role: 'defense'
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
+          },
+          Tracer: {
+            name: 'Tracer',
+            image: 'static/Tracer.png',
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Widowmaker: {
             name: 'Widowmaker',
             sortName: 'widowmaker',
             image: 'static/Widowmaker.png',
-            role: 'defense'
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
           },
           Winston: {
             name: 'Harambe',
             sortName: 'winston',
             image: 'static/Harambe.png',
-            role: 'tank'
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
           },
           Zarya: {
             name: 'Zarya',
             sortName: 'zarya',
             image: 'static/Zarya.png',
-            role: 'tank'
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
           },
           Zenyatta: {
             name: 'Zenyatta',
             sortName: 'zenyatta',
             image: 'static/Zenyatta.png',
-            role: 'support'
+            role: 'support',
+            competitive: {},
+            quickplay: {}
           }
         }
       },
@@ -217,7 +263,9 @@ export default {
       this.currentBattletag.platform = query.platform.toLowerCase()
       this.currentBattletag.region = query.region.toLowerCase()
       let battletag = this.currentBattletag.tag.replace('#', '-')
-      router.push('/profile/' + battletag + '/')
+      let platform = this.currentBattletag.platform
+      let region = this.currentBattletag.region
+      router.push('/' + region + '/' + platform + '/' + battletag + '/')
     },
     switchView: function (view) {
       this.view.mode = view
@@ -227,7 +275,7 @@ export default {
       this.currentBattletag.tag = this.$route.params.battletag.replace('-', '#')
       let battletag = this.$route.params.battletag || this.currentBattletag.tag.replace('#', '-')
 
-      axios.get('https://owapi.net/api/v3/u/' + battletag + '/blob')
+      axios.get('https://owapi.net/api/v3/u/' + battletag + '/blob?platform=' + this.$route.params.platform)
 
       .then((response) => {
         // console.log(response.data)

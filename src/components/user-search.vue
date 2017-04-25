@@ -14,7 +14,6 @@
         <select class='select' name="Region" v-model="query.region">
               <option>US</option>
               <option>EU</option>
-              <option>CN</option>
               <option>KR</option>
             </select>
       </v-col>
