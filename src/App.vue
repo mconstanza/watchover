@@ -271,6 +271,7 @@ export default {
       this.view.mode = view
     },
     loadHeroData: function () {
+      console.log('loading data')
       this.loading = true
       this.currentBattletag.tag = this.$route.params.battletag.replace('-', '#')
       let battletag = this.$route.params.battletag || this.currentBattletag.tag.replace('#', '-')
@@ -337,7 +338,7 @@ export default {
   },
   created: function () {
     this.renderBackground()
-    if (this.$route.params.battletag) {
+    if (this.$route.params.battletag && this.$route.params.battletag !== this.currentBattletag.tag.replace('#', '-')) {
       this.loadHeroData()
     }
   }

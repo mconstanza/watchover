@@ -1,7 +1,7 @@
 <template>
 <v-card class="heroCard">
   <!-- Title -->
-  <router-link :to="heroLink">
+  <router-link :to="{ name: 'HeroDetails', params: { hero: heroLink }}">
     <v-card-row class="cardTitleRow" :id="headerId(hero)">
       <v-card-title @click="toggleHeroStats">
         <span class="white--text heroName">{{hero.name}}</span>
@@ -286,8 +286,23 @@ export default {
   data () {
     return {
       fullStats: false,
-      heroLink: this.$route.params.battletag + '/' + this.hero.name,
       noCrit: ['Ana', 'Junkrat', 'Pharah', 'Symmetra', 'Reinhardt', 'Harambe', 'Zarya']
+    }
+  },
+  computed: {
+    heroLink: function () {
+      switch (this.hero.name) {
+        case 'Torbjörn':
+          return 'Torbjorn'
+        case 'Lúcio':
+          return 'Lucio'
+        case 'D.Va':
+          return 'DVa'
+        case 'Soldier: 76':
+          return 'Soldier76'
+        default:
+          return this.hero.name
+      }
     }
   },
   methods: {
@@ -319,7 +334,7 @@ export default {
         case 'Soldier: 76':
           return 'Soldier76'
         case 'Torbjörn':
-          return 'Torbjoern'
+          return 'Torbjorn'
         default:
           return hero.name
       }
@@ -346,7 +361,7 @@ li {
 }
 
 a {
-  color: #42b983;
+  text-decoration: none;
 }
 
 p {
@@ -372,6 +387,15 @@ p {
   color:white;
   font-family: sans-serif;
   font-size: 10px;
+  padding: 10px;
+}
+
+.card__title {
+  padding: 0;
+}
+
+.card__title span {
+  margin-left: 5px;
 }
 
 .cardTitleRow {
@@ -404,7 +428,9 @@ p {
   max-width: 80px;
   min-height: 80px;
   border-radius: 10px;
-  border: 2px solid white
+  border: 2px solid white;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 
 .medalColumn {
@@ -513,7 +539,7 @@ p {
   background-color: #f5bd27;
 }
 
-#Torbjoern {
+#Torbjorn {
   background-color: #9b3435;
 }
 

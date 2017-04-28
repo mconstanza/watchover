@@ -13,7 +13,9 @@
               </v-col>
               <v-col lg10 md9 sm9 class="headerNameCol">
                 <h3 class='whiteText'>
-                  <span>{{currentBattletag.tag}}</span>
+                  <router-link :to="{ name: 'HeroCardContainer', params: { battletag: this.$route.params.battletag }}">
+                    <span>{{currentBattletag.tag}}</span>
+                  </router-link>
                   <small class='subHeader'> on {{currentBattletag.platform}} ({{currentBattletag.region}})</small>
                 </h3>
               </v-col>
@@ -37,7 +39,6 @@ export default {
   name: 'player-header',
   data () {
     return {
-
     }
   },
   props: ['currentBattletag', 'viewMode']
@@ -62,7 +63,8 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: white;
+  text-decoration: none;
 }
 
 p {

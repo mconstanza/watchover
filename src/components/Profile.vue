@@ -31,7 +31,7 @@
       <button class="viewToggle" v-if="!this.$route.params.hero" v-show="!view.roles.support" @click="switchRoleView('support')"><div class="buttonText">Support</div></button>
     </div>
 
-    <router-view :viewMode="view.mode" :toggleLoading="toggleLoading" :loadHeroData="loadHeroData" @clicked ="onClickSearch" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :currentBattletag="currentBattletag" ></router-view>
+    <router-view v-show="!loading" :viewMode="view.mode" :toggleLoading="toggleLoading" :loadHeroData="loadHeroData" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :currentBattletag="currentBattletag" ></router-view>
 
   </div>
 </template>
@@ -43,7 +43,6 @@ export default {
   name: 'profile',
   data () {
     return {
-      msg: 'test'
     }
   },
   components: {
@@ -60,17 +59,17 @@ export default {
     },
     switchRoleView: function (role) {
       this.$emit('switchRoleView', role)
-    }
-  },
-  created: function () {
-    if (!this.currentBattletag.loaded || this.currentBattletag.tag !== this.$route.params.battletag.replace('-', '#')) {
-      // this.toggleLoading()
-      this.loadHeroData()
+    },
+    reloadData: function () {
+      if (this.$route.params.battletag && this.$route.params.battletag !== this.currentBattletag.tag.replace('#', '-')) {
+        console.log('reloading data')
+        this.loadHeroData()
+      }
     }
   },
   watch: {
-    // call again the method if the route changes
-    '$route': 'loadHeroData'
+    // call the method again if the route changes
+    '$route': 'reloadData'
   }
 }
 </script>

@@ -19,7 +19,6 @@ export default new Router({
     },
     {
       path: '/:region/:platform/:battletag',
-      name: 'Profile',
       component: Profile,
       props: true,
       children: [
