@@ -16,31 +16,29 @@
       <!-- Render a blue button if the view is competitive -->
       <button id="switchViewBtn" v-show="viewMode === 'Competitive'" class="viewToggle activeViewButton" @click="switchView"><div class="buttonText">{{viewMode}}</div></button>
       <!-- Render a red button if the view is quickplay -->
-      <button id="switchViewBtn" v-show="viewMode === 'Quickplay'" class="viewToggle red" @click="switchView"><div class="buttonText">{{viewMode}}</div></button>
+      <button id="switchViewBtn" v-show="viewMode === 'Quickplay'" class="viewToggle quickplay" @click="switchView"><div class="buttonText">{{viewMode}}</div></button>
 
-      <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')"><div class="buttonText">All Heroes</div></button>
-      <button class="viewToggle" v-show="!view.roles.defense || !view.roles.offense || !view.roles.tank || !view.roles.support" @click="switchRoleView('all')"><div class="buttonText">All Heroes</div></button>
+      <button class="viewToggle activeViewButton" v-if="!this.$route.params.hero" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')"><div class="buttonText">All Heroes</div></button>
+      <button class="viewToggle" v-if="!this.$route.params.hero" v-show="!view.roles.defense || !view.roles.offense || !view.roles.tank || !view.roles.support" @click="switchRoleView('all')"><div class="buttonText">All Heroes</div></button>
 
-      <button class="viewToggle activeViewButton" v-show="view.roles.defense && view.roles.offense" @click="switchRoleView('damage')"><div class="buttonText">Damage</div></button>
-      <button class="viewToggle" v-show="!view.roles.defense && !view.roles.offense" @click="switchRoleView('damage')"><div class="buttonText">Damage</div></button>
+      <button class="viewToggle activeViewButton" v-if="!this.$route.params.hero" v-show="view.roles.defense && view.roles.offense" @click="switchRoleView('damage')"><div class="buttonText">Damage</div></button>
+      <button class="viewToggle" v-if="!this.$route.params.hero" v-show="!view.roles.defense && !view.roles.offense" @click="switchRoleView('damage')"><div class="buttonText">Damage</div></button>
 
-      <button class="viewToggle activeViewButton" v-show="view.roles.tank" @click="switchRoleView('tank')"><div class="buttonText">Tank</div></button>
-      <button class="viewToggle" v-show="!view.roles.tank" @click="switchRoleView('tank')"><div class="buttonText">Tank</div></button>
+      <button class="viewToggle activeViewButton" v-if="!this.$route.params.hero" v-show="view.roles.tank" @click="switchRoleView('tank')"><div class="buttonText">Tank</div></button>
+      <button class="viewToggle" v-if="!this.$route.params.hero" v-show="!view.roles.tank" @click="switchRoleView('tank')"><div class="buttonText">Tank</div></button>
 
-      <button class="viewToggle activeViewButton" v-show="view.roles.support" @click="switchRoleView('support')"><div class="buttonText">Support</div></button>
-      <button class="viewToggle" v-show="!view.roles.support" @click="switchRoleView('support')"><div class="buttonText">Support</div></button>
+      <button class="viewToggle activeViewButton" v-if="!this.$route.params.hero" v-show="view.roles.support" @click="switchRoleView('support')"><div class="buttonText">Support</div></button>
+      <button class="viewToggle" v-if="!this.$route.params.hero" v-show="!view.roles.support" @click="switchRoleView('support')"><div class="buttonText">Support</div></button>
     </div>
 
-    <div id="CardContainer">
-      <hero-card v-if="!loading" v-for="hero in currentBattletag.heroes" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card>
-    </div>
+    <router-view :viewMode="view.mode" :toggleLoading="toggleLoading" :loadHeroData="loadHeroData" @clicked ="onClickSearch" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :currentBattletag="currentBattletag" ></router-view>
 
   </div>
 </template>
 
 <script>
-import heroCard from './HeroCard.vue'
 import playerHeader from './PlayerHeader.vue'
+
 export default {
   name: 'profile',
   data () {
@@ -49,7 +47,6 @@ export default {
     }
   },
   components: {
-    heroCard,
     playerHeader
   },
   props: ['loading', 'currentBattletag', 'viewMode', 'view', 'loadHeroData', 'toggleLoading'],
@@ -124,22 +121,6 @@ a {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
-#CardContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.heroCard {
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.card__row {
-  align-items: flex-start;
-  flex-flow: row wrap;
-}
-
 #viewButtonsDiv {
   color: white;
   margin-bottom: 30px;
@@ -155,6 +136,10 @@ a {
   -o-transform: skew(-15deg);
   border: 1px solid black;
   border-radius: 3px;
+}
+
+.quickplay {
+  background-color: red;
 }
 
 .buttonText {

@@ -1,12 +1,14 @@
 <template>
 <v-card class="heroCard">
   <!-- Title -->
-  <v-card-row class="cardTitleRow" :id="headerId(hero)">
-    <v-card-title @click="toggleHeroStats">
-      <span class="white--text heroName">{{hero.name}}</span>
-      <v-spacer></v-spacer>
-    </v-card-title>
-  </v-card-row>
+  <router-link :to="heroLink">
+    <v-card-row class="cardTitleRow" :id="headerId(hero)">
+      <v-card-title @click="toggleHeroStats">
+        <span class="white--text heroName">{{hero.name}}</span>
+        <v-spacer></v-spacer>
+      </v-card-title>
+    </v-card-row>
+  </router-link>
   <!-- Title -->
 
   <!-- Content -->
@@ -284,6 +286,7 @@ export default {
   data () {
     return {
       fullStats: false,
+      heroLink: this.$route.params.battletag + '/' + this.hero.name,
       noCrit: ['Ana', 'Junkrat', 'Pharah', 'Symmetra', 'Reinhardt', 'Harambe', 'Zarya']
     }
   },

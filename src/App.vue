@@ -337,6 +337,9 @@ export default {
   },
   created: function () {
     this.renderBackground()
+    if (this.$route.params.battletag) {
+      this.loadHeroData()
+    }
   }
 }
 
