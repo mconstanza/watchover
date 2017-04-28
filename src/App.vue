@@ -97,7 +97,7 @@ export default {
             competitive: {},
             quickplay: {}
           },
-          Mccree: {
+          McCree: {
             name: 'McCree',
             sortName: 'mccree',
             image: 'static/McCree.png',
@@ -201,7 +201,7 @@ export default {
             quickplay: {}
           },
           Winston: {
-            name: 'Harambe',
+            name: 'Winston',
             sortName: 'winston',
             image: 'static/Harambe.png',
             role: 'tank',

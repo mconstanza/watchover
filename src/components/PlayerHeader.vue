@@ -19,6 +19,7 @@
                   <small class='subHeader'> on {{currentBattletag.platform}} ({{currentBattletag.region}})</small>
                 </h3>
               </v-col>
+
             </v-row>
 
 
@@ -27,7 +28,9 @@
         </v-col>
 
         <v-col md6>
-
+          <v-row>
+            <!-- General player stats go here -->
+          </v-row>
         </v-col>
 
       </v-row>

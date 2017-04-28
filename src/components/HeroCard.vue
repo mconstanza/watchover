@@ -286,7 +286,7 @@ export default {
   data () {
     return {
       fullStats: false,
-      noCrit: ['Ana', 'Junkrat', 'Pharah', 'Symmetra', 'Reinhardt', 'Harambe', 'Zarya']
+      noCrit: ['Ana', 'Junkrat', 'Pharah', 'Symmetra', 'Reinhardt', 'Winston', 'Zarya']
     }
   },
   computed: {
@@ -547,7 +547,7 @@ p {
   background-color: #504057;
 }
 
-#Harambe {
+#Winston {
   background-color: #cccdcb;
 }
 

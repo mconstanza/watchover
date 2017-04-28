@@ -1,5 +1,5 @@
 <template>
-  <div className="container">
+  <v-container>
 
     <!-- Title -->
     <v-row id="nameRow">
@@ -13,7 +13,7 @@
     <!-- Title -->
 
 
-  </div className='container'>
+  </v-container>
 </template>
 
 <script>
@@ -77,6 +77,10 @@ h3{
   color: white;
 }
 
+.container {
+  max-width: 100%;
+}
+
 .statHeader {
   font-weight: bold;
   text-decoration: underline;
@@ -99,7 +103,6 @@ h3{
 #heroDetailAvatar {
   border-radius: 10px;
   border: solid 1px white;
-  margin-left: 15px;
 }
 
 .medalColumn {
