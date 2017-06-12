@@ -1,12 +1,13 @@
 <template>
   <div id='appContainer' :style="appStyleObject">
 
-    <v-toolbar id="toolbar">
-      <v-toolbar-title id="brand"><router-link to="/">WatchOver</router-link></v-toolbar-title>
-      <v-toolbar-items>
-        <v-toolbar-item><user-search @clicked ="onClickSearch"/></v-toolbar-item>
-      </v-toolbar-items>
-    </v-toolbar>
+    <b-navbar id="toolbar" toggleable type="inverse">
+      <b-nav-toggle target="nav_collapse"></b-nav-toggle>
+      <b-link class="navbar-brand" id="brand"><router-link to="/">WatchOver</router-link></b-link>
+      <b-collapse is-nav id="nav_collapse">
+        <b-nav is-nav-bar right class="nav navbar-right ml-auto"><user-search @clicked ="onClickSearch"/></b-nav>
+      </b-collapse>
+    </b-navbar>
 
     <main>
       <v-content>
@@ -20,6 +21,8 @@
 import userSearch from './components/user-search.vue'
 import axios from 'axios'
 import router from './router/index.js'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 export default {
   name: 'app',
   components: {
@@ -406,11 +409,14 @@ main {
 
 #brand {
   width: 50px;
+  list-style: none;
 }
 
 #brand a{
   color: #f29a2c;
   font-size: 30px;
+
 }
+
 
 </style>

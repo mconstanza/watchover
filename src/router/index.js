@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import BootstrapVue from 'bootstrap-vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Profile from '@/components/Profile'
@@ -7,7 +7,7 @@ import HeroDetails from '@/components/HeroDetails'
 import HeroCardContainer from '@/components/HeroCardContainer'
 
 Vue.use(Router)
-Vue.use(Vuetify)
+Vue.use(BootstrapVue)
 
 export default new Router({
   routes: [

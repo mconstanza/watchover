@@ -1,62 +1,19 @@
 <template>
-<v-container fluid>
-  <v-row>
-    <v-col lg12 md12 sm12>
-      <v-row>
-        <v-col lg4 md2 sm0>
+<div id ='container' class='container-fluid text-center'>
+    <div id='battletagCard'>
 
-        </v-col>
+      <div>
+        <p>Battletag</p>
+      </div>
 
-        <v-col lg4 md8 sm12 id="battletagCardCol">
-          <v-card id='battletagCard'>
-            <v-row id="battletagCardInputRow">
-
-              <v-col md2>
-                <p>Platform</p>
-                <select class='select' name="Platform" v-model="query.platform">
-                      <option>PC</option>
-                      <option>XBL</option>
-                      <option>PSN</option>
-                    </select>
-              </v-col>
-
-              <v-col md2>
-                <p>Region</p>
-                <select class='select' name="Region" v-model="query.region">
-                      <option>US</option>
-                      <option>EU</option>
-                      <option>CN</option>
-                      <option>KR</option>
-                    </select>
-              </v-col>
-
-              <v-col md8 class='battletagCol'>
-
-                <v-row>
-                  <p>Battletag</p>
-                </v-row>
-
-                <v-row id='inputRow'>
-                  <div id="inputContainer">
-                    <input type="text" @keyup.enter="onClickButton" v-model.trim="query.battletag" name="user-search" label="Search" placeholder="Battletag is case sensitive!"/>
-                    <button id="submit" @click="onClickButton"><div class="buttonText">Onward</div></button>
-                  </div>
-                </v-row>
-
-              </v-col>
-
-            </v-row>
-          </v-card>
-        </v-col>
-
-        <v-col lg4 md2 sm0>
-
-        </v-col>
-
-      </v-row>
-    </v-col>
-  </v-row>
-</v-container>
+      <div id='inputRow'>
+        <div id="inputContainer">
+          <input type="text" @keyup.enter="onClickButton" v-model.trim="query.battletag" name="user-search" label="Search" placeholder="Battletag is case sensitive!"/>
+          <button id="submit" @click="onClickButton"><div class="buttonText">Onward</div></button>
+        </div>
+      </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -103,6 +60,11 @@ a {
   color: #42b983;
 }
 
+#container {
+  display: flex;
+  justify-content: center;
+}
+
 
 /*Input Field*/
 
@@ -110,7 +72,7 @@ input {
   background-color: white;
   border: 1px solid black;
   min-height: 36px;
-  width: 200px;
+  width: 250px;
   padding: 0 25px;
   border-radius: 2px;
   -webkit-transform: skew(-15deg);
@@ -127,16 +89,8 @@ input {
   justify-content: center;
 }
 
-#battletagCardCol {
-  text-align: center;
-  display: flex;
-  flex-basis: 0;
-  align-items: center;
-  justify-content: center;
-}
-
 #battletagCard {
-  margin-top: 75px;
+  margin-top: 100px;
   height: 150px !important;
   min-width: 496px;
   max-width: 496px;
@@ -155,8 +109,8 @@ input {
 }
 
 #battletagCard p {
-  padding-left: 30px;
   color: white;
+  margin-top: 15px;
 }
 
 #battletagCardInputRow {

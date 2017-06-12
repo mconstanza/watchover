@@ -1,61 +1,61 @@
-<template>
+  <template>
     <v-container fluid id="playerHeader">
-      <v-row>
+      <v-layout row>
 
-        <v-col lg6>
+        <v-flex lg6>
 
-            <v-row>
+            <v-layout row>
 
-              <v-col lg2>
+              <v-flex lg2 md2>
                 <div class="headerAvatar">
                   <img class="avatarImage" :src="currentBattletag.profile.stats.competitive.overall_stats.avatar" width="80" height="80">
                 </div>
-              </v-col>
+              </v-flex>
 
               <!-- Header -->
-              <v-col lg10 class="headerNameCol">
+              <v-flex lg10 md10 class="headerNameCol">
 
-                  <v-col lg12>
-                    <v-row>
+                  <v-flex lg12>
+                    <v-layout row>
                       <h3 class='whiteText'>
                         <router-link :to="{ name: 'HeroCardContainer', params: { battletag: this.$route.params.battletag }}">
                           {{currentBattletag.tag}}
                         </router-link>
                       </h3>
-                    </v-row>
-                    <v-row>
-                      <v-col lg12>
-                        <v-row class="levelRow">
+                    </v-layout>
+                    <v-layout row>
+                      <v-flex lg12>
+                        <v-layout row class="levelRow">
                           <p class="playerLevel">{{this.level}}</p>
                           <v-icon v-for="n in this.competitive.overall_stats.prestige" class="prestigeStar">grade</v-icon>
-                        </v-row>
-                        <v-row>
+                        </v-layout>
+                        <v-layout row>
                           <h5 class='subHeader'> on {{currentBattletag.platform}} ({{currentBattletag.region}})</h5>
-                        </v-row>
-                      </v-col>
+                        </v-layout>
+                      </v-flex>
 
-                    </v-row>
-                  </v-col>
+                    </v-layout>
+                  </v-flex>
 
-              </v-col>
+              </v-flex>
               <!-- End Header -->
 
-            </v-row>
+            </v-layout>
 
-        </v-col>
+        </v-flex>
         <!-- General player stats go here -->
-        <v-col lg6>
+        <v-flex lg6>
 
-          <v-row>
+          <v-layout row>
             <img class='rankIcon' :src="this.rankIcon"/>
             <h3>{{this.competitive.overall_stats.comprank}}</h3>
-          </v-row>
-        </v-col>
+          </v-layout>
+        </v-flex>
 
         <!-- <v-col md4>
         </v-col> -->
 
-      </v-row>
+      </v-layout>
     </v-container>
 </template>
 
