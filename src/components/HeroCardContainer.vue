@@ -1,6 +1,6 @@
 <template>
   <div id="CardContainer">
-    <hero-card v-if="!loading" v-for="hero in currentBattletag.heroes" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card>
+    <!-- <hero-card v-if="!loading" v-for="hero in currentBattletag.heroes" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card> -->
   </div>
 </template>
 

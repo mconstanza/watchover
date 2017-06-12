@@ -282,7 +282,7 @@ export default {
       axios.get('https://owapi.net/api/v3/u/' + battletag + '/blob?platform=' + this.$route.params.platform)
 
       .then((response) => {
-        // console.log(response.data)
+        console.log(response.data)
         if (response.data.us) {
           this.currentBattletag.profile.achievements = response.data.us.achievements
           this.currentBattletag.profile.stats = response.data.us.stats

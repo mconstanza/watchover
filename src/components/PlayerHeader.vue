@@ -1,62 +1,56 @@
-  <template>
-    <v-container fluid id="playerHeader">
-      <v-layout row>
+<template>
+  <div class='container-fluid' id="playerHeader">
+    <div class='row'>
 
-        <v-flex lg6>
+      <div class='col-md-6'>
 
-            <v-layout row>
+        <div class='row'>
 
-              <v-flex lg2 md2>
-                <div class="headerAvatar">
-                  <img class="avatarImage" :src="currentBattletag.profile.stats.competitive.overall_stats.avatar" width="80" height="80">
+          <div class='col-md-2'>
+            <div class="headerAvatar">
+              <img class="avatarImage" :src="currentBattletag.profile.stats.competitive.overall_stats.avatar" width="80" height="80">
+            </div>
+          </div>
+
+          <!-- Header -->
+          <div class="headerNameCol col-md-10">
+            <div class='row'>
+
+              <div class='col-md-12'>
+                <div class='row'>
+                  <h3 class='whiteText'>
+                    <router-link :to="{ name: 'HeroCardContainer', params: { battletag: this.$route.params.battletag }}">
+                      {{currentBattletag.tag}}
+                    </router-link>
+                  </h3>
                 </div>
-              </v-flex>
+                <div class='row'>
+                  <div class='col-md-12'>
+                    <div class='row levelRow'>
+                      <p class="playerLevel">{{this.level}}</p>
+                      <i v-for="n in this.competitive.overall_stats.prestige" class='fa fa-star'></i>
+                    </div>
+                    <div class='row'>
+                      <h5 class='subHeader'> on {{currentBattletag.platform}} ({{currentBattletag.region}})</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Header -->
+        </div>
+      </div>
+      <!-- General player stats go here -->
+      <div class='col-md-6'>
 
-              <!-- Header -->
-              <v-flex lg10 md10 class="headerNameCol">
-
-                  <v-flex lg12>
-                    <v-layout row>
-                      <h3 class='whiteText'>
-                        <router-link :to="{ name: 'HeroCardContainer', params: { battletag: this.$route.params.battletag }}">
-                          {{currentBattletag.tag}}
-                        </router-link>
-                      </h3>
-                    </v-layout>
-                    <v-layout row>
-                      <v-flex lg12>
-                        <v-layout row class="levelRow">
-                          <p class="playerLevel">{{this.level}}</p>
-                          <v-icon v-for="n in this.competitive.overall_stats.prestige" class="prestigeStar">grade</v-icon>
-                        </v-layout>
-                        <v-layout row>
-                          <h5 class='subHeader'> on {{currentBattletag.platform}} ({{currentBattletag.region}})</h5>
-                        </v-layout>
-                      </v-flex>
-
-                    </v-layout>
-                  </v-flex>
-
-              </v-flex>
-              <!-- End Header -->
-
-            </v-layout>
-
-        </v-flex>
-        <!-- General player stats go here -->
-        <v-flex lg6>
-
-          <v-layout row>
-            <img class='rankIcon' :src="this.rankIcon"/>
-            <h3>{{this.competitive.overall_stats.comprank}}</h3>
-          </v-layout>
-        </v-flex>
-
-        <!-- <v-col md4>
-        </v-col> -->
-
-      </v-layout>
-    </v-container>
+        <div class='row'>
+          <img class='rankIcon' :src="this.rankIcon"/>
+          <h3>{{this.competitive.overall_stats.comprank}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -158,11 +152,6 @@ p {
   margin-right: 5px;
   line-height: 1em;
   font-size: 20px;
-  padding-top: 5px;
-}
-
-.prestigeStar {
-  color: #faa02e;
 }
 
 .rankIcon {
@@ -175,8 +164,8 @@ p {
   text-align: left;
 }
 
-#playerHeader {
-
+.fa-star {
+  color: #faa02e;
 }
 
 </style>

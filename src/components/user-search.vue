@@ -70,6 +70,7 @@ input {
 #inputContainer .battletagCol {
   text-align: center;
   align-items: center;
+  font-family: Overwatch;
 }
 
 .row {
