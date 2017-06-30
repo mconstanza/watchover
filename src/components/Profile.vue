@@ -3,7 +3,7 @@
 
     <!-- Loading Screen -->
     <div id='loadingDiv' v-if="loading">
-      <v-progress-circular class="goldenrod" v-bind:size="200" indeterminate />
+      LOADING GOES HERE
     </div>
 
     <!-- Player Header -->
@@ -18,8 +18,8 @@
       <!-- Render a red button if the view is quickplay -->
       <button id="switchViewBtn" v-show="viewMode === 'Quickplay'" class="viewToggle quickplay" @click="switchView"><div class="buttonText">{{viewMode}}</div></button>
 
-      <button class="viewToggle activeViewButton" v-if="!this.$route.params.hero" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')"><div class="buttonText">All Heroes</div></button>
-      <button class="viewToggle" v-if="!this.$route.params.hero" v-show="!view.roles.defense || !view.roles.offense || !view.roles.tank || !view.roles.support" @click="switchRoleView('all')"><div class="buttonText">All Heroes</div></button>
+      <button class="viewToggle activeViewButton" v-if="!this.$route.params.hero" v-show="view.roles.defense && view.roles.offense && view.roles.tank && view.roles.support" @click="switchRoleView('all')"><div class="buttonText">All</div></button>
+      <button class="viewToggle" v-if="!this.$route.params.hero" v-show="!view.roles.defense || !view.roles.offense || !view.roles.tank || !view.roles.support" @click="switchRoleView('all')"><div class="buttonText">All</div></button>
 
       <button class="viewToggle activeViewButton" v-if="!this.$route.params.hero" v-show="view.roles.defense && view.roles.offense" @click="switchRoleView('damage')"><div class="buttonText">Damage</div></button>
       <button class="viewToggle" v-if="!this.$route.params.hero" v-show="!view.roles.defense && !view.roles.offense" @click="switchRoleView('damage')"><div class="buttonText">Damage</div></button>

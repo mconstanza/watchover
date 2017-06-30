@@ -48,6 +48,14 @@
           <img class='rankIcon' :src="this.rankIcon"/>
           <h3>{{this.competitive.overall_stats.comprank}}</h3>
         </div>
+        <div class='row'>
+          <i class="fa fa-circle fa-2x" id='goldMedal' aria-hidden="true"></i>
+          <h3>{{this.competitive.game_stats.medals_gold}}</h3>
+          <i class="fa fa-circle fa-2x" id='silverMedal' aria-hidden="true"></i>
+          <h3>{{this.competitive.game_stats.medals_silver}}</h3>
+          <i class="fa fa-circle fa-2x" id='bronzeMedal' aria-hidden="true"></i>
+          <h3>{{this.competitive.game_stats.medals_bronze}}</h3>
+        </div>
       </div>
     </div>
   </div>
@@ -166,6 +174,22 @@ p {
 
 .fa-star {
   color: #faa02e;
+}
+
+#goldMedal {
+  color: #f2dc27;
+}
+
+#silverMedal {
+  color: #cccdcb;
+}
+
+#bronzeMedal {
+  color: #9b3435;
+}
+
+#goldMedal, #silverMedal, #bronzeMedal {
+  text-shadow: 1px 1px #222;
 }
 
 </style>

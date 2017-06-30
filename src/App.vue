@@ -10,9 +10,7 @@
     </b-navbar>
 
     <main>
-      <v-content>
         <router-view :viewMode="view.mode" :toggleLoading="toggleLoading" :loadHeroData="loadHeroData" @clicked ="onClickSearch" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :currentBattletag="currentBattletag" ></router-view>
-      </v-content>
     </main>
   </div>
 </template>
