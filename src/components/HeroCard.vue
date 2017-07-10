@@ -160,7 +160,7 @@
             <div class="col-md-2" v-show="viewMode ==='Competitive'">
               <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
                 <p class="statHeader">Win %</p>
-                <p>{{hero.competitive.general_stats.win_percentage * 100 + " %" || '---'}} </p>
+                <p>{{displayPercent(hero.competitive.general_stats.win_percentage) || '---'}} </p>
               </div>
 
               <div class="card_text" v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
@@ -178,8 +178,168 @@
   <!-- Title -->
   <!-- Card Body -->
   <div class="card-block">
+    <div class="row">
 
+      <div class="col-md-2">
+
+        <div v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+          <p class="statHeader">Eliminations</p>
+          <p class="whiteText">{{hero.competitive.general_stats.eliminations || '---'}}</p>
+        </div>
+
+        <div v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
+          <p class="statHeader">Eliminations</p>
+          <p class="whiteText">---</p>
+        </div>
+
+        <div v-if="viewMode ==='Quickplay' && hero.quickplay.general_stats">
+          <p class="statHeader">Eliminations</p>
+          <p class="whiteText">{{hero.quickplay.general_stats.eliminations || '---'}}</p>
+        </div>
+
+        <div v-if="viewMode ==='Quickplay' && !hero.quickplay.general_stats">
+          <p class="statHeader">Eliminations</p>
+          <p class="whiteText">---</p>
+        </div>
+
+      </div>
+
+        <div class="col-md-2">
+          <div v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+            <p class="statHeader">K/D Ratio</p>
+            <p class="whiteText">{{round(hero.competitive.general_stats.eliminations / hero.competitive.general_stats.deaths) || '---'}}</p>
+          </div>
+
+          <div v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
+            <p class="statHeader">K/D Ratio</p>
+            <p class="whiteText">---</p>
+          </div>
+
+          <div v-if="viewMode ==='Quickplay' && hero.quickplay.general_stats">
+            <p class="statHeader">K/D Ratio</p>
+            <p class="whiteText">{{round(hero.quickplay.general_stats.eliminations / hero.quickplay.general_stats.deaths) || '---'}}</p>
+          </div>
+
+          <div v-if="viewMode ==='Quickplay' && !hero.quickplay.general_stats">
+            <p class="statHeader">K/D Ratio</p>
+            <p class="whiteText">---</p>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+            <p class="statHeader">Accuracy</p>
+            <p class="whiteText">{{displayPercent(hero.competitive.general_stats.weapon_accuracy)  || '---'}}</p>
+          </div>
+
+          <div v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
+            <p class="statHeader">Accuracy</p>
+            <p class="whiteText">---</p>
+          </div>
+
+          <div v-if="viewMode ==='Quickplay' && hero.quickplay.general_stats">
+            <p class="statHeader">Accuracy</p>
+            <p class="whiteText">{{displayPercent(hero.quickplay.general_stats.weapon_accuracy) || '---'}}</p>
+          </div>
+
+          <div v-if="viewMode ==='Quickplay' && !hero.quickplay.general_stats">
+            <p class="statHeader">Accuracy</p>
+            <p class="whiteText">---</p>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
+            <p class="statHeader">Blocked Avg.</p>
+            <p class="whiteText">{{hero.competitive.average_stats.damage_blocked_average || '---'}}</p>
+          </div>
+
+          <div v-if="viewMode ==='Competitive' && !hero.competitive.average_stats">
+            <p class="statHeader">Blocked Avg.</p>
+            <p class="whiteText">---</p>
+          </div>
+
+          <div v-if="viewMode ==='Quickplay' && hero.quickplay.average_stats">
+            <p class="statHeader">Blocked Avg.</p>
+            <p class="whiteText">{{hero.quickplay.average_stats.damage_blocked_average || '---'}}</p>
+          </div>
+
+          <div v-if="viewMode ==='Quickplay' && !hero.quickplay.average_stats">
+            <p class="statHeader">Blocked Avg.</p>
+            <p class="whiteText">---</p>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
+            <p class="statHeader">Healing Avg.</p>
+            <p class="whiteText">{{hero.competitive.average_stats.healing_done_average || '---'}}</p>
+          </div>
+
+          <div v-if="viewMode ==='Competitive' && !hero.competitive.average_stats">
+            <p class="statHeader">Healing Avg.</p>
+            <p class="whiteText">---</p>
+          </div>
+
+          <div v-if="viewMode ==='Quickplay' && hero.quickplay.average_stats">
+            <p class="statHeader">Healing Avg.</p>
+            <p class="whiteText">{{hero.quickplay.average_stats.healing_done_average || '---'}}</p>
+          </div>
+
+          <div v-if="viewMode ==='Quickplay' && !hero.quickplay.average_stats">
+            <p class="statHeader">Healing Avg.</p>
+            <p class="whiteText">---</p>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+            <p class="statHeader">Crit %.</p>
+            <p class="whiteText">{{displayPercent(hero.competitive.general_stats.critical_hit_accuracy) || '---'}}</p>
+          </div>
+
+          <div v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
+            <p class="statHeader">Crit %.</p>
+            <p class="whiteText">---</p>
+          </div>
+
+          <div v-if="viewMode ==='Quickplay' && hero.quickplay.general_stats">
+            <p class="statHeader">Crit %.</p>
+            <p class="whiteText">{{displayPercent(hero.quickplay.general_stats.critical_hit_accuracy) || '---'}}</p>
+          </div>
+
+          <div v-if="viewMode ==='Quickplay' && !hero.quickplay.general_stats">
+            <p class="statHeader">Crit %.</p>
+            <p class="whiteText">---</p>
+          </div>
+        </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <div v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+          <p class="statHeader">Damage Avg.</p>
+          <p class="whiteText">{{round(hero.competitive.general_stats.all_damage_done / hero.competitive.general_stats.games_played ) || '---'}}</p>
+        </div>
+
+        <div v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
+          <p class="statHeader">Damage Avg.</p>
+          <p class="whiteText">---</p>
+        </div>
+
+        <div v-if="viewMode ==='Quickplay' && hero.quickplay.general_stats">
+          <p class="statHeader">Damage / 10 mins</p>
+          <p class="whiteText">{{hero.quickplay.general_stats.all_damage_done_avg_per_10_min || '---'}}</p>
+        </div>
+
+        <div v-if="viewMode ==='Quickplay' && !hero.quickplay.general_stats">
+          <p class="statHeader">Damage / 10 mins</p>
+          <p class="whiteText">---</p>
+        </div>
+      </div>
+    </div>
   </div>
+
   <!-- End Card Body -->
 </div>
 </template>
@@ -257,6 +417,19 @@ export default {
       } else {
         return value
       }
+    },
+    round: function (value) {
+      if (value !== undefined) {
+        return +value.toFixed(2)
+      } else return value
+    },
+    displayPercent: function (value) {
+      if (isNaN(value) === true) {
+        return '---'
+      } else {
+        console.log(this.round(value))
+        return this.round(value * 100) + ' %'
+      }
     }
   }
 }
@@ -282,6 +455,7 @@ li {
 a {
   text-decoration: none;
   color:white;
+  max-height: 104px;
 }
 
 a:hover {
@@ -316,12 +490,8 @@ p {
   padding: 10px;
 }
 
-.card__title {
-  padding: 0;
-}
-
-.card__title span {
-  margin-left: 5px;
+.whiteText {
+  color: white;
 }
 
 .cardTitleRow {
@@ -393,6 +563,10 @@ p {
 
 #Bastion {
   background-color: #b9b9b9;
+}
+
+#Doomfist {
+  background-color: #675a52;
 }
 
 #DVa {

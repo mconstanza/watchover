@@ -65,6 +65,7 @@ input {
   -webkit-transform: skew(-15deg);
   -moz-transform: skew(-15deg);
   -o-transform: skew(-15deg);
+  font-family: 'Overwatch', sans-serif;
 }
 
 #inputContainer .battletagCol {
@@ -108,6 +109,7 @@ button {
   -moz-transform: skew(-15deg);
   -o-transform: skew(-15deg);
   border: 1px solid black;
+  font-family: 'Overwatch', sans-serif;
 }
 
 .buttonText {

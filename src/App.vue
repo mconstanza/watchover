@@ -3,7 +3,7 @@
 
     <b-navbar id="toolbar" toggleable type="inverse">
       <b-nav-toggle target="nav_collapse"></b-nav-toggle>
-      <b-link class="navbar-brand" id="brand"><router-link to="/">WatchOver</router-link></b-link>
+      <b-link class="navbar-brand" id="brand"><router-link to="/">WatchOver.me</router-link></b-link>
       <b-collapse is-nav id="nav_collapse">
         <b-nav is-nav-bar right class="nav navbar-right ml-auto"><user-search @clicked ="onClickSearch"/></b-nav>
       </b-collapse>
@@ -55,6 +55,14 @@ export default {
             sortName: 'bastion',
             image: 'static/Bastion.png',
             role: 'defense',
+            competitive: {},
+            quickplay: {}
+          },
+          Doomfist: {
+            name: 'Doomfist',
+            sortName: 'doomfist',
+            image: 'static/Doomfist.png',
+            role: 'offense',
             competitive: {},
             quickplay: {}
           },
