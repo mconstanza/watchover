@@ -122,6 +122,14 @@ export default {
             competitive: {},
             quickplay: {}
           },
+          Orisa: {
+            name: 'Orisa',
+            sortName: 'orisa',
+            image: 'static/Orisa.png',
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
+          },
           Pharah: {
             name: 'Pharah',
             sortName: 'pharah',
@@ -188,6 +196,7 @@ export default {
           },
           Tracer: {
             name: 'Tracer',
+            sortName: 'tracer',
             image: 'static/Tracer.png',
             role: 'offense',
             competitive: {},

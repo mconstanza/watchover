@@ -6,14 +6,14 @@
 
         <div class='row'>
 
-          <div class='col-md-2'>
+          <div>
             <div class="headerAvatar">
               <img class="avatarImage" :src="currentBattletag.profile.stats.competitive.overall_stats.avatar" width="80" height="80">
             </div>
           </div>
 
           <!-- Header -->
-          <div class="headerNameCol col-md-10">
+          <div class="headerNameCol">
             <div class='row'>
 
               <div class='col-md-12'>
@@ -49,12 +49,18 @@
           <h3>{{this.competitive.overall_stats.comprank}}</h3>
         </div>
         <div class='row'>
-          <i class="fa fa-circle fa-2x" id='goldMedal' aria-hidden="true"></i>
-          <h3>{{this.competitive.game_stats.medals_gold}}</h3>
-          <i class="fa fa-circle fa-2x" id='silverMedal' aria-hidden="true"></i>
-          <h3>{{this.competitive.game_stats.medals_silver}}</h3>
-          <i class="fa fa-circle fa-2x" id='bronzeMedal' aria-hidden="true"></i>
-          <h3>{{this.competitive.game_stats.medals_bronze}}</h3>
+          <div class='medal'>
+            <i class="fa fa-circle fa-2x" id='goldMedal' aria-hidden="true"></i>
+            <h3>{{this.competitive.game_stats.medals_gold}}</h3>
+          </div>
+          <div class='medal'>
+            <i class="fa fa-circle fa-2x" id='silverMedal' aria-hidden="true"></i>
+            <h3>{{this.competitive.game_stats.medals_silver}}</h3>
+          </div>
+          <div class='medal'>
+            <i class="fa fa-circle fa-2x" id='bronzeMedal' aria-hidden="true"></i>
+            <h3>{{this.competitive.game_stats.medals_bronze}}</h3>
+          </div>
         </div>
       </div>
     </div>
@@ -125,6 +131,11 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: #f29a2c;
+  text-decoration: none;
+}
+
 p {
   white-space: nowrap;
   margin: 0;
@@ -141,11 +152,13 @@ p {
 }
 
 .headerAvatar {
-
+  padding-right: 5px;
 }
 
 .avatarImage {
   border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 25px;
 }
 
 .headerName {
@@ -165,7 +178,6 @@ p {
 .rankIcon {
   max-width: 35px;
   max-height: 35px;
-  margin-top: 6px;
 }
 
 .headerNameCol {
@@ -174,6 +186,11 @@ p {
 
 .fa-star {
   color: #faa02e;
+}
+
+.medal {
+  margin-right: 5px;
+  text-align: left;
 }
 
 #goldMedal {

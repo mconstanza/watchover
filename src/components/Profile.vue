@@ -92,7 +92,11 @@ li {
 }
 
 a {
-  color: #42b983;
+  color:white;
+}
+
+a:hover {
+  color: #f29a2c;
 }
 
 #loadingDiv {
@@ -135,6 +139,7 @@ a {
   -o-transform: skew(-15deg);
   border: 1px solid black;
   border-radius: 3px;
+  font-family: 'Overwatch';
 }
 
 .quickplay {

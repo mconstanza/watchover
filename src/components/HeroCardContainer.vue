@@ -1,16 +1,16 @@
 <template>
   <div id="CardContainer">
-    <!-- <hero-card v-if="!loading" v-for="hero in currentBattletag.heroes" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card> -->
+    <hero-card v-if="!loading" v-for="hero in currentBattletag.heroes" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card>
   </div>
 </template>
 
 <script>
 import heroCard from './HeroCard.vue'
 export default {
-  name: 'cardContainer',
+  name: 'HeroCardContainer',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'This is the container that holds the hero cards with basic data for each hero.'
     }
   },
   components: {

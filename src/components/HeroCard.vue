@@ -1,282 +1,187 @@
 <template>
-<v-card class="heroCard">
+<div class="card heroCard">
   <!-- Title -->
   <router-link :to="{ name: 'HeroDetails', params: { hero: heroLink }}">
-    <v-card-row class="cardTitleRow" :id="headerId(hero)">
-      <v-card-title @click="toggleHeroStats">
-        <span class="white--text heroName">{{hero.name}}</span>
-        <v-spacer></v-spacer>
-      </v-card-title>
-    </v-card-row>
+    <div class="card-header cardTitleRow" :id="headerId(hero)">
+      <div class="row">
+
+        <div class="col-md-2 text-left">
+          <!-- Avatar -->
+          <img id="avatar" :src="hero.image"></img>
+          <!-- Avatar -->
+        </div>
+
+        <div id="heroNameCol" class="col-md-1 text-left">
+          <h4 class="card-title heroName text-left">{{hero.name}}</h4>
+          <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+            <p>{{hero.competitive.general_stats.games_played + " game" + plural(hero.competitive.general_stats.games_played) || '---'}}</p>
+          </div>
+        </div>
+
+        <div class="col-md-9">
+
+          <div class="row">
+
+            <div class="col-md-3">
+
+              <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.playtime">
+                <p class="statHeader">Time Played</p>
+
+                <p>{{Math.round(hero.competitive.playtime) + " hour" + plural(hero.competitive.playtime) || '---'}}</p>
+              </div>
+
+              <div class="card_text" v-if="viewMode ==='Competitive' && !hero.competitive.playtime">
+                <p class="statHeader">Time Played</p>
+                <p> 0 hours</p>
+              </div>
+
+              <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+                <p class="statHeader">Time Played</p>
+                <p>{{Math.round(hero.quickplay.playtime) + " hour" + plural(hero.quickplay.playtime) || '---'}}</p>
+              </div>
+
+              <div class="card_text" v-if="viewMode ==='Quickplay'&& !hero.quickplay.general_stats">
+                <p class="statHeader">Time Played</p>
+                <p> 0 hours</p>
+              </div>
+
+            </div>
+            <!-- Medals -->
+            <div class="medalColumn">
+              <div class="card_text medalText" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+                <i class="fa fa-circle statHeader" id='goldMedal' aria-hidden="true"></i>
+                <p>{{hero.competitive.general_stats.medals_gold}}</p>
+              </div>
+
+              <div class="card_text medalText" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+                <i class="fa fa-circle statHeader" id='goldMedal' aria-hidden="true"></i>
+                <p>{{hero.quickplay.general_stats.medals_gold}}</p>
+              </div>
+
+              <div class="card_text medalText" v-if="viewMode ==='Competitive'&& !hero.competitive.general_stats">
+                <i class="fa fa-circle statHeader" id='goldMedal' aria-hidden="true"></i>
+                <p>---</p>
+              </div>
+
+              <div class="card_text medalText" v-if="viewMode ==='Quickplay'&& !hero.quickplay.general_stats">
+                <i class="fa fa-circle statHeader" id='goldMedal' aria-hidden="true"></i>
+                <p>---</p>
+              </div>
+            </div>
+
+            <div class="medalColumn">
+              <div class="card_text medalText" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+                <i class="fa fa-circle statHeader" id='silverMedal' aria-hidden="true"></i>
+                <p>{{hero.competitive.general_stats.medals_silver}}</p>
+              </div>
+
+              <div class="card_text medalText" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+                <i class="fa fa-circle statHeader" id='silverMedal' aria-hidden="true"></i>
+                <p>{{hero.quickplay.general_stats.medals_silver}}</p>
+              </div>
+            </div>
+
+            <div class="card_text medalText" v-if="viewMode ==='Competitive'&& !hero.competitive.general_stats">
+              <i class="fa fa-circle statHeader" id='silverMedal' aria-hidden="true"></i>
+              <p>---</p>
+            </div>
+
+            <div class="card_text medalText" v-if="viewMode ==='Quickplay'&& !hero.quickplay.general_stats">
+              <i class="fa fa-circle statHeader" id='silverMedal' aria-hidden="true"></i>
+              <p>---</p>
+            </div>
+
+            <div class="medalColumn">
+              <div class="card_text medalText" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+                <i class="fa fa-circle statHeader" id='bronzeMedal' aria-hidden="true"></i>
+                <p>{{hero.competitive.general_stats.medals_bronze}}</p>
+              </div>
+
+              <div class="card_text medalText" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+                <i class="fa fa-circle statHeader" id='bronzeMedal' aria-hidden="true"></i>
+                <p>{{hero.quickplay.general_stats.medals_bronze}}</p>
+              </div>
+            </div>
+
+            <div class="card_text medalText" v-if="viewMode ==='Competitive'&& !hero.competitive.general_stats">
+              <i class="fa fa-circle statHeader" id='bronzeMedal' aria-hidden="true"></i>
+              <p>---</p>
+            </div>
+
+            <div class="card_text medalText" v-if="viewMode ==='Quickplay'&& !hero.quickplay.general_stats">
+              <i class="fa fa-circle statHeader" id='bronzeMedal' aria-hidden="true"></i>
+              <p>---</p>
+            </div>
+            <!-- End Medals -->
+
+            <div class="col-md-2">
+              <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+                <p class="statHeader">Cards</p>
+                <p>{{hero.competitive.general_stats.cards || '---'}} </p>
+              </div>
+              <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+                <p class="statHeader">Cards</p>
+                <p>{{hero.quickplay.general_stats.cards || '---'}} </p>
+              </div>
+
+              <div class="card_text" v-if="viewMode ==='Competitive'&& !hero.competitive.general_stats">
+                <p class="statHeader">Cards</p>
+                <p>---</p>
+              </div>
+
+              <div class="card_text" v-if="viewMode ==='Quickplay'&& !hero.quickplay.general_stats">
+                <p class="statHeader">Cards</p>
+                <p>---</p>
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+                <p class="statHeader">Win/Loss</p>
+                <p>{{checkUndefined(hero.competitive.general_stats.games_won) + " - " + checkUndefined(hero.competitive.general_stats.games_lost) || '---'}} </p>
+              </div>
+
+              <div class="card_text" v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
+                <p class="statHeader">Win/Loss</p>
+                <p>---</p>
+              </div>
+
+              <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+                <p class="statHeader">Games Won</p>
+                <p>{{hero.quickplay.general_stats.games_won || '---'}} </p>
+              </div>
+
+              <div class="card_text" v-if="viewMode ==='Quickplay'&& !hero.quickplay.general_stats">
+                <p class="statHeader">Games Won</p>
+                <p>---</p>
+              </div>
+            </div>
+
+            <div class="col-md-2" v-show="viewMode ==='Competitive'">
+              <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+                <p class="statHeader">Win %</p>
+                <p>{{hero.competitive.general_stats.win_percentage * 100 + " %" || '---'}} </p>
+              </div>
+
+              <div class="card_text" v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
+                <p class="statHeader">Win %</p>
+                <p>0%</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
   </router-link>
   <!-- Title -->
+  <!-- Card Body -->
+  <div class="card-block">
 
-  <!-- Content -->
-  <v-card-row>
-    <!-- Avatar -->
-    <v-card-column id="avatar">
-      <v-card-row :img="hero.image"></v-card-row>
-    </v-card-column>
-    <!-- Avatar -->
-
-    <v-card-column>
-
-      <v-card-row>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Time Played</strong></p>
-
-            <p>{{hero.competitive.playtime || '---'}} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Time Played</strong></p>
-            <p>{{hero.quickplay.TimePlayed || '---'}}</p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Games Won</strong></p>
-            <p>{{hero.competitive.GamesWon || '---'}} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Games Won</strong></p>
-            <p>{{hero.quickplay.GamesWon || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column v-show="viewMode ==='Competitive'">
-          <v-card-text class="card_text">
-            <p><strong>Games Lost</strong></p>
-            <p>{{hero.competitive.GamesLost || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column v-show="viewMode ==='Competitive'">
-          <v-card-text class="card_text">
-            <p><strong>Win %</strong></p>
-            <p>{{hero.competitive.WinPercentage || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Time on Fire</strong></p>
-            <p>{{hero.competitive.TimeSpentonFire || '---'}} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Time on Fire</strong></p>
-            <p>{{hero.quickplay.TimeSpentonFire || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Avg Fire</strong></p>
-            <p>{{hero.competitive['TimeSpentonFire-Average'] || '---'}} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Avg Fire</strong></p>
-            <p>{{hero.quickplay['TimeSpentonFire-Average'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Most Fire</strong></p>
-            <p>{{hero.competitive['TimeSpentonFire-MostinGame'] || '---'}} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Most Fire</strong></p>
-            <p>{{hero.quickplay['TimeSpentonFire-MostinGame'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-
-        <!-- Medals -->
-
-        <v-card-column class="medalColumn">
-          <v-card-text class="card_text medalText" v-if="viewMode ==='Competitive'">
-            <v-icon class="goldMedal">fiber_manual_record</v-icon>
-            <p>{{hero.competitive['Medals-Gold'] || '---'}} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text medalText" v-if="viewMode ==='Quickplay'">
-            <v-icon class="goldMedal">fiber_manual_record</v-icon>
-            <p>{{hero.quickplay['Medals-Gold'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column class="medalColumn">
-          <v-card-text class="card_text medalText" v-if="viewMode ==='Competitive'">
-            <v-icon class="silverMedal">fiber_manual_record</v-icon>
-            <p>{{hero.competitive['Medals-Silver'] || '---'}} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text medalText" v-if="viewMode ==='Quickplay'">
-            <v-icon class="silverMedal">fiber_manual_record</v-icon>
-            <p>{{hero.quickplay['Medals-Silver'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column class="medalColumn">
-          <v-card-text class="card_text medalText" v-if="viewMode ==='Competitive'">
-            <v-icon class="bronzeMedal">fiber_manual_record</v-icon>
-            <p>{{hero.competitive['Medals-Bronze'] || '---'}} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text medalText" v-if="viewMode ==='Quickplay'">
-            <v-icon class="bronzeMedal">fiber_manual_record</v-icon>
-            <p>{{hero.quickplay['Medals-Bronze'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <!-- End Medals -->
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Cards</strong></p>
-            <p>{{hero.competitive.Cards || hero.competitive.Card || '---'}} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Cards</strong></p>
-            <p>{{hero.quickplay.Cards || hero.quickplay.Card || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Elims</strong></p>
-            <p>{{hero.competitive.Eliminations || hero.competitive.Elimination || '---'}} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Elims</strong></p>
-            <p>{{hero.quickplay.Eliminations || hero.quickplay.Elimination || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Avg Elims</strong></p>
-            <p>{{hero.competitive['Eliminations-Average'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Avg Elims</strong></p>
-            <p>{{hero.quickplay['Eliminations-Average'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Deaths</strong></p>
-            <p>{{hero.competitive.Deaths || hero.competitive.Death || '---'}} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Deaths</strong></p>
-            <p>{{hero.quickplay.Deaths || hero.quickplay.Death || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Avg Deaths</strong></p>
-            <p>{{hero.competitive['Deaths-Average'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Avg Deaths</strong></p>
-            <p>{{hero.quickplay['Deaths-Average'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Elims/Life</strong></p>
-            <p>{{hero.competitive['EliminationsperLife'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Elims/Life</strong></p>
-            <p>{{hero.quickplay['EliminationsperLife'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Best Streak</strong></p>
-            <p>{{hero.competitive['KillStreak-Best'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Best Streak</strong></p>
-            <p>{{hero.quickplay['KillStreak-Best'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-if="viewMode ==='Competitive'">
-            <p><strong>Weapon Accuracy</strong></p>
-            <p>{{hero.competitive['WeaponAccuracy'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-if="viewMode ==='Quickplay'">
-            <p><strong>Weapon Accuracy</strong></p>
-            <p>{{hero.quickplay['WeaponAccuracy'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
-            <p><strong>Damage Done</strong></p>
-            <p>{{hero.competitive['DamageDone'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
-            <p><strong>Damage Done</strong></p>
-            <p>{{hero.quickplay['DamageDone'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
-            <p><strong>Avg Damage</strong></p>
-            <p>{{hero.competitive['DamageDone-Average'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
-            <p><strong>Avg Damage</strong></p>
-            <p>{{hero.quickplay['DamageDone-Average'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-        <v-card-column>
-          <v-card-text class="card_text" v-show="viewMode ==='Competitive'">
-            <p><strong>Most Damage</strong></p>
-            <p>{{hero.competitive['DamageDone-MostinGame'] || '---' }} </p>
-          </v-card-text>
-
-          <v-card-text class="card_text" v-show="viewMode ==='Quickplay'">
-            <p><strong>Most Damage</strong></p>
-            <p>{{hero.quickplay['DamageDone-MostinGame'] || '---'}} </p>
-          </v-card-text>
-        </v-card-column>
-
-      </v-card-row>
-
-    </v-card-column>
-
-  </v-card-row>
-</v-card>
+  </div>
+  <!-- End Card Body -->
+</div>
 </template>
 
 <script>
@@ -338,6 +243,20 @@ export default {
         default:
           return hero.name
       }
+    },
+    plural: function (value) {
+      if (value >= 2 || value <= 0) {
+        return 's'
+      } else {
+        return ''
+      }
+    },
+    checkUndefined: function (value) {
+      if (value === undefined) {
+        return 0
+      } else {
+        return value
+      }
     }
   }
 }
@@ -362,6 +281,12 @@ li {
 
 a {
   text-decoration: none;
+  color:white;
+}
+
+a:hover {
+  text-decoration: none;
+  color:white;
 }
 
 p {
@@ -378,6 +303,7 @@ p {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   text-shadow: -1px 1px 20px black;
   max-width: 725px;
+  width: 725px;
   margin: 0 10px 10px 10px;
 }
 
@@ -399,12 +325,18 @@ p {
 }
 
 .cardTitleRow {
-  height: 45px;
+  /*height: 45px;*/
   border: 1px solid black;
 }
 
 .heroName {
-  text-shadow: -1px 1px 10px black
+  padding-top: 10px;
+  text-shadow: -1px 1px 10px black;
+  margin:0;
+}
+
+#heroNameCol{
+  padding: 0;
 }
 
 .icon {
@@ -412,11 +344,9 @@ p {
 }
 
 .statHeader {
-  font-weight: bold;
-  text-decoration: underline;
-  justify-content: center;
   margin: 0;
   color: white;
+  padding-top: 10px;
 }
 
 .statHeader p {
@@ -429,8 +359,6 @@ p {
   min-height: 80px;
   border-radius: 10px;
   border: 2px solid white;
-  margin-left: 5px;
-  margin-top: 5px;
 }
 
 .medalColumn {
@@ -442,16 +370,16 @@ p {
   padding-right: 0;
 }
 
-.goldMedal {
-  color: #eacf00;
+#goldMedal {
+  color: #f2dc27;
 }
 
-.silverMedal {
-  color: #d4d8d8;
+#silverMedal {
+  color: #cccdcb;
 }
 
-.bronzeMedal {
-  color: #9b6c00;
+#bronzeMedal {
+  color: #9b3435;
 }
 
 .medalColumn {
@@ -501,6 +429,14 @@ p {
 
 #Mercy {
   background-color: #fefe4e;
+}
+
+#Orisa {
+  background: #f2dc27; /* Old browsers */
+  background: -moz-linear-gradient(left,#f2dc27  0%, #3ae80d 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #f2dc27  0%,#3ae80d 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #f2dc27 0%,#3ae80d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2dc27', endColorstr='#3ae80d',GradientType=1 ); /* IE6-9 */
 }
 
 #Pharah {
@@ -560,7 +496,7 @@ p {
 }
 
 .card .cardTitleRow:hover {
-  -webkit-filter: brightness(120%);
+  -webkit-filter: brightness(105%);
 }
 
 </style>
