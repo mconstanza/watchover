@@ -1,5 +1,11 @@
 <template>
 <div id ='container' class='container-fluid text-center'>
+
+  <div id='sampleHero'>
+    <h3>Sample Player</h3>
+    <router-link :to="'/us/pc/Nessfalco-1145/'">Nessfalco#1145</router-link>
+  </div>
+
     <div id='battletagCard'>
 
       <div>
@@ -13,6 +19,8 @@
         </div>
       </div>
     </div>
+
+
 </div>
 </template>
 
@@ -63,6 +71,8 @@ a {
 #container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  font-family: 'Overwatch', sans-serif;
 }
 
 
@@ -78,6 +88,7 @@ input {
   -webkit-transform: skew(-15deg);
   -moz-transform: skew(-15deg);
   -o-transform: skew(-15deg);
+  font-family: 'Overwatch', sans-serif;
 }
 
 #inputContainer .battletagCol {
@@ -106,6 +117,7 @@ input {
   background: -webkit-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  font-family: 'Overwatch', sans-serif;
 }
 
 #battletagCard p {
@@ -164,6 +176,7 @@ button {
   -moz-transform: skew(-15deg);
   -o-transform: skew(-15deg);
   color:white;
+  font-family: 'Overwatch', sans-serif;
 }
 
 .buttonText {

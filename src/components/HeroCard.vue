@@ -47,7 +47,7 @@
 
             </div>
             <!-- Medals -->
-            <div class="medalColumn">
+            <div class="medalColumn col-md-1">
               <div class="card_text medalText" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
                 <i class="fa fa-circle statHeader" id='goldMedal' aria-hidden="true"></i>
                 <p>{{hero.competitive.general_stats.medals_gold}}</p>
@@ -69,7 +69,7 @@
               </div>
             </div>
 
-            <div class="medalColumn">
+            <div class="medalColumn col-md-1">
               <div class="card_text medalText" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
                 <i class="fa fa-circle statHeader" id='silverMedal' aria-hidden="true"></i>
                 <p>{{hero.competitive.general_stats.medals_silver}}</p>
@@ -79,19 +79,21 @@
                 <i class="fa fa-circle statHeader" id='silverMedal' aria-hidden="true"></i>
                 <p>{{hero.quickplay.general_stats.medals_silver}}</p>
               </div>
+
+
+              <div class="card_text medalText" v-if="viewMode ==='Competitive'&& !hero.competitive.general_stats">
+                <i class="fa fa-circle statHeader" id='silverMedal' aria-hidden="true"></i>
+                <p>---</p>
+              </div>
+
+
+              <div class="card_text medalText" v-if="viewMode ==='Quickplay'&& !hero.quickplay.general_stats">
+                <i class="fa fa-circle statHeader" id='silverMedal' aria-hidden="true"></i>
+                <p>---</p>
+              </div>
             </div>
 
-            <div class="card_text medalText" v-if="viewMode ==='Competitive'&& !hero.competitive.general_stats">
-              <i class="fa fa-circle statHeader" id='silverMedal' aria-hidden="true"></i>
-              <p>---</p>
-            </div>
-
-            <div class="card_text medalText" v-if="viewMode ==='Quickplay'&& !hero.quickplay.general_stats">
-              <i class="fa fa-circle statHeader" id='silverMedal' aria-hidden="true"></i>
-              <p>---</p>
-            </div>
-
-            <div class="medalColumn">
+            <div class="medalColumn col-md-1">
               <div class="card_text medalText" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
                 <i class="fa fa-circle statHeader" id='bronzeMedal' aria-hidden="true"></i>
                 <p>{{hero.competitive.general_stats.medals_bronze}}</p>
@@ -101,16 +103,17 @@
                 <i class="fa fa-circle statHeader" id='bronzeMedal' aria-hidden="true"></i>
                 <p>{{hero.quickplay.general_stats.medals_bronze}}</p>
               </div>
-            </div>
 
-            <div class="card_text medalText" v-if="viewMode ==='Competitive'&& !hero.competitive.general_stats">
-              <i class="fa fa-circle statHeader" id='bronzeMedal' aria-hidden="true"></i>
-              <p>---</p>
-            </div>
 
-            <div class="card_text medalText" v-if="viewMode ==='Quickplay'&& !hero.quickplay.general_stats">
-              <i class="fa fa-circle statHeader" id='bronzeMedal' aria-hidden="true"></i>
-              <p>---</p>
+              <div class="card_text medalText" v-if="viewMode ==='Competitive'&& !hero.competitive.general_stats">
+                <i class="fa fa-circle statHeader" id='bronzeMedal' aria-hidden="true"></i>
+                <p>---</p>
+              </div>
+
+              <div class="card_text medalText" v-if="viewMode ==='Quickplay'&& !hero.quickplay.general_stats">
+                <i class="fa fa-circle statHeader" id='bronzeMedal' aria-hidden="true"></i>
+                <p>---</p>
+              </div>
             </div>
             <!-- End Medals -->
 
@@ -341,7 +344,7 @@
       <div class="col-md-2">
         <div v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
           <p class="statHeader">Obj. Kills Avg.</p>
-          <p class="whiteText">{{hero.competitive.general_stats.objective_kills_avg_pet_10_min || '---'}}</p>
+          <p class="whiteText">{{averageStat(hero, viewMode, 'general_stats', 'objective_kills') || '---'}}</p>
         </div>
 
         <div v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
@@ -350,15 +353,39 @@
         </div>
 
         <div v-if="viewMode ==='Quickplay' && hero.quickplay.general_stats">
-          <p class="statHeader">Obj. Kills Avg.</p>
-          <p class="whiteText">{{hero.quickplay.general_stats.objective_kills_avg_pet_10_min || '---'}}</p>
+          <p class="statHeader">Obj. Kills / min</p>
+          <p class="whiteText">{{statPerMin(hero, viewMode, 'general_stats', 'objective_kills') || '---'}}</p>
         </div>
 
         <div v-if="viewMode ==='Quickplay' && !hero.quickplay.general_stats">
-          <p class="statHeader">Obj. Kills Avg.</p>
+          <p class="statHeader">Obj. Kills / min</p>
           <p class="whiteText">---</p>
         </div>
       </div>
+
+        <!-- OBJECTIVE TIME -->
+      <div class="col-md-2">
+        <div v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+          <p class="statHeader">Obj. Time Avg.</p>
+          <p class="whiteText">{{averageStat(hero, viewMode, 'general_stats', 'objective_time') * 60 || '---'}}</p> <!-- in minutes -->
+        </div>
+
+        <div v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
+          <p class="statHeader">Obj. Time Avg.</p>
+          <p class="whiteText">---</p>
+        </div>
+
+        <div v-if="viewMode ==='Quickplay' && hero.quickplay.general_stats">
+          <p class="statHeader">Obj. Time</p>
+          <p class="whiteText">{{hero.quickplay.general_stats.objective_time * 60 || '---'}}</p> <!-- in minutes -->
+        </div>
+
+        <div v-if="viewMode ==='Quickplay' && !hero.quickplay.general_stats">
+          <p class="statHeader">Obj. Time</p>
+          <p class="whiteText">---</p>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -452,10 +479,21 @@ export default {
         return this.round(value * 100) + ' %'
       }
     },
-    averageStat: function (hero, mode, location = 'general_stats', stat) {
+    averageStat: function (hero, mode, location, stat) {
       var playmode = mode.toLowerCase()
-      if (hero[playmode][location][stat] > 0) {
+      if (hero[playmode][location][stat]) {
         let roundedStat = this.round(hero[playmode][location][stat] / hero[playmode].general_stats.games_played)
+        if (roundedStat !== Infinity) {
+          return roundedStat
+        } else {
+          return '---'
+        }
+      }
+    },
+    statPerMin: function (hero, mode, location, stat) {
+      var playmode = mode.toLowerCase()
+      if (hero[playmode][location][stat] !== undefined) {
+        let roundedStat = this.round(hero[playmode][location][stat] / hero[playmode].general_stats.time_played / 60) // converting hours to minutes
         if (roundedStat !== Infinity) {
           return roundedStat
         } else {
