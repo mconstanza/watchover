@@ -319,7 +319,7 @@
       <div class="col-md-2">
         <div v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
           <p class="statHeader">Damage Avg.</p>
-          <p class="whiteText">{{round(hero.competitive.general_stats.all_damage_done / hero.competitive.general_stats.games_played ) || '---'}}</p>
+          <p class="whiteText">{{averageStat(hero, viewMode, 'general_stats', 'all_damage_done') || '---'}}</p>
         </div>
 
         <div v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
@@ -334,6 +334,28 @@
 
         <div v-if="viewMode ==='Quickplay' && !hero.quickplay.general_stats">
           <p class="statHeader">Damage / 10 mins</p>
+          <p class="whiteText">---</p>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+          <p class="statHeader">Obj. Kills Avg.</p>
+          <p class="whiteText">{{hero.competitive.general_stats.objective_kills_avg_pet_10_min || '---'}}</p>
+        </div>
+
+        <div v-if="viewMode ==='Competitive' && !hero.competitive.general_stats">
+          <p class="statHeader">Obj. Kills Avg.</p>
+          <p class="whiteText">---</p>
+        </div>
+
+        <div v-if="viewMode ==='Quickplay' && hero.quickplay.general_stats">
+          <p class="statHeader">Obj. Kills Avg.</p>
+          <p class="whiteText">{{hero.quickplay.general_stats.objective_kills_avg_pet_10_min || '---'}}</p>
+        </div>
+
+        <div v-if="viewMode ==='Quickplay' && !hero.quickplay.general_stats">
+          <p class="statHeader">Obj. Kills Avg.</p>
           <p class="whiteText">---</p>
         </div>
       </div>
@@ -419,7 +441,7 @@ export default {
       }
     },
     round: function (value) {
-      if (value !== undefined) {
+      if (value !== undefined && value !== 'Infinity') {
         return +value.toFixed(2)
       } else return value
     },
@@ -427,8 +449,18 @@ export default {
       if (isNaN(value) === true) {
         return '---'
       } else {
-        console.log(this.round(value))
         return this.round(value * 100) + ' %'
+      }
+    },
+    averageStat: function (hero, mode, location = 'general_stats', stat) {
+      var playmode = mode.toLowerCase()
+      if (hero[playmode][location][stat] > 0) {
+        let roundedStat = this.round(hero[playmode][location][stat] / hero[playmode].general_stats.games_played)
+        if (roundedStat !== Infinity) {
+          return roundedStat
+        } else {
+          return '---'
+        }
       }
     }
   }
