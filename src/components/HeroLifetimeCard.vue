@@ -1,21 +1,22 @@
 <template>
-  <div id="CardContainer">
-    <!-- Load hero card -->
-    <hero-card v-if="!loading" :hero="hero" :viewMode="viewMode" :key="hero.name"></hero-card>
-    <hero-lifetime-card v-if="!loading" :hero="hero" :viewMode="viewMode" :key="hero.name"></hero-lifetime-card>
+<div class="card heroLifetimeCard">
+  <div class="card-title">
+    <h3 class="whiteText">{{hero.name + ' Lifetime Stats'}}</h3>
   </div>
+  <div class="card-block">
+
+  </div>
+</div>
+
 </template>
 
 <script>
-import heroCard from './HeroCard.vue'
-import heroLifetimeCard from './HeroLifetimeCard.vue'
 export default {
-  name: 'hero-details',
+  name: 'hero-lifetime-card',
   components: {
-    heroCard,
-    heroLifetimeCard
+
   },
-  props: ['viewMode', 'currentBattletag', 'loadHeroData', 'loading'],
+  props: ['viewMode', 'currentBattletag', 'loadHeroData', 'loading', 'hero'],
   data () {
     return {
       hero: this.currentBattletag.heroes[this.$route.params.hero]
@@ -86,10 +87,8 @@ h3{
   color: white;
 }
 
-#CardContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.container {
+  max-width: 100%;
 }
 
 .statHeader {
@@ -100,7 +99,7 @@ h3{
   color: white;
 }
 
-.heroDetailsCard {
+.heroLifetimeCard {
   text-align: center;
   background: black;
   background: #060606; /* Old browsers */
@@ -109,8 +108,8 @@ h3{
   background: linear-gradient(to right, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   text-shadow: -1px 1px 20px black;
-  max-width: 95%;
-  width: 95%;
+  max-width: 725px;
+  width: 725px;
   margin: 0 10px 10px 10px;
 }
 

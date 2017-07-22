@@ -399,8 +399,6 @@ export default {
   props: ['hero', 'viewMode', 'quickplay'],
   data () {
     return {
-      fullStats: false,
-      noCrit: ['Ana', 'Junkrat', 'Pharah', 'Symmetra', 'Reinhardt', 'Winston', 'Zarya']
     }
   },
   computed: {
