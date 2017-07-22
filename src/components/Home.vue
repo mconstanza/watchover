@@ -1,62 +1,27 @@
 <template>
-<v-container fluid>
-  <v-row>
-    <v-col lg12 md12 sm12>
-      <v-row>
-        <v-col lg4 md2 sm0>
+<div id ='container' class='container-fluid text-center'>
 
-        </v-col>
+  <div id='sampleHero'>
+    <h3>Sample Player</h3>
+    <router-link :to="'/us/pc/Nessfalco-1145/'">Nessfalco#1145</router-link>
+  </div>
 
-        <v-col lg4 md8 sm12 id="battletagCardCol">
-          <v-card id='battletagCard'>
-            <v-row id="battletagCardInputRow">
+    <div id='battletagCard'>
 
-              <v-col md2>
-                <p>Platform</p>
-                <select class='select' name="Platform" v-model="query.platform">
-                      <option>PC</option>
-                      <option>XBL</option>
-                      <option>PSN</option>
-                    </select>
-              </v-col>
+      <div>
+        <p>Battletag</p>
+      </div>
 
-              <v-col md2>
-                <p>Region</p>
-                <select class='select' name="Region" v-model="query.region">
-                      <option>US</option>
-                      <option>EU</option>
-                      <option>CN</option>
-                      <option>KR</option>
-                    </select>
-              </v-col>
+      <div id='inputRow'>
+        <div id="inputContainer">
+          <input type="text" @keyup.enter="onClickButton" v-model.trim="query.battletag" name="user-search" label="Search" placeholder="Battletag is case sensitive!"/>
+          <button id="submit" @click="onClickButton"><div class="buttonText">Onward</div></button>
+        </div>
+      </div>
+    </div>
 
-              <v-col md8 class='battletagCol'>
 
-                <v-row>
-                  <p>Battletag</p>
-                </v-row>
-
-                <v-row id='inputRow'>
-                  <div id="inputContainer">
-                    <input type="text" @keyup.enter="onClickButton" v-model.trim="query.battletag" name="user-search" label="Search" placeholder="Battletag is case sensitive!"/>
-                    <button id="submit" @click="onClickButton"><div class="buttonText">Onward</div></button>
-                  </div>
-                </v-row>
-
-              </v-col>
-
-            </v-row>
-          </v-card>
-        </v-col>
-
-        <v-col lg4 md2 sm0>
-
-        </v-col>
-
-      </v-row>
-    </v-col>
-  </v-row>
-</v-container>
+</div>
 </template>
 
 <script>
@@ -103,6 +68,13 @@ a {
   color: #42b983;
 }
 
+#container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: 'Overwatch', sans-serif;
+}
+
 
 /*Input Field*/
 
@@ -110,12 +82,13 @@ input {
   background-color: white;
   border: 1px solid black;
   min-height: 36px;
-  width: 200px;
+  width: 250px;
   padding: 0 25px;
   border-radius: 2px;
   -webkit-transform: skew(-15deg);
   -moz-transform: skew(-15deg);
   -o-transform: skew(-15deg);
+  font-family: 'Overwatch', sans-serif;
 }
 
 #inputContainer .battletagCol {
@@ -127,16 +100,8 @@ input {
   justify-content: center;
 }
 
-#battletagCardCol {
-  text-align: center;
-  display: flex;
-  flex-basis: 0;
-  align-items: center;
-  justify-content: center;
-}
-
 #battletagCard {
-  margin-top: 75px;
+  margin-top: 100px;
   height: 150px !important;
   min-width: 496px;
   max-width: 496px;
@@ -152,11 +117,12 @@ input {
   background: -webkit-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  font-family: 'Overwatch', sans-serif;
 }
 
 #battletagCard p {
-  padding-left: 30px;
   color: white;
+  margin-top: 15px;
 }
 
 #battletagCardInputRow {
@@ -210,6 +176,7 @@ button {
   -moz-transform: skew(-15deg);
   -o-transform: skew(-15deg);
   color:white;
+  font-family: 'Overwatch', sans-serif;
 }
 
 .buttonText {

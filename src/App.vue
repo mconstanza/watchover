@@ -1,17 +1,16 @@
 <template>
   <div id='appContainer' :style="appStyleObject">
 
-    <v-toolbar id="toolbar">
-      <v-toolbar-title id="brand"><router-link to="/">WatchOver</router-link></v-toolbar-title>
-      <v-toolbar-items>
-        <v-toolbar-item><user-search @clicked ="onClickSearch"/></v-toolbar-item>
-      </v-toolbar-items>
-    </v-toolbar>
+    <b-navbar id="toolbar" toggleable type="inverse">
+      <b-nav-toggle target="nav_collapse"></b-nav-toggle>
+      <b-link class="navbar-brand" id="brand"><router-link to="/">WatchOver.me</router-link></b-link>
+      <b-collapse is-nav id="nav_collapse">
+        <b-nav is-nav-bar right class="nav navbar-right ml-auto"><user-search @clicked ="onClickSearch"/></b-nav>
+      </b-collapse>
+    </b-navbar>
 
     <main>
-      <v-content>
-        <router-view :viewMode="view.mode" :toggleLoading="toggleLoading" :loadHeroData="loadHeroData" @clicked ="onClickSearch" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :current-battletag="currentBattletag" ></router-view>
-      </v-content>
+        <router-view :viewMode="view.mode" :toggleLoading="toggleLoading" :loadHeroData="loadHeroData" @clicked ="onClickSearch" :loading="loading" :view="view" @switchView="switchView" @switchRoleView="switchRoleView" :currentBattletag="currentBattletag" ></router-view>
     </main>
   </div>
 </template>
@@ -20,6 +19,8 @@
 import userSearch from './components/user-search.vue'
 import axios from 'axios'
 import router from './router/index.js'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 export default {
   name: 'app',
   components: {
@@ -31,132 +32,215 @@ export default {
       appStyleObject: {
         backgroundImage: '/static/Dorado_004.jpg'
       },
-      heroQueryString: 'Ana%2CBastion%2CDVa%2CGenji%2CHanzo%2CJunkrat%2CLucio%2CMccree%2CMei%2CMercy%2CPharah%2CReaper%2CReinhardt%2CRoadhog%2CSoldier76%2CSombra%2CSymmetra%2CTracer%2CTorbjoern%2CWidowmaker%2CWinston%2CZarya%2CZenyatta',
       currentBattletag: {
         loaded: false,
         tag: '',
         platform: 'pc',
         region: 'us',
-        profile: {},
-        combinedStats: {
-          quick: [],
-          competitive: []
+        profile: {
+          achievements: {},
+          stats: {}
         },
-        heroStats: {
+        heroes: {
           Ana: {
             name: 'Ana',
+            sortName: 'ana',
             image: 'static/Ana.png',
-            role: 'support'
+            role: 'support',
+            competitive: {},
+            quickplay: {}
           },
           Bastion: {
             name: 'Bastion',
+            sortName: 'bastion',
             image: 'static/Bastion.png',
-            role: 'defense'
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
+          },
+          Doomfist: {
+            name: 'Doomfist',
+            sortName: 'doomfist',
+            image: 'static/Doomfist.png',
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           DVa: {
             name: 'D.Va',
+            sortName: 'dva',
             image: 'static/Dva.png',
-            role: 'tank'
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
           },
           Genji: {
             name: 'Genji',
+            sortName: 'genji',
             image: 'static/Genji.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Hanzo: {
             name: 'Hanzo',
+            sortName: 'hanzo',
             image: 'static/Hanzo.png',
-            role: 'defense'
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
           },
           Junkrat: {
             name: 'Junkrat',
+            sortName: 'junkrat',
             image: 'static/Junkrat.png',
-            role: 'defense'
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
           },
           Lucio: {
             name: 'Lúcio',
+            sortName: 'lucio',
             image: 'static/Lucio.png',
-            role: 'support'
+            role: 'support',
+            competitive: {},
+            quickplay: {}
           },
-          Mccree: {
+          McCree: {
             name: 'McCree',
+            sortName: 'mccree',
             image: 'static/McCree.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Mei: {
             name: 'Mei',
+            sortName: 'mei',
             image: 'static/Mei.png',
-            role: 'defense'
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
           },
           Mercy: {
             name: 'Mercy',
+            sortName: 'mercy',
             image: 'static/Mercy.png',
-            role: 'support'
+            role: 'support',
+            competitive: {},
+            quickplay: {}
+          },
+          Orisa: {
+            name: 'Orisa',
+            sortName: 'orisa',
+            image: 'static/Orisa.png',
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
           },
           Pharah: {
             name: 'Pharah',
+            sortName: 'pharah',
             image: 'static/Pharah.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Reaper: {
             name: 'Reaper',
+            sortName: 'reaper',
             image: 'static/Reaper.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Reinhardt: {
             name: 'Reinhardt',
+            sortName: 'reinhardt',
             image: 'static/Reinhardt.png',
-            role: 'tank'
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
           },
           Roadhog: {
             name: 'Roadhog',
+            sortName: 'roadhog',
             image: 'static/Roadhog.png',
-            role: 'tank'
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
           },
           Soldier76: {
             name: 'Soldier: 76',
+            sortName: 'soldier76',
             image: 'static/Soldier.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Sombra: {
             name: 'Sombra',
+            sortName: 'sombra',
             image: 'static/Sombra.png',
-            role: 'offense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Symmetra: {
             name: 'Symmetra',
+            sortName: 'symmetra',
             image: 'static/Symmetra.png',
-            role: 'support'
+            role: 'support',
+            competitive: {},
+            quickplay: {}
+          },
+          Torbjorn: {
+            name: 'Torbjörn',
+            sortName: 'torbjorn',
+            image: 'static/Torb.png',
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
           },
           Tracer: {
             name: 'Tracer',
+            sortName: 'tracer',
             image: 'static/Tracer.png',
-            role: 'offense'
-          },
-          Torbjoern: {
-            name: 'Torbjörn',
-            image: 'static/Torb.png',
-            role: 'defense'
+            role: 'offense',
+            competitive: {},
+            quickplay: {}
           },
           Widowmaker: {
             name: 'Widowmaker',
+            sortName: 'widowmaker',
             image: 'static/Widowmaker.png',
-            role: 'defense'
+            role: 'defense',
+            competitive: {},
+            quickplay: {}
           },
           Winston: {
-            name: 'Harambe',
+            name: 'Winston',
+            sortName: 'winston',
             image: 'static/Harambe.png',
-            role: 'tank'
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
           },
           Zarya: {
             name: 'Zarya',
+            sortName: 'zarya',
             image: 'static/Zarya.png',
-            role: 'tank'
+            role: 'tank',
+            competitive: {},
+            quickplay: {}
           },
           Zenyatta: {
             name: 'Zenyatta',
+            sortName: 'zenyatta',
             image: 'static/Zenyatta.png',
-            role: 'support'
+            role: 'support',
+            competitive: {},
+            quickplay: {}
           }
         }
       },
@@ -199,36 +283,49 @@ export default {
       let battletag = this.currentBattletag.tag.replace('#', '-')
       let platform = this.currentBattletag.platform
       let region = this.currentBattletag.region
-      router.push('/profile/' + platform + '/' + region + '/' + battletag + '/')
+      router.push('/' + region + '/' + platform + '/' + battletag + '/')
     },
     switchView: function (view) {
       this.view.mode = view
     },
     loadHeroData: function () {
+      console.log('loading data')
       this.loading = true
       this.currentBattletag.tag = this.$route.params.battletag.replace('-', '#')
       let battletag = this.$route.params.battletag || this.currentBattletag.tag.replace('#', '-')
-      let platform = this.$route.params.platform || this.currentBattletag.platform
-      let region = this.$route.params.region || this.currentBattletag.region
 
-      axios.all([
-        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/profile'),
-        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/competitive/allHeroes/'),
-        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/quickplay/allHeroes/'),
-        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/competitive/hero/' + this.heroQueryString + '/'),
-        axios.get('https://api.lootbox.eu/' + platform + '/' + region + '/' + battletag + '/quickplay/hero/' + this.heroQueryString + '/')
-      ])
+      axios.get('https://owapi.net/api/v3/u/' + battletag + '/blob?platform=' + this.$route.params.platform)
+
       .then((response) => {
-        this.currentBattletag.profile = response[0].data.data
-        this.currentBattletag.combinedStats.competitive = response[1].data
-        this.currentBattletag.combinedStats.quickplay = response[2].data
+        console.log(response.data)
+        if (response.data.us) {
+          this.currentBattletag.profile.achievements = response.data.us.achievements
+          this.currentBattletag.profile.stats = response.data.us.stats
+        } else if (response.data.kr) {
+          this.currentBattletag.profile.achievements = response.data.kr.achievements
+          this.currentBattletag.profile.stats = response.data.kr.stats
+        } else if (response.data.eu) {
+          this.currentBattletag.profile.achievements = response.data.eu.achievements
+          this.currentBattletag.profile.stats = response.data.eu.stats
+        }
+        // sort hero data
 
-        for (var hero in response[3].data) {
-          this.currentBattletag.heroStats[hero].competitive = response[3].data[hero]
+        let quickplayHeroData = response.data[this.currentBattletag.region].heroes.stats.quickplay
+        let competitiveHeroData = response.data[this.currentBattletag.region].heroes.stats.competitive
+        let quickplayPlaytimeHeroData = response.data[this.currentBattletag.region].heroes.playtime.quickplay
+        let competitivePlaytimeHeroData = response.data[this.currentBattletag.region].heroes.playtime.competitive
+
+        for (var hero in this.currentBattletag.heroes) {
+          if (quickplayHeroData.hasOwnProperty(this.currentBattletag.heroes[hero].sortName)) {
+            this.currentBattletag.heroes[hero].quickplay = quickplayHeroData[this.currentBattletag.heroes[hero].sortName]
+            this.currentBattletag.heroes[hero].quickplay.playtime = quickplayPlaytimeHeroData[this.currentBattletag.heroes[hero].sortName]
+          }
+          if (competitiveHeroData.hasOwnProperty(this.currentBattletag.heroes[hero].sortName)) {
+            this.currentBattletag.heroes[hero].competitive = competitiveHeroData[this.currentBattletag.heroes[hero].sortName]
+            this.currentBattletag.heroes[hero].competitive.playtime = competitivePlaytimeHeroData[this.currentBattletag.heroes[hero].sortName]
+          }
         }
-        for (hero in response[4].data) {
-          this.currentBattletag.heroStats[hero].quickplay = response[4].data[hero]
-        }
+        // change loading state
         this.currentBattletag.loaded = true
         this.loading = false
       })
@@ -259,6 +356,9 @@ export default {
   },
   created: function () {
     this.renderBackground()
+    if (this.$route.params.battletag && this.$route.params.battletag !== this.currentBattletag.tag.replace('#', '-')) {
+      this.loadHeroData()
+    }
   }
 }
 
@@ -324,11 +424,14 @@ main {
 
 #brand {
   width: 50px;
+  list-style: none;
 }
 
 #brand a{
   color: #f29a2c;
   font-size: 30px;
+
 }
+
 
 </style>
