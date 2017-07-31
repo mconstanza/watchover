@@ -1,68 +1,84 @@
 <template>
   <div class='container-fluid' id="playerHeader">
     <div class='row'>
+      <div class='col-md-3'></div>
 
       <div class='col-md-6'>
 
         <div class='row'>
 
-          <div>
-            <div class="headerAvatar">
-              <img class="avatarImage" :src="currentBattletag.profile.stats.competitive.overall_stats.avatar" width="80" height="80">
-            </div>
-          </div>
-
-          <!-- Header -->
-          <div class="headerNameCol">
-            <div class='row'>
-
-              <div class='col-md-12'>
-                <div class='row'>
-                  <h3 class='whiteText'>
-                    <router-link :to="{ name: 'HeroCardContainer', params: { battletag: this.$route.params.battletag }}">
-                      {{currentBattletag.tag}}
-                    </router-link>
-                  </h3>
+          <div class='col-md-5 offset-md-1'>
+            <div class='row container'>
+              <div>
+                <div class="headerAvatar">
+                  <img class="avatarImage" :src="currentBattletag.profile.stats.competitive.overall_stats.avatar" width="80" height="80">
                 </div>
+              </div>
+
+              <!-- Header -->
+              <div class="headerNameCol">
                 <div class='row'>
                   <div class='col-md-12'>
-                    <div class='row levelRow'>
-                      <p class="playerLevel">{{this.level}}</p>
-                      <i v-for="n in this.competitive.overall_stats.prestige" class='fa fa-star'></i>
+                    <div class='row'>
+                      <h3 class='whiteText'>
+                        <router-link :to="{ name: 'HeroCardContainer', params: { battletag: this.$route.params.battletag }}">
+                          {{currentBattletag.tag}}
+                        </router-link>
+                      </h3>
                     </div>
                     <div class='row'>
-                      <h5 class='subHeader'> on {{currentBattletag.platform}} ({{currentBattletag.region}})</h5>
+                      <div class='col-md-12'>
+                        <div class='row levelRow'>
+                          <p class="playerLevel">{{this.level}}</p>
+                          <i v-for="n in this.competitive.overall_stats.prestige" class='fa fa-star'></i>
+                        </div>
+                        <div class='row'>
+                          <h5 class='subHeader'> on {{currentBattletag.platform}} ({{currentBattletag.region}})</h5>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <div id='rankCol' class='col-md-5 offset-md-1'>
+            <div class='row'>
+              <!-- <div class='col-md-2'></div> -->
+              <div class='col-md-4'>
+                <div class='row'>
+                  <div class='container'>
+                    <img class='rankIcon' :src="this.rankIcon"/>
+                    <h3>{{this.competitive.overall_stats.comprank}}</h3>
+                  </div>
+                </div>
+              </div>
+              <div id='medalCol' class='col-md-8'>
+                <div id='medalRow' class='row'>
+                  <div class='medal col-md-auto'>
+                    <i class="fa fa-circle fa-2x" id='goldMedal' aria-hidden="true"></i>
+                    <h3 >{{this[view].game_stats.medals_gold}}</h3>
+                  </div>
+                  <div class='medal col-md-auto'>
+                    <i class="fa fa-circle fa-2x" id='silverMedal' aria-hidden="true"></i>
+                    <h3>{{this[view].game_stats.medals_silver}}</h3>
+                  </div>
+                  <div class='medal col-md-auto'>
+                    <i class="fa fa-circle fa-2x" id='bronzeMedal' aria-hidden="true"></i>
+                    <h3>{{this[view].game_stats.medals_bronze}}</h3>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class='col-md-2'></div> -->
+            </div>
+          </div>
           <!-- End Header -->
         </div>
       </div>
       <!-- General player stats go here -->
-      <div class='col-md-6'>
-
-        <div class='row'>
-          <img class='rankIcon' :src="this.rankIcon"/>
-          <h3>{{this.competitive.overall_stats.comprank}}</h3>
-        </div>
-        <div class='row'>
-          <div class='medal'>
-            <i class="fa fa-circle fa-2x" id='goldMedal' aria-hidden="true"></i>
-            <h3>{{this.competitive.game_stats.medals_gold}}</h3>
-          </div>
-          <div class='medal'>
-            <i class="fa fa-circle fa-2x" id='silverMedal' aria-hidden="true"></i>
-            <h3>{{this.competitive.game_stats.medals_silver}}</h3>
-          </div>
-          <div class='medal'>
-            <i class="fa fa-circle fa-2x" id='bronzeMedal' aria-hidden="true"></i>
-            <h3>{{this.competitive.game_stats.medals_bronze}}</h3>
-          </div>
-        </div>
-      </div>
+      <div class='col-md-3'></div>
     </div>
   </div>
 </template>
@@ -78,6 +94,9 @@ export default {
     }
   },
   computed: {
+    view: function () {
+      return this.viewMode.toLowerCase()
+    },
     rankIcon: function () {
       switch (this.competitive.overall_stats.tier) {
         case 'bronze':
@@ -141,6 +160,15 @@ p {
   margin: 0;
 }
 
+#medalRow {
+  margin: 0;
+}
+
+#medalCol {
+  padding: 0;
+  margin: 0;
+}
+
 .whiteText {
   color: white;
 }
@@ -159,13 +187,6 @@ p {
   border-radius: 10px;
   margin-left: 10px;
   margin-right: 25px;
-}
-
-.headerName {
-
-}
-
-.levelRow {
 }
 
 .playerLevel {

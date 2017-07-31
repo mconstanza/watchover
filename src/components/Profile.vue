@@ -8,7 +8,7 @@
 
     <!-- Player Header -->
     <div v-if="!loading" id="HeadingContainer">
-      <player-header v-if="!loading" :currentBattletag="currentBattletag"></player-header>
+      <player-header v-if="!loading" :currentBattletag="currentBattletag" :viewMode="view.mode"></player-header>
     </div>
 
     <!-- Toggle Views -->
@@ -97,6 +97,10 @@ a {
 
 a:hover {
   color: #f29a2c;
+}
+
+button {
+  cursor: pointer;
 }
 
 #loadingDiv {

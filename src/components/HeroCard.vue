@@ -396,7 +396,7 @@
 <script>
 export default {
   name: 'hero-card',
-  props: ['hero', 'viewMode', 'quickplay'],
+  props: ['hero', 'viewMode'],
   data () {
     return {
     }
