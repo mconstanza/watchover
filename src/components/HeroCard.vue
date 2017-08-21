@@ -11,14 +11,14 @@
           <!-- Avatar -->
         </div>
 
-        <div id="heroNameCol" class="col-md-1 text-left">
+        <div id="heroNameCol" class="col-md-2 text-left">
           <h4 class="card-title heroName text-left">{{hero.name}}</h4>
           <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
             <p>{{hero.competitive.general_stats.games_played + " game" + plural(hero.competitive.general_stats.games_played) || '---'}}</p>
           </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-8">
 
           <div class="row">
 

@@ -2,9 +2,7 @@
   <div id="ProfileContainer">
 
     <!-- Loading Screen -->
-    <div id='loadingDiv' v-if="loading">
-      LOADING GOES HERE
-    </div>
+    <div class="text-center" id='loadingDiv' v-if="loading"></div>
 
     <!-- Player Header -->
     <div v-if="!loading" id="HeadingContainer">
@@ -67,6 +65,9 @@ export default {
       }
     }
   },
+  beforeMount () {
+    this.reloadData()
+  },
   watch: {
     // call the method again if the route changes
     '$route': 'reloadData'
@@ -104,7 +105,19 @@ button {
 }
 
 #loadingDiv {
+  margin: auto;
   margin-top: 100px;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #f29a2c; /* Goldenrod */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .basicCard {
