@@ -100,21 +100,21 @@ export default {
     rankIcon: function () {
       switch (this.competitive.overall_stats.tier) {
         case 'bronze':
-          return '/static/ranks/Rank_Bronze_64.png'
+          return 'static/ranks/Rank_Bronze_64.png'
         case 'silver':
-          return '/static/ranks/Rank_Silver_64.png'
+          return 'static/ranks/Rank_Silver_64.png'
         case 'gold':
-          return '/static/ranks/Rank_Gold_64.png'
+          return 'static/ranks/Rank_Gold_64.png'
         case 'platinum':
-          return '/static/ranks/Rank_Platinum_64.png'
+          return 'static/ranks/Rank_Platinum_64.png'
         case 'diamond':
-          return '/static/ranks/Rank_Diamond_64.png'
+          return 'static/ranks/Rank_Diamond_64.png'
         case 'master':
-          return '/static/ranks/Rank_Master_64.png'
+          return 'static/ranks/Rank_Master_64.png'
         case 'grandmaster':
-          return '/static/ranks/Rank_GM_64.png'
+          return 'static/ranks/Rank_GM_64.png'
         case 'top500':
-          return '/static/ranks/Rank_500_64.png'
+          return 'static/ranks/Rank_500_64.png'
       }
     }
   },
