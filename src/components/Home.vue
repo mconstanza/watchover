@@ -85,9 +85,9 @@ input {
   width: 250px;
   padding: 0 25px;
   border-radius: 2px;
-  -webkit-transform: skew(-15deg);
-  -moz-transform: skew(-15deg);
-  -o-transform: skew(-15deg);
+  /*-webkit-transform: skew(-15deg, 0deg);
+  -moz-transform: skew(-15deg, 0deg);
+  -o-transform: skew(-15deg, 0deg);*/
   font-family: 'Overwatch', sans-serif;
 }
 
@@ -108,9 +108,9 @@ input {
   align-items: center;
   align-self: center;
   border-radius: 10px;
-  -webkit-transform: skew(-15deg);
-  -moz-transform: skew(-15deg);
-  -o-transform: skew(-15deg);
+  -webkit-transform: skew(-15deg, 0deg);
+  -moz-transform: skew(-15deg, 0deg);
+  -o-transform: skew(-15deg, 0deg);
   background: black;
   background: #060606; /* Old browsers */
   background: -moz-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* FF3.6-15 */
@@ -128,9 +128,9 @@ input {
 #battletagCardInputRow {
  height: 100%;
  padding-top: 25px;
- -webkit-transform: skew(15deg);
- -moz-transform: skew(15deg);
- -o-transform: skew(15deg);
+ /*-webkit-transform: skew(-15deg, 0deg);
+ -moz-transform: skew(-15deg, 0deg);
+ -o-transform: skew(-15deg, 0deg);*/
 }
 
 .card {
@@ -153,16 +153,16 @@ select {
   padding-left: 15px;
   margin-left: 10px;
   border: 1px solid black;
-  -webkit-transform: skew(-15deg);
-  -moz-transform: skew(-15deg);
-  -o-transform: skew(-15deg);
+  -webkit-transform: skew(-15deg, 0deg);
+  -moz-transform: skew(-15deg, 0deg);
+  -o-transform: skew(-15deg, 0deg);
   -webkit-appearance: menulist;
 }
 
 option {
-  -webkit-transform: skew(40deg);
-  -moz-transform: skew(40deg);
-  -o-transform: skew(40deg);
+  /*-webkit-transform: skew(-15deg, 0deg);
+  -moz-transform: skew(-15deg, 0deg);
+  -o-transform: skew(-15deg, 0deg);*/
   color: black;
 }
 
@@ -172,16 +172,16 @@ button {
   border-radius: 3px;
   height: 36px;
   width: 75px;
-  -webkit-transform: skew(-15deg);
+  /*-webkit-transform: skew(-15deg);
   -moz-transform: skew(-15deg);
-  -o-transform: skew(-15deg);
+  -o-transform: skew(-15deg);*/
   color:white;
   font-family: 'Overwatch', sans-serif;
 }
 
 .buttonText {
-  -webkit-transform: skew(15deg);
-  -moz-transform: skew(15deg);
-  -o-transform: skew(15deg);
+  -webkit-transform: skew(15deg, 0);
+  -moz-transform: skew(15deg, 0);
+  -o-transform: skew(15deg, 0);
 }
 </style>

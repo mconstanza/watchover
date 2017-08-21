@@ -89,9 +89,9 @@ select {
   padding-left: 15px;
   margin-right: 10px;
   border: 1px solid black;
-  -webkit-transform: skew(-15deg);
+  /*-webkit-transform: skew(-15deg);
   -moz-transform: skew(-15deg);
-  -o-transform: skew(-15deg);
+  -o-transform: skew(-15deg);*/
   -webkit-appearance: menulist;
   color: black;
 }
