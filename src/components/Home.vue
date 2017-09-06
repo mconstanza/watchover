@@ -2,8 +2,8 @@
 <div id ='container' class='container-fluid text-center'>
 
   <div id='sampleHero'>
-    <h3>Sample Player</h3>
-    <router-link :to="'/us/pc/Nessfalco-1145/'">Nessfalco#1145</router-link>
+    <h3 id="sampleHeroHeading">Sample Player</h3>
+    <router-link id="sampleHeroLink":to="'/us/pc/Nessfalco-1145/'">Nessfalco#1145</router-link>
   </div>
 
     <div id='battletagCard'>
@@ -118,6 +118,35 @@ input {
   background: linear-gradient(to right, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   font-family: 'Overwatch', sans-serif;
+}
+
+#sampleHero {
+  margin-top: 100px;
+  height: 150px !important;
+  min-width: 250px;
+  align-items: center;
+  align-self: center;
+  border-radius: 10px;
+  -webkit-transform: skew(-15deg, 0deg);
+  -moz-transform: skew(-15deg, 0deg);
+  -o-transform: skew(-15deg, 0deg);
+  background: black;
+  background: #060606; /* Old browsers */
+  background: -moz-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(76, 76, 76, .8) 0%,rgba(47, 47, 47, .8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  font-family: 'Overwatch', sans-serif;
+}
+
+#sampleHeroHeading {
+  margin-top: 25px;
+  font-size: 42px;
+}
+
+#sampleHeroLink {
+  color: #f29a2c;
+  font-size: 28px;
 }
 
 #battletagCard p {

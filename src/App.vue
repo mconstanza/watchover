@@ -283,7 +283,18 @@ export default {
       let battletag = this.currentBattletag.tag.replace('#', '-')
       let platform = this.currentBattletag.platform
       let region = this.currentBattletag.region
-      router.push('/' + region + '/' + platform + '/' + battletag + '/')
+      if (this.checkSearchInput(query.battletag)) {
+        router.push('/' + region + '/' + platform + '/' + battletag + '/')
+      } else {
+        // error handling for improper battletag
+      }
+    },
+    checkSearchInput: function (query) {
+      if (query.length < 3 || query.length > 12) {
+        return false
+      } else {
+        return true
+      }
     },
     switchView: function (view) {
       this.view.mode = view
@@ -297,6 +308,8 @@ export default {
       axios.get('https://owapi.net/api/v3/u/' + battletag + '/blob?platform=' + this.$route.params.platform)
 
       .then((response) => {
+        console.log(response)
+        console.log(response.msg)
         console.log(response.data)
         if (response.data.us) {
           this.currentBattletag.profile.achievements = response.data.us.achievements
@@ -328,6 +341,10 @@ export default {
         // change loading state
         this.currentBattletag.loaded = true
         this.loading = false
+      })
+      .catch(error => {
+        console.log(error.response)
+        router.push('/')
       })
     },
     switchRoleView: function (role) {
