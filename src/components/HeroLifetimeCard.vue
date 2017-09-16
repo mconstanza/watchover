@@ -9,68 +9,68 @@
     <div class="row">
 
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">All Damage Done</p>
-          <p>{{hero.competitive.general_stats.all_damage_done || '---'}} </p>
+          <p>{{hero.competitive.average_stats.all_damage_done || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">All Damage Done</p>
-          <p>{{hero.quickplay.general_stats.all_damage_done || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.all_damage_done || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">Most Damage in Game</p>
-          <p>{{hero.competitive.general_stats.all_damage_done_most_in_game || '---'}} </p>
+          <p>{{hero.competitive.average_stats.all_damage_done_most_in_game || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">Most Damage in Game</p>
-          <p>{{hero.quickplay.general_stats.all_damage_done_most_in_game || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.all_damage_done_most_in_game || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">Most Damage in Life</p>
-          <p>{{hero.competitive.general_stats.all_damage_done_most_in_life || '---'}} </p>
+          <p>{{hero.competitive.average_stats.all_damage_done_most_in_life || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">Most Damage in Life</p>
-          <p>{{hero.quickplay.general_stats.all_damage_done_most_in_life || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.all_damage_done_most_in_life || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">Hero Damage Done</p>
-          <p>{{hero.competitive.general_stats.hero_damage_done || '---'}} </p>
+          <p>{{hero.competitive.average_stats.hero_damage_done || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">Hero Damage Done</p>
-          <p>{{hero.quickplay.general_stats.hero_damage_done || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.hero_damage_done || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">Most Hero Dmg in Game</p>
-          <p>{{hero.competitive.general_stats.hero_damage_done_most_in_game || '---'}} </p>
+          <p>{{hero.competitive.average_stats.hero_damage_done_most_in_game || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">Most Hero Dmg in Game</p>
-          <p>{{hero.quickplay.general_stats.hero_damage_done_most_in_game || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.hero_damage_done_most_in_game || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">Most Hero Dmg in Life</p>
-          <p>{{hero.competitive.general_stats.hero_damage_done_most_in_life || '---'}} </p>
+          <p>{{hero.competitive.average_stats.hero_damage_done_most_in_life || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">Most Hero Dmg in Life</p>
-          <p>{{hero.quickplay.general_stats.hero_damage_done_most_in_life || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.hero_damage_done_most_in_life || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
@@ -78,68 +78,68 @@
 
     <div class="row">
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">Most Elims in Game</p>
-          <p>{{hero.competitive.general_stats.eliminations_most_in_game || '---'}} </p>
+          <p>{{hero.competitive.average_stats.eliminations_most_in_game || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">Most Elims in Game</p>
-          <p>{{hero.quickplay.general_stats.eliminations_most_in_game || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.eliminations_most_in_game || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">Most Elims in Life</p>
-          <p>{{hero.competitive.general_stats.eliminations_most_in_life || '---'}} </p>
+          <p>{{hero.competitive.average_stats.eliminations_most_in_life || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">Most Elims in Life</p>
-          <p>{{hero.quickplay.general_stats.eliminations_most_in_life || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.eliminations_most_in_life || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">Healing Done</p>
-          <p>{{hero.competitive.general_stats.healing_done || '---'}} </p>
+          <p>{{hero.competitive.average_stats.healing_done || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">Healing Done</p>
-          <p>{{hero.quickplay.general_stats.healing_done || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.healing_done || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">Most Healing in Game</p>
-          <p>{{hero.competitive.general_stats.healing_done_most_in_game || '---'}} </p>
+          <p>{{hero.competitive.average_stats.healing_done_most_in_game || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">Most Healing in Game</p>
-          <p>{{hero.quickplay.general_stats.healing_done_most_in_game || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.healing_done_most_in_game || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">Final Blows</p>
-          <p>{{hero.competitive.general_stats.final_blows || '---'}} </p>
+          <p>{{hero.competitive.average_stats.final_blows || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">Final Blows</p>
-          <p>{{hero.quickplay.general_stats.final_blows || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.final_blows || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
       <div class="col-md-2">
-        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.general_stats">
+        <div class="card_text" v-if="viewMode ==='Competitive' && hero.competitive.average_stats">
           <p class="statHeader">Most Final Blows</p>
-          <p>{{hero.competitive.general_stats.final_blows_most_in_game || '---'}} </p>
+          <p>{{hero.competitive.average_stats.final_blows_most_in_game || '---'}} </p>
         </div>
-        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.general_stats">
+        <div class="card_text" v-if="viewMode ==='Quickplay'&& hero.quickplay.average_stats">
           <p class="statHeader">Most Final Blows</p>
-          <p>{{hero.quickplay.general_stats.final_blows_most_in_game || '---'}} </p>
+          <p>{{hero.quickplay.average_stats.final_blows_most_in_game || '---'}} </p>
         </div>
       </div> <!--COLUMN -->
 
