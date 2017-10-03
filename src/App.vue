@@ -251,7 +251,8 @@ export default {
           support: true,
           offense: true,
           defense: true
-        }
+        },
+        sort: 'PlaytimeDesc'
       }
     }
   },
@@ -309,7 +310,6 @@ export default {
 
       .then((response) => {
         console.log(response)
-        console.log(response.msg)
         console.log(response.data)
         if (response.data.us) {
           this.currentBattletag.profile.achievements = response.data.us.achievements
@@ -331,11 +331,16 @@ export default {
         for (var hero in this.currentBattletag.heroes) {
           if (quickplayHeroData.hasOwnProperty(this.currentBattletag.heroes[hero].sortName)) {
             this.currentBattletag.heroes[hero].quickplay = quickplayHeroData[this.currentBattletag.heroes[hero].sortName]
-            this.currentBattletag.heroes[hero].quickplay.playtime = quickplayPlaytimeHeroData[this.currentBattletag.heroes[hero].sortName]
+            this.currentBattletag.heroes[hero].quickplay.playtime = quickplayPlaytimeHeroData[this.currentBattletag.heroes[hero].sortName] || 0
           }
           if (competitiveHeroData.hasOwnProperty(this.currentBattletag.heroes[hero].sortName)) {
             this.currentBattletag.heroes[hero].competitive = competitiveHeroData[this.currentBattletag.heroes[hero].sortName]
-            this.currentBattletag.heroes[hero].competitive.playtime = competitivePlaytimeHeroData[this.currentBattletag.heroes[hero].sortName]
+            this.currentBattletag.heroes[hero].competitive.playtime = competitivePlaytimeHeroData[this.currentBattletag.heroes[hero].sortName] || 0
+            console.log(this.currentBattletag.heroes[hero].competitive)
+          } else {
+            this.currentBattletag.heroes[hero].competitive = {}
+            this.currentBattletag.heroes[hero].competitive.playtime = 0
+            console.log(this.currentBattletag.heroes[hero].competitive)
           }
         }
         // change loading state

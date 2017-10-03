@@ -1,16 +1,26 @@
 <template>
   <div id="CardContainer">
-    <hero-card v-if="!loading" v-for="hero in currentBattletag.heroes" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card>
+    <hero-card v-if="!loading" v-for="hero in orderedUsers" v-show="view.roles[hero.role]" :hero="hero" :viewMode="view.mode" :key="hero.name"></hero-card>
   </div>
 </template>
 
 <script>
 import heroCard from './HeroCard.vue'
+var _ = require('lodash')
 export default {
   name: 'HeroCardContainer',
   data () {
     return {
       msg: 'This is the container that holds the hero cards with basic data for each hero.'
+    }
+  },
+  computed: {
+    orderedUsers: function () {
+      if (this.view.sort === 'PlaytimeDesc' && this.viewMode === 'Competitive') {
+        return _.orderBy(this.currentBattletag.heroes, 'competitive.playtime', ['desc'])
+      } else if (this.view.sort === 'PlaytimeDesc' && this.viewMode === 'Quickplay') {
+        return _.orderBy(this.currentBattletag.heroes, 'quickplay.playtime', ['desc'])
+      }
     }
   },
   components: {
