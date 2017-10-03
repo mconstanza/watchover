@@ -311,15 +311,15 @@ h3{
 }
 
 #Bastion {
-  background-color: #b9b9b9;
+  background-color: #6e994d;
 }
 
 #Doomfist {
-  background-color: #675a52;
+  background-color: #e04e34;
 }
 
 #DVa {
-  background-color: #ffd2ef;
+  background-color: #ff7fd1;
 }
 
 #Genji {
@@ -351,7 +351,7 @@ h3{
 }
 
 #Mercy {
-  background-color: #fefe4e;
+  background-color: #ffe16c;
 }
 
 #Pharah {
@@ -363,7 +363,7 @@ h3{
 }
 
 #Reinhardt {
-  background-color: #9ba0a0;
+  background-color: #aa958e;
 }
 
 #Roadhog {

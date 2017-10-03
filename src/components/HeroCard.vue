@@ -630,15 +630,15 @@ p {
 }
 
 #Bastion {
-  background-color: #b9b9b9;
+  background-color: #6e994d;
 }
 
 #Doomfist {
-  background-color: #675a52;
+  background-color: #e04e34;
 }
 
 #DVa {
-  background-color: #ffd2ef;
+  background-color: #ff7fd1;
 }
 
 #Genji {
@@ -670,7 +670,7 @@ p {
 }
 
 #Mercy {
-  background-color: #fefe4e;
+  background-color: #ffe16c;
 }
 
 #Orisa {
@@ -690,7 +690,7 @@ p {
 }
 
 #Reinhardt {
-  background-color: #9ba0a0;
+  background-color: #aa958e;
 }
 
 #Roadhog {

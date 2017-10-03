@@ -161,7 +161,7 @@ h3{
 }
 
 #Bastion {
-  background-color: #b9b9b9;
+  background-color: #6e994d;
 }
 
 #DVa {
@@ -209,7 +209,7 @@ h3{
 }
 
 #Reinhardt {
-  background-color: #9ba0a0;
+  background-color: #aa958e;
 }
 
 #Roadhog {
